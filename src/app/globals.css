@@ -123,8 +123,28 @@
   }
   body {
     @apply bg-background text-foreground;
+    -webkit-text-size-adjust: 100%;
   }
   html {
     @apply font-sans;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+.ad-container {
+  min-height: 50px;
+  overflow: hidden;
+}
+
+@media (max-width: 639px) {
+  .ad-container {
+    max-width: 100vw;
+    margin-inline: -1rem;
+    padding-inline: 1rem;
   }
 }
