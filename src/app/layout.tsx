@@ -32,6 +32,11 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      {process.env.NEXT_PUBLIC_ADSENSE_PUB_ID && (
+        <head>
+          <meta name="google-adsense-account" content={process.env.NEXT_PUBLIC_ADSENSE_PUB_ID} />
+        </head>
+      )}
       <body className="flex min-h-full flex-col">
         <script
           type="application/ld+json"
