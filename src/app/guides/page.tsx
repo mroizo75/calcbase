@@ -7,9 +7,9 @@ import { guides } from "@/lib/guides/registry";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Business Guides – VAT, Margin vs Markup, Discounts & Break-even",
+  title: "Business Guides – VAT, Pricing, ROI, Margins & Tax | CalcBase",
   description:
-    "Learn how VAT works, the difference between margin and markup, how to calculate discounts, and the break-even formula. Plain-English guides with formulas and examples.",
+    "Practical guides on VAT, sales tax, profit margins, markup, ROI, pricing strategy, discounts, and break-even analysis. Clear formulas, worked examples, and calculator links.",
   canonical: "/guides",
 });
 

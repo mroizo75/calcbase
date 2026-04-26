@@ -61,8 +61,96 @@ export const guides: GuideConfig[] = [
       canonical: "/guides/break-even-formula",
     },
   },
+  {
+    slug: "vat-rates-by-country",
+    title: "VAT Rates by Country: Complete 2026 Guide to Global Tax Rates",
+    description:
+      "A comprehensive reference of VAT, GST, and consumption tax rates for major economies worldwide. Includes UK, EU, Australia, Canada, India, and more.",
+    publishedDate: "2026-04-26",
+    updatedDate: "2026-04-26",
+    relatedCalculators: ["vat-calculator", "add-vat", "remove-vat", "sales-tax-calculator"],
+    seo: {
+      title: "VAT Rates by Country 2026 – Global VAT & GST Rate Table | CalcBase",
+      description:
+        "Complete list of VAT and GST rates by country for 2026. UK 20%, Germany 19%, France 20%, Australia 10%, and more. Compare rates and calculate VAT instantly.",
+      canonical: "/guides/vat-rates-by-country",
+    },
+  },
+  {
+    slug: "vat-vs-sales-tax",
+    title: "VAT vs Sales Tax: What's the Difference and Why It Matters",
+    description:
+      "VAT and sales tax both add cost to purchases, but they work differently. This guide explains the key differences, how each is calculated, and which countries use which system.",
+    publishedDate: "2026-04-26",
+    updatedDate: "2026-04-26",
+    relatedCalculators: ["vat-calculator", "sales-tax-calculator", "add-vat", "remove-vat"],
+    seo: {
+      title: "VAT vs Sales Tax – Key Differences Explained Simply | CalcBase",
+      description:
+        "Understand the difference between VAT and sales tax. How each works, who pays, collection methods, and which countries use which. Clear comparison with examples.",
+      canonical: "/guides/vat-vs-sales-tax",
+    },
+  },
+  {
+    slug: "how-to-price-a-product",
+    title: "How to Price a Product: Formulas, Strategies, and Common Mistakes",
+    description:
+      "Pricing determines profitability. This guide covers cost-plus pricing, margin-based pricing, competitive pricing, and the formulas behind each approach.",
+    publishedDate: "2026-04-26",
+    updatedDate: "2026-04-26",
+    relatedCalculators: ["margin-calculator", "markup-calculator", "profit-calculator", "break-even-calculator"],
+    seo: {
+      title: "How to Price a Product – Pricing Formulas & Strategies | CalcBase",
+      description:
+        "Learn how to price a product using cost-plus, margin-based, and competitive pricing strategies. Includes formulas, worked examples, and common pricing mistakes to avoid.",
+      canonical: "/guides/how-to-price-a-product",
+    },
+  },
+  {
+    slug: "how-to-calculate-roi",
+    title: "How to Calculate ROI: Formula, Examples, and Common Pitfalls",
+    description:
+      "Return on investment measures the efficiency of an investment. Learn the ROI formula, see worked examples for marketing, real estate, and business investments, and understand ROI limitations.",
+    publishedDate: "2026-04-26",
+    updatedDate: "2026-04-26",
+    relatedCalculators: ["roi-calculator", "profit-calculator", "break-even-calculator"],
+    seo: {
+      title: "How to Calculate ROI – Formula, Examples & Pitfalls | CalcBase",
+      description:
+        "Learn the ROI formula step by step. Calculate return on investment for marketing campaigns, real estate, and business decisions. Includes worked examples and common mistakes.",
+      canonical: "/guides/how-to-calculate-roi",
+    },
+  },
+  {
+    slug: "pricing-strategy-explained",
+    title: "Pricing Strategy Explained: From Cost-Plus to Value-Based Pricing",
+    description:
+      "Choose the right pricing strategy for your business. This guide covers cost-plus, value-based, competitive, penetration, and premium pricing with real-world examples and the math behind each.",
+    publishedDate: "2026-04-26",
+    updatedDate: "2026-04-26",
+    relatedCalculators: ["margin-calculator", "markup-calculator", "break-even-calculator", "profit-calculator"],
+    seo: {
+      title: "Pricing Strategy Guide – 5 Methods with Formulas | CalcBase",
+      description:
+        "Compare pricing strategies: cost-plus, value-based, competitive, penetration, and premium pricing. Learn which strategy fits your business with formulas and examples.",
+      canonical: "/guides/pricing-strategy-explained",
+    },
+  },
 ];
 
 export function getGuide(slug: string): GuideConfig | undefined {
   return guides.find((g) => g.slug === slug);
+}
+
+export function getGuidesForCalculator(calcSlug: string): GuideConfig[] {
+  return guides.filter((g) => g.relatedCalculators.includes(calcSlug));
+}
+
+export function getRelatedGuides(currentSlug: string): GuideConfig[] {
+  const current = getGuide(currentSlug);
+  if (!current) return [];
+  const currentCalcSet = new Set(current.relatedCalculators);
+  return guides
+    .filter((g) => g.slug !== currentSlug && g.relatedCalculators.some((c) => currentCalcSet.has(c)))
+    .slice(0, 4);
 }

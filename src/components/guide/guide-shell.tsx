@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BookOpen } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/layout/breadcrumb";
 import { getCalculator } from "@/lib/calculators/registry";
+import { getRelatedGuides } from "@/lib/guides/registry";
 import { AdBanner } from "@/components/ads/ad-banner";
 import { buildGuidePageGraph } from "@/lib/seo/schema";
 import type { GuideConfig } from "@/lib/guides/types";
@@ -16,6 +17,7 @@ export function GuideShell({ config, children }: GuideShellProps) {
   const relatedCalcs = config.relatedCalculators
     .map((slug) => getCalculator(slug))
     .filter(Boolean);
+  const relatedGuides = getRelatedGuides(config.slug);
 
   const graph = buildGuidePageGraph({
     title: config.title,
@@ -63,6 +65,29 @@ export function GuideShell({ config, children }: GuideShellProps) {
                       <p className="mt-0.5 text-sm text-muted-foreground">{calc.shortDescription}</p>
                     </div>
                     <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground" />
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {relatedGuides.length > 0 && (
+        <section className="mt-12">
+          <h2 className="mb-4 text-xl font-semibold">Related Guides</h2>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {relatedGuides.map((guide) => (
+              <Link key={guide.slug} href={`/guides/${guide.slug}`}>
+                <Card className="transition-colors hover:border-primary/30 hover:bg-accent/50">
+                  <CardContent className="flex items-center gap-3 pt-5">
+                    <BookOpen className="h-4 w-4 shrink-0 text-muted-foreground" />
+                    <div>
+                      <h3 className="font-medium">{guide.title}</h3>
+                      <p className="mt-0.5 line-clamp-2 text-sm text-muted-foreground">
+                        {guide.description}
+                      </p>
+                    </div>
                   </CardContent>
                 </Card>
               </Link>

@@ -5,6 +5,7 @@ import { FormulaBlock } from "./formula-block";
 import { ExampleBlock } from "./example-block";
 import { FaqBlock } from "./faq-block";
 import { RelatedCalculators } from "./related-calculators";
+import { RelatedGuides } from "./related-guides";
 import { AdBanner } from "@/components/ads/ad-banner";
 import { AdSidebar } from "@/components/ads/ad-sidebar";
 import { buildCalculatorPageGraph } from "@/lib/seo/schema";
@@ -57,6 +58,8 @@ export function CalculatorShell({ config, children }: CalculatorShellProps) {
           <AdBanner slot="calc-below-faq" />
 
           <RelatedCalculators currentSlug={config.slug} />
+
+          <RelatedGuides calculatorSlug={config.slug} />
 
           <p className="mt-8 text-xs text-muted-foreground">
             All calculations are for informational purposes only. They should not replace professional

@@ -170,10 +170,15 @@ export default function HomePage() {
           <p className="mb-8 text-muted-foreground">
             Short, practical guides that explain the formulas and concepts behind each calculator.
           </p>
-          <div className="grid gap-3 text-left sm:grid-cols-2">
+          <div className="grid gap-3 text-left sm:grid-cols-2 lg:grid-cols-3">
             {[
               { title: "VAT Explained", href: "/guides/vat-explained", desc: "What VAT is, how it works, and how it differs from sales tax." },
+              { title: "VAT Rates by Country", href: "/guides/vat-rates-by-country", desc: "Complete 2026 reference of VAT and GST rates for major economies." },
+              { title: "VAT vs Sales Tax", href: "/guides/vat-vs-sales-tax", desc: "Key differences between VAT and sales tax explained simply." },
               { title: "Margin vs Markup", href: "/guides/margin-vs-markup", desc: "The crucial difference and why confusing them costs money." },
+              { title: "How to Price a Product", href: "/guides/how-to-price-a-product", desc: "Pricing formulas, strategies, and common mistakes to avoid." },
+              { title: "Pricing Strategy Guide", href: "/guides/pricing-strategy-explained", desc: "Cost-plus, value-based, competitive, and premium pricing." },
+              { title: "How to Calculate ROI", href: "/guides/how-to-calculate-roi", desc: "ROI formula, worked examples, and common pitfalls." },
               { title: "How to Calculate Discount", href: "/guides/how-to-calculate-discount", desc: "Percentage discounts, stacking, and reverse calculations." },
               { title: "Break-even Formula", href: "/guides/break-even-formula", desc: "Fixed costs, variable costs, and finding your break-even point." },
             ].map((guide) => (

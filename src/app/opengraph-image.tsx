@@ -10,7 +10,7 @@ export default function OgImage() {
     (
       <div
         style={{
-          background: "linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%)",
+          background: "linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%)",
           width: "100%",
           height: "100%",
           display: "flex",
@@ -18,47 +18,73 @@ export default function OgImage() {
           alignItems: "center",
           justifyContent: "center",
           fontFamily: "system-ui, sans-serif",
+          padding: "60px",
         }}
       >
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "16px",
-            marginBottom: "24px",
+            gap: "20px",
+            marginBottom: "32px",
           }}
         >
           <div
             style={{
-              width: "56px",
-              height: "56px",
-              background: "#171717",
-              borderRadius: "12px",
+              width: "64px",
+              height: "64px",
+              background: "#3B66D9",
+              borderRadius: "14px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               color: "white",
-              fontSize: "28px",
-              fontWeight: 700,
+              fontSize: "32px",
+              fontWeight: 800,
             }}
           >
-            C
+            CB
           </div>
-          <span style={{ fontSize: "48px", fontWeight: 700, color: "#171717" }}>
+          <span style={{ fontSize: "52px", fontWeight: 800, color: "#1a1a2e" }}>
             CalcBase
           </span>
         </div>
         <p
           style={{
-            fontSize: "24px",
+            fontSize: "26px",
             color: "#525252",
-            maxWidth: "600px",
+            maxWidth: "700px",
             textAlign: "center",
-            lineHeight: 1.4,
+            lineHeight: 1.5,
+            marginBottom: "40px",
           }}
         >
-          Free online calculators for VAT, margins, markup, discounts, and break-even analysis.
+          Free business calculators for VAT, margins, markup, ROI, sales tax, commissions, and break-even analysis.
         </p>
+        <div
+          style={{
+            display: "flex",
+            gap: "12px",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
+          {["VAT", "Margin", "Markup", "ROI", "Sales Tax", "Discount", "Commission", "Break-even"].map((label) => (
+            <span
+              key={label}
+              style={{
+                background: "#f0f4ff",
+                color: "#3B66D9",
+                padding: "8px 18px",
+                borderRadius: "20px",
+                fontSize: "18px",
+                fontWeight: 600,
+              }}
+            >
+              {label}
+            </span>
+          ))}
+        </div>
       </div>
     ),
     { ...size },

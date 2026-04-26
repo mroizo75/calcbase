@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
-import { AdsenseScript } from "@/components/ads/adsense-script";
 import { CookieBanner } from "@/components/consent/cookie-banner";
 import { buildSiteMetadata } from "@/lib/seo/metadata";
 import { buildSiteGraphJsonLd } from "@/lib/seo/schema";
@@ -35,6 +34,11 @@ export default function RootLayout({
       {process.env.NEXT_PUBLIC_ADSENSE_PUB_ID && (
         <head>
           <meta name="google-adsense-account" content={process.env.NEXT_PUBLIC_ADSENSE_PUB_ID} />
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_PUB_ID}`}
+            crossOrigin="anonymous"
+          />
         </head>
       )}
       <body className="flex min-h-full flex-col">
@@ -42,7 +46,6 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(buildSiteGraphJsonLd()) }}
         />
-        <AdsenseScript />
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />

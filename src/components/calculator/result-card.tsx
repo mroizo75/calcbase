@@ -108,47 +108,47 @@ ${formulaRow}
   return (
     <Card className="border-primary/20 bg-primary/[0.02]">
       <CardContent className="pt-6">
-        <div className="mb-4 flex items-start justify-between gap-2">
+        <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
             Result
           </h2>
-          <div className="flex gap-1">
+          <div className="flex flex-wrap gap-1">
             {shareUrl && (
               <button
                 onClick={handleShare}
-                className="flex h-8 items-center gap-1.5 rounded-md px-2.5 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                className="flex h-10 items-center gap-1.5 rounded-md px-3 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground sm:h-8 sm:px-2.5"
                 aria-label="Share calculation"
                 type="button"
               >
-                {copied === "link" ? <Check className="h-3.5 w-3.5" /> : <Share2 className="h-3.5 w-3.5" />}
+                {copied === "link" ? <Check className="h-4 w-4 sm:h-3.5 sm:w-3.5" /> : <Share2 className="h-4 w-4 sm:h-3.5 sm:w-3.5" />}
                 {copied === "link" ? "Copied" : "Share"}
               </button>
             )}
             <button
               onClick={handleExportPdf}
-              className="flex h-8 items-center gap-1.5 rounded-md px-2.5 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+              className="flex h-10 items-center gap-1.5 rounded-md px-3 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground sm:h-8 sm:px-2.5"
               aria-label="Save as PDF"
               type="button"
             >
-              <FileText className="h-3.5 w-3.5" />
+              <FileText className="h-4 w-4 sm:h-3.5 sm:w-3.5" />
               PDF
             </button>
             <button
               onClick={handleDownloadCsv}
-              className="flex h-8 items-center gap-1.5 rounded-md px-2.5 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+              className="flex h-10 items-center gap-1.5 rounded-md px-3 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground sm:h-8 sm:px-2.5"
               aria-label="Download CSV"
               type="button"
             >
-              <Download className="h-3.5 w-3.5" />
+              <Download className="h-4 w-4 sm:h-3.5 sm:w-3.5" />
               CSV
             </button>
             <button
               onClick={handleCopyText}
-              className="flex h-8 items-center gap-1.5 rounded-md px-2.5 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+              className="flex h-10 items-center gap-1.5 rounded-md px-3 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-foreground sm:h-8 sm:px-2.5"
               aria-label="Copy result"
               type="button"
             >
-              {copied === "text" ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+              {copied === "text" ? <Check className="h-4 w-4 sm:h-3.5 sm:w-3.5" /> : <Copy className="h-4 w-4 sm:h-3.5 sm:w-3.5" />}
               {copied === "text" ? "Copied" : "Copy"}
             </button>
           </div>

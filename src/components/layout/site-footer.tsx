@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Calculator } from "lucide-react";
+import Image from "next/image";
 import { CookieSettingsButton } from "./cookie-settings-button";
 
 const footerLinks = {
@@ -7,15 +7,24 @@ const footerLinks = {
     { label: "VAT Calculator", href: "/vat-calculator" },
     { label: "Add VAT", href: "/add-vat" },
     { label: "Remove VAT", href: "/remove-vat" },
+    { label: "Sales Tax Calculator", href: "/sales-tax-calculator" },
     { label: "Margin Calculator", href: "/margin-calculator" },
     { label: "Markup Calculator", href: "/markup-calculator" },
+    { label: "Profit Calculator", href: "/profit-calculator" },
     { label: "Discount Calculator", href: "/discount-calculator" },
+    { label: "ROI Calculator", href: "/roi-calculator" },
+    { label: "Commission Calculator", href: "/commission-calculator" },
     { label: "Break-even Calculator", href: "/break-even-calculator" },
-    { label: "Margin ↔ Markup Converter", href: "/margin-markup-converter" },
+    { label: "Margin ↔ Markup", href: "/margin-markup-converter" },
   ],
   guides: [
     { label: "VAT Explained", href: "/guides/vat-explained" },
+    { label: "VAT Rates by Country", href: "/guides/vat-rates-by-country" },
+    { label: "VAT vs Sales Tax", href: "/guides/vat-vs-sales-tax" },
     { label: "Margin vs Markup", href: "/guides/margin-vs-markup" },
+    { label: "How to Price a Product", href: "/guides/how-to-price-a-product" },
+    { label: "Pricing Strategy", href: "/guides/pricing-strategy-explained" },
+    { label: "How to Calculate ROI", href: "/guides/how-to-calculate-roi" },
     { label: "How to Calculate Discount", href: "/guides/how-to-calculate-discount" },
     { label: "Break-even Formula", href: "/guides/break-even-formula" },
   ],
@@ -33,9 +42,14 @@ export function SiteFooter() {
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
           <div className="sm:col-span-2 md:col-span-1">
-            <Link href="/" className="mb-3 inline-flex items-center gap-2 font-semibold">
-              <Calculator className="h-4 w-4 text-primary" />
-              CalcBase
+            <Link href="/" className="mb-3 inline-block">
+              <Image
+                src="/calclogo.png"
+                alt="CalcBase"
+                width={200}
+                height={40}
+                className="h-16 w-auto"
+              />
             </Link>
             <p className="text-sm leading-relaxed text-muted-foreground">
               Free, accurate business calculators for professionals.

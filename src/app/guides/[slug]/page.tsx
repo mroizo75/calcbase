@@ -7,6 +7,11 @@ import { VatExplainedContent } from "./vat-explained";
 import { MarginVsMarkupContent } from "./margin-vs-markup";
 import { HowToCalculateDiscountContent } from "./how-to-calculate-discount";
 import { BreakEvenFormulaContent } from "./break-even-formula";
+import { VatRatesByCountryContent } from "./vat-rates-by-country";
+import { VatVsSalesTaxContent } from "./vat-vs-sales-tax";
+import { HowToPriceAProductContent } from "./how-to-price-a-product";
+import { HowToCalculateRoiContent } from "./how-to-calculate-roi";
+import { PricingStrategyExplainedContent } from "./pricing-strategy-explained";
 
 export function generateStaticParams() {
   return guides.map((g) => ({ slug: g.slug }));
@@ -30,6 +35,11 @@ const contentMap: Record<string, React.ComponentType> = {
   "margin-vs-markup": MarginVsMarkupContent,
   "how-to-calculate-discount": HowToCalculateDiscountContent,
   "break-even-formula": BreakEvenFormulaContent,
+  "vat-rates-by-country": VatRatesByCountryContent,
+  "vat-vs-sales-tax": VatVsSalesTaxContent,
+  "how-to-price-a-product": HowToPriceAProductContent,
+  "how-to-calculate-roi": HowToCalculateRoiContent,
+  "pricing-strategy-explained": PricingStrategyExplainedContent,
 };
 
 export default async function GuidePage({ params }: { params: Params }) {

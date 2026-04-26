@@ -23,15 +23,28 @@ export function AdSlot({ slot, className = "" }: AdSlotProps) {
 
   useEffect(() => {
     if (!ADS_ENABLED || !hasConsent || !adRef.current || pushed.current) return;
-    pushed.current = true;
 
-    try {
-      const w = window as Window & { adsbygoogle?: unknown[] };
-      w.adsbygoogle = w.adsbygoogle || [];
-      w.adsbygoogle.push({});
-    } catch {
-      /* AdSense not loaded */
-    }
+    const el = adRef.current;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        if (entry.isIntersecting && entry.intersectionRect.width > 0 && !pushed.current) {
+          pushed.current = true;
+          try {
+            const w = window as Window & { adsbygoogle?: unknown[] };
+            w.adsbygoogle = w.adsbygoogle || [];
+            w.adsbygoogle.push({});
+          } catch {
+            /* AdSense not loaded */
+          }
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
   }, [hasConsent]);
 
   if (!ADS_ENABLED || !hasConsent) return null;

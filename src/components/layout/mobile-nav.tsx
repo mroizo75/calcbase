@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import { SearchBox } from "./search-box";
 
 const navLinks = [
   { label: "Calculators", href: "/calculators" },
@@ -57,8 +58,11 @@ export function MobileNav() {
           />
           <nav
             id="mobile-nav-menu"
-            className="fixed inset-x-0 top-14 z-50 border-b bg-background p-4 shadow-lg sm:hidden"
+            className="fixed inset-x-0 top-16 z-50 border-b bg-background p-4 shadow-lg sm:hidden"
           >
+            <div className="mb-3">
+              <SearchBox />
+            </div>
             <ul className="space-y-1">
               {navLinks.map((link, i) => (
                 <li key={link.href}>

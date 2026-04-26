@@ -20,6 +20,31 @@ export const VAT_PRESETS: VatPreset[] = [
   { country: "South Africa", rate: 15, label: "South Africa (15%)" },
 ];
 
+export interface SalesTaxPreset {
+  state: string;
+  rate: number;
+  label: string;
+}
+
+export const US_SALES_TAX_PRESETS: SalesTaxPreset[] = [
+  { state: "California", rate: 7.25, label: "California (7.25%)" },
+  { state: "Texas", rate: 6.25, label: "Texas (6.25%)" },
+  { state: "New York", rate: 4, label: "New York (4%)" },
+  { state: "Florida", rate: 6, label: "Florida (6%)" },
+  { state: "Illinois", rate: 6.25, label: "Illinois (6.25%)" },
+  { state: "Pennsylvania", rate: 6, label: "Pennsylvania (6%)" },
+  { state: "Ohio", rate: 5.75, label: "Ohio (5.75%)" },
+  { state: "Georgia", rate: 4, label: "Georgia (4%)" },
+  { state: "Washington", rate: 6.5, label: "Washington (6.5%)" },
+  { state: "New Jersey", rate: 6.625, label: "New Jersey (6.625%)" },
+  { state: "Michigan", rate: 6, label: "Michigan (6%)" },
+  { state: "Colorado", rate: 2.9, label: "Colorado (2.9%)" },
+  { state: "Oregon", rate: 0, label: "Oregon (0% – no sales tax)" },
+  { state: "Montana", rate: 0, label: "Montana (0% – no sales tax)" },
+  { state: "Delaware", rate: 0, label: "Delaware (0% – no sales tax)" },
+  { state: "New Hampshire", rate: 0, label: "New Hampshire (0% – no sales tax)" },
+];
+
 export const calculators: CalculatorConfig[] = [
   {
     slug: "vat-calculator",
@@ -28,7 +53,7 @@ export const calculators: CalculatorConfig[] = [
     longDescription:
       "Calculate Value Added Tax for any country. Add VAT to a net amount or extract VAT from a gross price. Choose from preset rates for the UK, EU, Australia, Canada, and more — or enter a custom rate.",
     category: "vat",
-    relatedSlugs: ["add-vat", "remove-vat", "margin-calculator", "discount-calculator"],
+    relatedSlugs: ["add-vat", "remove-vat", "sales-tax-calculator", "margin-calculator", "discount-calculator"],
     defaultInputs: { amount: 100, rate: 20, mode: "add" },
     formula: "VAT Amount = Net Amount × (VAT Rate ÷ 100)\nGross Amount = Net Amount + VAT Amount",
     formulaExplanation:
@@ -214,7 +239,7 @@ export const calculators: CalculatorConfig[] = [
     longDescription:
       "Enter your revenue (selling price) and cost to calculate profit margin. This calculator shows your profit amount and margin percentage — essential for pricing decisions and financial analysis.",
     category: "pricing",
-    relatedSlugs: ["markup-calculator", "margin-markup-converter", "break-even-calculator", "discount-calculator"],
+    relatedSlugs: ["markup-calculator", "profit-calculator", "margin-markup-converter", "break-even-calculator"],
     defaultInputs: { revenue: 100, cost: 60 },
     formula: "Profit = Revenue − Cost\nMargin % = (Profit ÷ Revenue) × 100",
     formulaExplanation:
@@ -463,7 +488,7 @@ export const calculators: CalculatorConfig[] = [
     longDescription:
       "Enter your fixed costs, variable cost per unit, and selling price per unit to find the break-even point. See exactly how many units you must sell — and the revenue needed — before your business turns profitable.",
     category: "business",
-    relatedSlugs: ["margin-calculator", "markup-calculator", "vat-calculator", "discount-calculator"],
+    relatedSlugs: ["margin-calculator", "roi-calculator", "profit-calculator", "markup-calculator"],
     defaultInputs: { fixedCosts: 10000, variableCostPerUnit: 25, sellingPricePerUnit: 50 },
     formula: "Break-even Units = Fixed Costs ÷ (Selling Price − Variable Cost per Unit)\nBreak-even Revenue = Break-even Units × Selling Price",
     formulaExplanation:
@@ -526,6 +551,251 @@ export const calculators: CalculatorConfig[] = [
       "how to calculate break even point", "break even point formula", "how many units to break even",
       "break even revenue", "break even analysis", "fixed costs variable costs",
       "break even chart", "break even point",
+    ],
+  },
+  {
+    slug: "roi-calculator",
+    title: "ROI Calculator",
+    shortDescription: "Calculate return on investment. See your ROI percentage and net profit instantly.",
+    longDescription:
+      "Enter the total investment cost and the gain (or current value) to find your return on investment. This calculator shows the ROI percentage and net profit — essential for evaluating business decisions, marketing campaigns, and investment opportunities.",
+    category: "business",
+    relatedSlugs: ["profit-calculator", "break-even-calculator", "margin-calculator", "commission-calculator"],
+    defaultInputs: { investment: 10000, gain: 15000 },
+    formula: "Net Profit = Gain − Investment\nROI % = (Net Profit ÷ Investment) × 100",
+    formulaExplanation:
+      "ROI measures the efficiency of an investment. Subtract the cost from the gain to find net profit, then divide by the original investment and multiply by 100 to express it as a percentage.",
+    examples: [
+      {
+        title: "Marketing campaign ROI",
+        description: "A business spends $5,000 on ads and generates $12,000 in revenue.",
+        inputs: { Investment: "$5,000", "Total return": "$12,000" },
+        result: "Net profit = $7,000. ROI = 140%.",
+      },
+      {
+        title: "Equipment purchase ROI",
+        description: "A £20,000 machine generates £28,000 in additional revenue over its lifetime.",
+        inputs: { Investment: "£20,000", "Total return": "£28,000" },
+        result: "Net profit = £8,000. ROI = 40%.",
+      },
+    ],
+    faq: [
+      {
+        question: "What is a good ROI?",
+        answer:
+          "A good ROI depends on context. In the stock market, 7–10% annual ROI is considered average. For marketing campaigns, 500%+ ROI (5:1 ratio) is a common benchmark. For real estate, 8–12% is typical. Always compare ROI within the same category.",
+      },
+      {
+        question: "Can ROI be negative?",
+        answer:
+          "Yes. A negative ROI means you lost money — the gain was less than the investment. For example, investing $1,000 and getting back $800 gives an ROI of −20%.",
+      },
+      {
+        question: "What is the difference between ROI and profit margin?",
+        answer:
+          "ROI measures the return relative to the investment cost. Profit margin measures the profit relative to revenue. ROI tells you how efficiently your money was used; margin tells you how much of each sale is profit.",
+      },
+      {
+        question: "How do I calculate ROI on a marketing campaign?",
+        answer:
+          "Subtract the total campaign cost from the revenue it generated, then divide by the campaign cost. If a $2,000 campaign generates $10,000: ($10,000 − $2,000) ÷ $2,000 = 400% ROI.",
+      },
+    ],
+    seo: {
+      title: "ROI Calculator – Calculate Return on Investment Free | CalcBase",
+      description:
+        "Free ROI calculator. Enter investment cost and gain to calculate return on investment percentage and net profit. Evaluate marketing, business, and investment ROI.",
+      canonical: "/roi-calculator",
+    },
+    keywords: [
+      "roi calculator", "return on investment calculator", "roi formula", "calculate roi",
+      "marketing roi calculator", "investment return calculator", "how to calculate roi",
+      "roi percentage calculator", "what is a good roi", "roi calculator free",
+      "return on investment formula", "business roi calculator",
+    ],
+  },
+  {
+    slug: "profit-calculator",
+    title: "Profit Calculator",
+    shortDescription: "Calculate profit, selling price, and margins from cost and revenue. Three flexible input modes.",
+    longDescription:
+      "Find your profit amount, selling price, margin percentage, and markup from any combination of inputs. Enter cost and revenue, cost and target margin, or cost and target markup — the calculator shows everything you need for pricing decisions.",
+    category: "pricing",
+    relatedSlugs: ["margin-calculator", "markup-calculator", "roi-calculator", "break-even-calculator"],
+    defaultInputs: { cost: 60, revenue: 100, mode: "fromRevenue" },
+    formula: "Profit = Revenue − Cost\nMargin % = (Profit ÷ Revenue) × 100\nMarkup % = (Profit ÷ Cost) × 100",
+    formulaExplanation:
+      "Profit is the difference between what you sell for and what it costs. Margin expresses that profit as a percentage of revenue; markup expresses it as a percentage of cost. Both describe the same profit from different perspectives.",
+    examples: [
+      {
+        title: "Profit from a $100 sale",
+        description: "A product that costs $60 to produce is sold for $100.",
+        inputs: { Cost: "$60", Revenue: "$100" },
+        result: "Profit = $40. Margin = 40%. Markup = 66.67%.",
+      },
+      {
+        title: "Setting price from a 30% margin target",
+        description: "A product costs £50 and you need a 30% margin.",
+        inputs: { Cost: "£50", "Target margin": "30%" },
+        result: "Selling price = £71.43. Profit = £21.43.",
+      },
+    ],
+    faq: [
+      {
+        question: "How do I calculate profit?",
+        answer:
+          "Subtract the total cost from the total revenue. If you sell a product for $100 and it costs $60, your profit is $40.",
+      },
+      {
+        question: "What is the difference between gross and net profit?",
+        answer:
+          "Gross profit is revenue minus the direct cost of goods sold. Net profit subtracts all expenses (rent, salaries, taxes, etc.). This calculator focuses on gross profit.",
+      },
+      {
+        question: "How do I find selling price from a target margin?",
+        answer:
+          "Divide the cost by (1 − margin as decimal). For a 30% margin on a $50 cost: $50 ÷ 0.70 = $71.43 selling price.",
+      },
+      {
+        question: "Is profit the same as margin?",
+        answer:
+          "No. Profit is an absolute amount (e.g. $40). Margin is profit expressed as a percentage of revenue (e.g. 40%). A high margin on a small sale can mean less total profit than a low margin on a large sale.",
+      },
+    ],
+    seo: {
+      title: "Profit Calculator – Calculate Profit & Selling Price | CalcBase",
+      description:
+        "Free profit calculator. Find profit, margin, and markup from cost and revenue. Set target margins to find the right selling price. Three flexible input modes.",
+      canonical: "/profit-calculator",
+    },
+    keywords: [
+      "profit calculator", "profit margin calculator", "how to calculate profit",
+      "selling price calculator", "profit formula", "gross profit calculator",
+      "calculate profit from cost and price", "profit percentage calculator",
+      "how much profit calculator", "price from margin calculator",
+    ],
+  },
+  {
+    slug: "sales-tax-calculator",
+    title: "Sales Tax Calculator",
+    shortDescription: "Calculate US sales tax for any amount. Includes state tax rate presets.",
+    longDescription:
+      "Enter a price and sales tax rate to see the tax amount and total price. Choose from preset US state tax rates or enter a custom rate. Useful for shopping, invoicing, and comparing prices across states.",
+    category: "vat",
+    relatedSlugs: ["vat-calculator", "add-vat", "discount-calculator", "roi-calculator"],
+    defaultInputs: { price: 100, rate: 7.25 },
+    formula: "Sales Tax = Price × (Tax Rate ÷ 100)\nTotal Price = Price + Sales Tax",
+    formulaExplanation:
+      "In the US, sales tax is added on top of the listed price at the point of sale. Multiply the pre-tax price by the sales tax rate to find the tax amount, then add it to get the total.",
+    examples: [
+      {
+        title: "California sales tax on a $50 purchase",
+        description: "Buying a $50 item in California with a 7.25% state sales tax.",
+        inputs: { Price: "$50", "Sales tax rate": "7.25%" },
+        result: "Sales tax = $3.63. Total price = $53.63.",
+      },
+      {
+        title: "Comparing prices across states",
+        description: "A $500 laptop purchased in Oregon (0%) vs New York (4% state + local).",
+        inputs: { Price: "$500", "Tax rate": "8%" },
+        result: "In NY: $40 tax, $540 total. In Oregon: $0 tax, $500 total.",
+      },
+    ],
+    faq: [
+      {
+        question: "How is sales tax different from VAT?",
+        answer:
+          "Sales tax is charged only at the final point of sale to the consumer. VAT is collected at every stage of production and distribution. Sales tax is used in the US; VAT is used in the UK, EU, and most other countries.",
+      },
+      {
+        question: "Which US states have no sales tax?",
+        answer:
+          "Five states have no statewide sales tax: Oregon, Montana, Delaware, New Hampshire, and Alaska. However, Alaska allows local jurisdictions to impose sales tax.",
+      },
+      {
+        question: "Does sales tax apply to online purchases?",
+        answer:
+          "Yes, in most cases. Since the 2018 Supreme Court ruling (South Dakota v. Wayfair), states can require online retailers to collect sales tax even if they have no physical presence in the state.",
+      },
+      {
+        question: "Why do sales tax rates vary so much?",
+        answer:
+          "US sales tax is set at the state, county, and city level. State rates range from 0% to 7.25%, and local surcharges can add 1–5% more. The total combined rate varies by exact location.",
+      },
+    ],
+    seo: {
+      title: "Sales Tax Calculator – US State Sales Tax Calculator | CalcBase",
+      description:
+        "Free US sales tax calculator. Enter price and tax rate to find sales tax and total. Includes all US state tax rates. Compare prices across states instantly.",
+      canonical: "/sales-tax-calculator",
+    },
+    keywords: [
+      "sales tax calculator", "us sales tax calculator", "sales tax calculator by state",
+      "calculate sales tax", "sales tax formula", "how to calculate sales tax",
+      "state sales tax rates", "sales tax rate calculator", "total price with tax",
+      "tax calculator usa", "sales tax vs vat", "reverse sales tax calculator",
+    ],
+  },
+  {
+    slug: "commission-calculator",
+    title: "Commission Calculator",
+    shortDescription: "Calculate sales commission earned and net amount. Supports percentage-based commissions.",
+    longDescription:
+      "Enter the total sales amount and commission rate to find the commission earned and the remaining net amount. Useful for sales professionals, real estate agents, freelancers, and affiliate marketers.",
+    category: "business",
+    relatedSlugs: ["profit-calculator", "roi-calculator", "margin-calculator", "discount-calculator"],
+    defaultInputs: { salesAmount: 50000, commissionRate: 5 },
+    formula: "Commission = Sales Amount × (Commission Rate ÷ 100)\nNet Amount = Sales Amount − Commission",
+    formulaExplanation:
+      "Multiply the total sales amount by the commission rate to find the commission earned. The net amount is what remains after the commission is paid.",
+    examples: [
+      {
+        title: "Real estate agent commission",
+        description: "A 6% commission on a $350,000 home sale.",
+        inputs: { "Sales amount": "$350,000", "Commission rate": "6%" },
+        result: "Commission = $21,000. Net to seller = $329,000.",
+      },
+      {
+        title: "Sales rep monthly commission",
+        description: "A sales rep earning 8% on £25,000 in monthly sales.",
+        inputs: { "Sales amount": "£25,000", "Commission rate": "8%" },
+        result: "Commission earned = £2,000. Net to company = £23,000.",
+      },
+    ],
+    faq: [
+      {
+        question: "What is a typical sales commission rate?",
+        answer:
+          "Commission rates vary by industry. Real estate agents typically earn 5–6%, SaaS sales reps 8–12%, retail salespeople 1–5%, and affiliate marketers 5–30%. Rates depend on the product value and sales cycle length.",
+      },
+      {
+        question: "How do tiered commissions work?",
+        answer:
+          "Tiered commissions increase the rate as sales volume grows. For example: 5% on the first $50,000, 8% on sales above $50,000. This calculator uses a flat rate; for tiered commissions, calculate each tier separately.",
+      },
+      {
+        question: "Is commission calculated on revenue or profit?",
+        answer:
+          "Most commissions are calculated on revenue (the total sale amount). Some businesses calculate on gross profit instead, which incentivizes higher-margin sales. Always clarify the commission base.",
+      },
+      {
+        question: "What is the difference between commission and markup?",
+        answer:
+          "Commission is a percentage paid to a salesperson or intermediary. Markup is the percentage added to cost to set the selling price. They serve different purposes: commission compensates salespeople; markup determines pricing.",
+      },
+    ],
+    seo: {
+      title: "Commission Calculator – Sales Commission Calculator Free | CalcBase",
+      description:
+        "Free commission calculator. Calculate sales commission earned and net amount from any sale. Includes real estate, sales rep, and affiliate commission examples.",
+      canonical: "/commission-calculator",
+    },
+    keywords: [
+      "commission calculator", "sales commission calculator", "commission rate calculator",
+      "real estate commission calculator", "how to calculate commission",
+      "commission percentage calculator", "sales rep commission calculator",
+      "affiliate commission calculator", "commission formula",
+      "calculate commission on sales", "commission earned calculator",
     ],
   },
 ];

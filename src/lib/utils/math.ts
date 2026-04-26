@@ -49,6 +49,25 @@ export function markupToMargin(markupPercent: number): number {
   return round((markupPercent / (100 + markupPercent)) * 100);
 }
 
+export function calculateRoi(investment: number, gain: number): { roi: number; netProfit: number } {
+  if (investment === 0) return { roi: 0, netProfit: round(gain) };
+  const netProfit = round(gain - investment);
+  const roi = round((netProfit / investment) * 100);
+  return { roi, netProfit };
+}
+
+export function calculateSalesTax(price: number, taxRate: number): { taxAmount: number; totalPrice: number } {
+  const taxAmount = round(price * (taxRate / 100));
+  const totalPrice = round(price + taxAmount);
+  return { taxAmount, totalPrice };
+}
+
+export function calculateCommission(salesAmount: number, commissionRate: number): { commission: number; netAfterCommission: number } {
+  const commission = round(salesAmount * (commissionRate / 100));
+  const netAfterCommission = round(salesAmount - commission);
+  return { commission, netAfterCommission };
+}
+
 export function calculateBreakeven(
   fixedCosts: number,
   variableCostPerUnit: number,

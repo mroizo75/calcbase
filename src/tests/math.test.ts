@@ -10,6 +10,9 @@ import {
   calculateBreakeven,
   marginToMarkup,
   markupToMargin,
+  calculateRoi,
+  calculateSalesTax,
+  calculateCommission,
 } from "@/lib/utils/math";
 
 describe("round", () => {
@@ -155,6 +158,54 @@ describe("markupToMargin", () => {
 
   it("converts 50% markup to 33.33% margin", () => {
     expect(markupToMargin(50)).toBe(33.33);
+  });
+});
+
+describe("calculateRoi", () => {
+  it("calculates 50% ROI on $1000 investment with $1500 return", () => {
+    const { roi, netProfit } = calculateRoi(1000, 1500);
+    expect(roi).toBe(50);
+    expect(netProfit).toBe(500);
+  });
+
+  it("handles negative ROI (loss)", () => {
+    const { roi, netProfit } = calculateRoi(1000, 600);
+    expect(roi).toBe(-40);
+    expect(netProfit).toBe(-400);
+  });
+
+  it("handles zero investment", () => {
+    const { roi, netProfit } = calculateRoi(0, 500);
+    expect(roi).toBe(0);
+    expect(netProfit).toBe(500);
+  });
+});
+
+describe("calculateSalesTax", () => {
+  it("calculates 7.25% sales tax on $100", () => {
+    const { taxAmount, totalPrice } = calculateSalesTax(100, 7.25);
+    expect(taxAmount).toBe(7.25);
+    expect(totalPrice).toBe(107.25);
+  });
+
+  it("handles zero tax rate", () => {
+    const { taxAmount, totalPrice } = calculateSalesTax(100, 0);
+    expect(taxAmount).toBe(0);
+    expect(totalPrice).toBe(100);
+  });
+});
+
+describe("calculateCommission", () => {
+  it("calculates 5% commission on $10,000 sale", () => {
+    const { commission, netAfterCommission } = calculateCommission(10000, 5);
+    expect(commission).toBe(500);
+    expect(netAfterCommission).toBe(9500);
+  });
+
+  it("handles 100% commission", () => {
+    const { commission, netAfterCommission } = calculateCommission(1000, 100);
+    expect(commission).toBe(1000);
+    expect(netAfterCommission).toBe(0);
   });
 });
 

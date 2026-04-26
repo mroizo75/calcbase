@@ -4,7 +4,7 @@ import { getCanonicalUrl, getBaseUrl } from "@/lib/utils/urls";
 
 const SITE_NAME = "CalcBase";
 const DEFAULT_DESCRIPTION =
-  "Free online business calculators for VAT, profit margin, markup, discount, and break-even. Add or remove VAT, calculate net-to-gross, and plan pricing. Trusted by professionals.";
+  "Free online business calculators for VAT, sales tax, profit margin, markup, ROI, commissions, discounts, and break-even. 12 tools plus guides. Trusted by professionals.";
 
 export function buildSiteMetadata(): Metadata {
   return {
