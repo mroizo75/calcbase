@@ -7,6 +7,8 @@ const DEFAULT_DESCRIPTION =
   "Free online business calculators for VAT, sales tax, profit margin, markup, ROI, commissions, discounts, and break-even. 12 tools plus guides. Trusted by professionals.";
 
 export function buildSiteMetadata(): Metadata {
+  const pubId = process.env.NEXT_PUBLIC_ADSENSE_PUB_ID;
+
   return {
     metadataBase: new URL(getBaseUrl()),
     title: {
@@ -14,6 +16,9 @@ export function buildSiteMetadata(): Metadata {
       template: `%s | ${SITE_NAME}`,
     },
     description: DEFAULT_DESCRIPTION,
+    ...(pubId && {
+      other: { "google-adsense-account": pubId },
+    }),
     openGraph: {
       type: "website",
       locale: "en_US",

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { MobileNav } from "./mobile-nav";
 import { ActiveLink } from "./active-link";
 import { HeaderSearch } from "./header-search";
@@ -8,11 +9,13 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
         <Link href="/" className="relative flex shrink-0 items-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src="/calclogo.png"
             alt="CalcBase – Business Calculators"
+            width={200}
+            height={64}
             className="h-16 w-auto"
+            priority
           />
         </Link>
 
