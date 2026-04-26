@@ -16,6 +16,9 @@ export function buildSiteMetadata(): Metadata {
       template: `%s | ${SITE_NAME}`,
     },
     description: DEFAULT_DESCRIPTION,
+    alternates: {
+      canonical: getBaseUrl(),
+    },
     ...(pubId && {
       other: { "google-adsense-account": pubId },
     }),
@@ -78,6 +81,13 @@ export function buildPageMetadata(opts: {
       description: opts.description,
       url: getCanonicalUrl(opts.canonical),
       type: "website",
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: opts.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: opts.title,
+      description: opts.description,
+      images: ["/opengraph-image"],
     },
   };
 }

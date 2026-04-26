@@ -4,7 +4,7 @@ import { calculators } from "@/lib/calculators/registry";
 import { guides } from "@/lib/guides/registry";
 
 const SITE_LAUNCHED = new Date("2026-04-15");
-const LAST_CONTENT_UPDATE = new Date("2026-04-26");
+const LAST_CONTENT_UPDATE = new Date();
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = getBaseUrl();

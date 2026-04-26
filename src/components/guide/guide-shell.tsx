@@ -44,7 +44,22 @@ export function GuideShell({ config, children }: GuideShellProps) {
       <h1 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
         {config.title}
       </h1>
-      <p className="mb-8 text-lg text-muted-foreground">{config.description}</p>
+      <p className="mb-3 text-lg text-muted-foreground">{config.description}</p>
+      <p className="mb-8 text-xs text-muted-foreground">
+        Published{" "}
+        <time dateTime={config.publishedDate}>
+          {new Date(config.publishedDate).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+        </time>
+        {config.updatedDate !== config.publishedDate && (
+          <>
+            {" · Updated "}
+            <time dateTime={config.updatedDate}>
+              {new Date(config.updatedDate).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+            </time>
+          </>
+        )}
+        {" · CalcBase"}
+      </p>
 
       <div className="prose-content space-y-6 text-base leading-relaxed">
         {children}

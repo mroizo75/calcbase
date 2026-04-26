@@ -16,7 +16,12 @@ export function buildOrganizationSchema() {
     "@type": "Organization",
     name: "CalcBase",
     url: getBaseUrl(),
-    logo: `${getBaseUrl()}/icon.png`,
+    logo: {
+      "@type": "ImageObject",
+      url: `${getBaseUrl()}/calclogo.png`,
+      width: 200,
+      height: 64,
+    },
   };
 }
 
@@ -63,6 +68,27 @@ export function buildWebPageSchema(opts: {
   };
 }
 
+export function buildWebApplicationSchema(config: CalculatorConfig) {
+  return {
+    "@type": "WebApplication",
+    name: config.title,
+    description: config.longDescription,
+    url: getCanonicalUrl(config.seo.canonical),
+    applicationCategory: "FinanceApplication",
+    operatingSystem: "Any",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "CalcBase",
+      url: getBaseUrl(),
+    },
+  };
+}
+
 export function buildArticleSchema(opts: {
   headline: string;
   description: string;
@@ -75,10 +101,21 @@ export function buildArticleSchema(opts: {
     headline: opts.headline,
     description: opts.description,
     url: getCanonicalUrl(opts.url),
+    author: {
+      "@type": "Organization",
+      name: "CalcBase",
+      url: getBaseUrl(),
+    },
     publisher: {
       "@type": "Organization",
       name: "CalcBase",
       url: getBaseUrl(),
+      logo: {
+        "@type": "ImageObject",
+        url: `${getBaseUrl()}/calclogo.png`,
+        width: 200,
+        height: 64,
+      },
     },
     datePublished: opts.datePublished,
     dateModified: opts.dateModified,
@@ -106,6 +143,7 @@ export function buildCalculatorPageGraph(config: CalculatorConfig) {
       description: config.longDescription,
       url: config.seo.canonical,
     }),
+    buildWebApplicationSchema(config),
     buildBreadcrumbSchema([
       { name: "Home", url: "/" },
       { name: "Calculators", url: "/calculators" },
