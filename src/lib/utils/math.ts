@@ -68,6 +68,29 @@ export function calculateCommission(salesAmount: number, commissionRate: number)
   return { commission, netAfterCommission };
 }
 
+export function calculatePercentageOf(percent: number, total: number): number {
+  return round(total * (percent / 100));
+}
+
+export function calculateWhatPercent(part: number, total: number): number {
+  if (total === 0) return 0;
+  return round((part / total) * 100);
+}
+
+export function calculateWhole(part: number, percent: number): number {
+  if (percent === 0) return 0;
+  return round(part / (percent / 100));
+}
+
+export function calculatePercentageChange(from: number, to: number): number {
+  if (from === 0) return 0;
+  return round(((to - from) / Math.abs(from)) * 100);
+}
+
+export function applyPercentageChange(value: number, changePercent: number): number {
+  return round(value * (1 + changePercent / 100));
+}
+
 export function calculateBreakeven(
   fixedCosts: number,
   variableCostPerUnit: number,

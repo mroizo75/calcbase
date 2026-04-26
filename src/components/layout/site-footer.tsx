@@ -16,6 +16,9 @@ const footerLinks = {
     { label: "Commission Calculator", href: "/commission-calculator" },
     { label: "Break-even Calculator", href: "/break-even-calculator" },
     { label: "Margin ↔ Markup", href: "/margin-markup-converter" },
+    { label: "Percentage Calculator", href: "/percentage-calculator" },
+    { label: "% Change Calculator", href: "/percentage-change-calculator" },
+    { label: "GST Calculator", href: "/gst-calculator" },
   ],
   guides: [
     { label: "VAT Explained", href: "/guides/vat-explained" },

@@ -53,7 +53,7 @@ export const calculators: CalculatorConfig[] = [
     longDescription:
       "Calculate Value Added Tax for any country. Add VAT to a net amount or extract VAT from a gross price. Choose from preset rates for the UK, EU, Australia, Canada, and more — or enter a custom rate.",
     category: "vat",
-    relatedSlugs: ["add-vat", "remove-vat", "sales-tax-calculator", "margin-calculator", "discount-calculator"],
+    relatedSlugs: ["add-vat", "remove-vat", "sales-tax-calculator", "gst-calculator", "margin-calculator", "discount-calculator"],
     defaultInputs: { amount: 100, rate: 20, mode: "add" },
     formula: "VAT Amount = Net Amount × (VAT Rate ÷ 100)\nGross Amount = Net Amount + VAT Amount",
     formulaExplanation:
@@ -129,7 +129,7 @@ export const calculators: CalculatorConfig[] = [
     longDescription:
       "Need to add VAT to a price? Enter the net amount and choose a VAT rate. This calculator shows the exact VAT amount and the final gross price — useful for invoicing, quoting, and pricing.",
     category: "vat",
-    relatedSlugs: ["vat-calculator", "remove-vat", "markup-calculator", "margin-calculator"],
+    relatedSlugs: ["vat-calculator", "remove-vat", "gst-calculator", "markup-calculator", "margin-calculator"],
     defaultInputs: { amount: 100, rate: 20 },
     formula: "VAT Amount = Net Amount × (VAT Rate ÷ 100)\nGross Amount = Net Amount + VAT Amount",
     formulaExplanation:
@@ -184,7 +184,7 @@ export const calculators: CalculatorConfig[] = [
     longDescription:
       "Have a price that includes VAT and need to find the net amount? Enter the gross total and the VAT rate, and this calculator extracts the VAT portion and shows you the price before tax.",
     category: "vat",
-    relatedSlugs: ["vat-calculator", "add-vat", "discount-calculator", "margin-calculator"],
+    relatedSlugs: ["vat-calculator", "add-vat", "gst-calculator", "discount-calculator", "margin-calculator"],
     defaultInputs: { amount: 120, rate: 20 },
     formula: "Net Amount = Gross Amount ÷ (1 + VAT Rate ÷ 100)\nVAT Amount = Gross Amount − Net Amount",
     formulaExplanation:
@@ -239,7 +239,7 @@ export const calculators: CalculatorConfig[] = [
     longDescription:
       "Enter your revenue (selling price) and cost to calculate profit margin. This calculator shows your profit amount and margin percentage — essential for pricing decisions and financial analysis.",
     category: "pricing",
-    relatedSlugs: ["markup-calculator", "profit-calculator", "margin-markup-converter", "break-even-calculator"],
+    relatedSlugs: ["markup-calculator", "profit-calculator", "margin-markup-converter", "break-even-calculator", "percentage-calculator", "percentage-change-calculator"],
     defaultInputs: { revenue: 100, cost: 60 },
     formula: "Profit = Revenue − Cost\nMargin % = (Profit ÷ Revenue) × 100",
     formulaExplanation:
@@ -366,7 +366,7 @@ export const calculators: CalculatorConfig[] = [
     longDescription:
       "Enter the original price and discount percentage to see exactly how much you save and what the final price will be. Useful for sales, promotions, and comparing deals.",
     category: "pricing",
-    relatedSlugs: ["vat-calculator", "margin-calculator", "markup-calculator", "break-even-calculator"],
+    relatedSlugs: ["vat-calculator", "margin-calculator", "markup-calculator", "break-even-calculator", "percentage-calculator"],
     defaultInputs: { originalPrice: 100, discountPercent: 25 },
     formula: "Discount Amount = Original Price × (Discount % ÷ 100)\nFinal Price = Original Price − Discount Amount",
     formulaExplanation:
@@ -560,7 +560,7 @@ export const calculators: CalculatorConfig[] = [
     longDescription:
       "Enter the total investment cost and the gain (or current value) to find your return on investment. This calculator shows the ROI percentage and net profit — essential for evaluating business decisions, marketing campaigns, and investment opportunities.",
     category: "business",
-    relatedSlugs: ["profit-calculator", "break-even-calculator", "margin-calculator", "commission-calculator"],
+    relatedSlugs: ["profit-calculator", "break-even-calculator", "margin-calculator", "commission-calculator", "percentage-change-calculator"],
     defaultInputs: { investment: 10000, gain: 15000 },
     formula: "Net Profit = Gain − Investment\nROI % = (Net Profit ÷ Investment) × 100",
     formulaExplanation:
@@ -682,7 +682,7 @@ export const calculators: CalculatorConfig[] = [
     longDescription:
       "Enter a price and sales tax rate to see the tax amount and total price. Choose from preset US state tax rates or enter a custom rate. Useful for shopping, invoicing, and comparing prices across states.",
     category: "vat",
-    relatedSlugs: ["vat-calculator", "add-vat", "discount-calculator", "roi-calculator"],
+    relatedSlugs: ["vat-calculator", "add-vat", "remove-vat", "gst-calculator", "discount-calculator", "roi-calculator"],
     defaultInputs: { price: 100, rate: 7.25 },
     formula: "Sales Tax = Price × (Tax Rate ÷ 100)\nTotal Price = Price + Sales Tax",
     formulaExplanation:
@@ -796,6 +796,232 @@ export const calculators: CalculatorConfig[] = [
       "commission percentage calculator", "sales rep commission calculator",
       "affiliate commission calculator", "commission formula",
       "calculate commission on sales", "commission earned calculator",
+    ],
+  },
+  {
+    slug: "percentage-calculator",
+    title: "Percentage Calculator",
+    shortDescription: "Find X% of a number, calculate what percentage one number is of another, or reverse-calculate the whole from a known part.",
+    longDescription:
+      "Three percentage modes in one tool: find what X% of any number equals, calculate what percentage one value is of another, or work backwards to find the original total when you know the part and the rate. Every result shows the formula so you can verify the math.",
+    category: "business",
+    relatedSlugs: ["percentage-change-calculator", "discount-calculator", "margin-calculator", "markup-calculator", "roi-calculator"],
+    defaultInputs: { percent: 15, total: 200, mode: "find-amount" },
+    formula: "Amount = Total × (Percent ÷ 100)\nPercent = (Part ÷ Total) × 100\nWhole = Part ÷ (Percent ÷ 100)",
+    formulaExplanation:
+      "All three percentage calculations use the same relationship: Percent × Total = Part × 100. Rearrange for what you need: to find the amount multiply total by the rate; to find the rate divide part by total; to find the whole divide part by the rate.",
+    examples: [
+      {
+        title: "What is 15% of $200?",
+        description: "A sales rep earning a 15% commission on a $200 sale.",
+        inputs: { Percent: "15%", Total: "$200" },
+        result: "15% of $200 = $30.",
+      },
+      {
+        title: "45 is what percent of 180?",
+        description: "A business made $45 profit on a $180 sale — what is the margin?",
+        inputs: { Part: "45", Total: "180" },
+        result: "45 is 25% of 180.",
+      },
+      {
+        title: "30 is 12%, what is the whole?",
+        description: "A discount of $30 represents 12% off — what was the original price?",
+        inputs: { Part: "$30", Percent: "12%" },
+        result: "The whole = $250.",
+      },
+    ],
+    faq: [
+      {
+        question: "How do I calculate a percentage of a number?",
+        answer:
+          "Multiply the number by the percentage divided by 100. For example, 15% of 200 = 200 × 0.15 = 30. This works for any percentage and any number.",
+      },
+      {
+        question: "How do I find what percentage one number is of another?",
+        answer:
+          "Divide the part by the whole, then multiply by 100. For example, 45 out of 180 = (45 ÷ 180) × 100 = 25%. This is also the formula for profit margin when part is profit and whole is revenue.",
+      },
+      {
+        question: "How do I find the original number before a percentage was taken?",
+        answer:
+          "Divide the known part by the percentage rate (as a decimal). If 30 represents 12% of something: 30 ÷ 0.12 = 250. This is the reverse percentage calculation.",
+      },
+      {
+        question: "What is the difference between percentage and percentage points?",
+        answer:
+          "A percentage is a proportion of a total. A percentage point is the arithmetic difference between two percentages. If a rate goes from 10% to 15%, it increased by 5 percentage points, but by 50% as a relative change.",
+      },
+      {
+        question: "How do I calculate percentage increase or decrease?",
+        answer:
+          "Use the Percentage Change Calculator for increases and decreases. The formula is: ((new − old) ÷ old) × 100. A positive result is an increase; a negative result is a decrease.",
+      },
+    ],
+    seo: {
+      title: "Percentage Calculator – What is X% of Y? | CalcBase",
+      description:
+        "Free percentage calculator. Find what X% of a number is, calculate what percentage one number is of another, or reverse-calculate the whole. Instant results with formula.",
+      canonical: "/percentage-calculator",
+    },
+    keywords: [
+      "percentage calculator", "what is 15 percent of 200", "percent of calculator",
+      "how to calculate percentage", "percentage formula", "x is what percent of y",
+      "percentage calculator online", "calculate percentage of number", "reverse percentage calculator",
+      "find the whole from percentage", "percent calculator", "percentage of a number",
+    ],
+  },
+  {
+    slug: "percentage-change-calculator",
+    title: "Percentage Change Calculator",
+    shortDescription: "Calculate the percentage increase or decrease between two numbers, or find the new value after applying a percentage change.",
+    longDescription:
+      "Two modes: find the exact percentage change between any two values (increase or decrease), or apply a known percentage change to calculate the resulting value. Used for tracking price changes, growth rates, discounts, and performance metrics.",
+    category: "business",
+    relatedSlugs: ["percentage-calculator", "roi-calculator", "discount-calculator", "margin-calculator", "profit-calculator"],
+    defaultInputs: { from: 80, to: 100, mode: "find-change" },
+    formula: "Percentage Change = ((New − Old) ÷ |Old|) × 100\nNew Value = Old Value × (1 + Change% ÷ 100)",
+    formulaExplanation:
+      "To find the percentage change, subtract the old value from the new, divide by the absolute value of the old, and multiply by 100. A positive result means increase; negative means decrease. To apply a change, multiply the original value by (1 + rate).",
+    examples: [
+      {
+        title: "Price increase from $80 to $100",
+        description: "A product's price changed from $80 to $100 — what is the percentage increase?",
+        inputs: { "Old value": "$80", "New value": "$100" },
+        result: "Percentage increase = 25%.",
+      },
+      {
+        title: "Salary after 8% raise",
+        description: "A £42,000 salary after an 8% pay rise.",
+        inputs: { "Original value": "£42,000", "Change": "+8%" },
+        result: "New salary = £45,360.",
+      },
+      {
+        title: "Stock dropped from $250 to $200",
+        description: "A stock price declined — what is the percentage loss?",
+        inputs: { "Old price": "$250", "New price": "$200" },
+        result: "Percentage decrease = −20%.",
+      },
+    ],
+    faq: [
+      {
+        question: "What is the formula for percentage change?",
+        answer:
+          "Percentage change = ((New Value − Old Value) ÷ |Old Value|) × 100. A positive result means the value increased; a negative result means it decreased. Always divide by the original (old) value, not the new one.",
+      },
+      {
+        question: "How do I calculate a percentage increase?",
+        answer:
+          "Subtract the original value from the new value, divide by the original, and multiply by 100. For example, from 80 to 100: (100 − 80) ÷ 80 × 100 = 25% increase.",
+      },
+      {
+        question: "How do I calculate a percentage decrease?",
+        answer:
+          "Same formula as percentage increase — the result will simply be negative. For example, from 100 to 75: (75 − 100) ÷ 100 × 100 = −25% (a 25% decrease).",
+      },
+      {
+        question: "What is the difference between percentage change and percentage points?",
+        answer:
+          "Percentage change is relative: from 20% to 25% is a 25% change ((25−20)÷20×100). Percentage points measure the absolute difference: 25% − 20% = 5 percentage points. These are very different and often confused.",
+      },
+      {
+        question: "How do I reverse a percentage change to find the original value?",
+        answer:
+          "If you know the current value and the percentage change, divide by (1 + change/100). For example, a value is now $120 after a 20% increase: $120 ÷ 1.20 = $100 original. Use the Remove VAT or Reverse Percentage calculator for this.",
+      },
+      {
+        question: "How is percentage change different from ROI?",
+        answer:
+          "ROI (Return on Investment) uses the same percentage change formula but is specifically applied to financial returns: (Gain − Investment) ÷ Investment × 100. Percentage change is the general-purpose version of that same calculation.",
+      },
+    ],
+    seo: {
+      title: "Percentage Change Calculator – Increase & Decrease | CalcBase",
+      description:
+        "Free percentage change calculator. Calculate % increase or decrease between two numbers, or apply a change to find the new value. Includes percent increase and decrease formula.",
+      canonical: "/percentage-change-calculator",
+    },
+    keywords: [
+      "percentage change calculator", "percent change calculator", "percentage increase calculator",
+      "percentage decrease calculator", "how to calculate percentage change", "percent increase formula",
+      "percentage change formula", "calculate percent increase", "percent difference calculator",
+      "percentage growth calculator", "price change percentage", "percent change formula",
+    ],
+  },
+  {
+    slug: "gst-calculator",
+    title: "GST Calculator",
+    shortDescription: "Add or remove GST from any amount. Supports Australia (10%), New Zealand (15%), Canada (5%), India (18%), and more.",
+    longDescription:
+      "Calculate Goods and Services Tax (GST) for Australia, New Zealand, Canada, India, Singapore and other GST countries. Add GST to a net (ex-GST) price, or remove GST from a GST-inclusive amount to find the original price. Free, accurate, and instant.",
+    category: "vat",
+    relatedSlugs: ["vat-calculator", "add-vat", "remove-vat", "sales-tax-calculator", "percentage-calculator"],
+    defaultInputs: { amount: 100, rate: 10, mode: "add" },
+    formula: "GST Amount = Net Amount × (GST Rate ÷ 100)\nGross Amount = Net Amount + GST Amount\nNet Amount = Gross Amount ÷ (1 + GST Rate ÷ 100)",
+    formulaExplanation:
+      "GST works identically to VAT: to add GST, multiply the net amount by the GST rate and add it to the net. To remove (extract) GST from an inclusive price, divide by (1 + GST rate as decimal). For Australia's 10% GST, that means dividing by 1.10.",
+    examples: [
+      {
+        title: "Adding 10% GST in Australia",
+        description: "An Australian contractor invoicing A$1,500 before GST.",
+        inputs: { "Net amount": "A$1,500", "GST rate": "10%" },
+        result: "GST = A$150. Total inc. GST = A$1,650.",
+      },
+      {
+        title: "Removing 15% GST in New Zealand",
+        description: "Finding the pre-GST price of a NZ$230 product.",
+        inputs: { "GST-inclusive price": "NZ$230", "GST rate": "15%" },
+        result: "Net price = NZ$200.00. GST included = NZ$30.00.",
+      },
+      {
+        title: "Adding 5% GST in Canada",
+        description: "A Canadian freelancer adding federal GST to a C$800 invoice.",
+        inputs: { "Net amount": "C$800", "GST rate": "5%" },
+        result: "GST = C$40. Total = C$840.",
+      },
+    ],
+    faq: [
+      {
+        question: "What is GST?",
+        answer:
+          "GST (Goods and Services Tax) is a value-added tax on most goods and services sold domestically. It is equivalent to VAT in the UK and EU. Countries using GST include Australia (10%), New Zealand (15%), Canada (5% federal), India (5–28%), and Singapore (9%).",
+      },
+      {
+        question: "What is the GST rate in Australia?",
+        answer:
+          "Australia's standard GST rate is 10%, introduced in July 2000. It applies to most goods and services. Some items are GST-free, including most fresh food, medical services, and educational courses.",
+      },
+      {
+        question: "What is the GST rate in New Zealand?",
+        answer:
+          "New Zealand's GST rate is 15%. Unlike Australia, New Zealand has very few exemptions — GST applies to almost all goods and services including food.",
+      },
+      {
+        question: "What is the GST rate in Canada?",
+        answer:
+          "Canada's federal GST rate is 5%. Several provinces also charge a provincial sales tax (PST) or a Harmonized Sales Tax (HST) that combines federal and provincial rates. For example, Ontario's HST is 13% (5% federal + 8% provincial).",
+      },
+      {
+        question: "How do I remove GST from a price that includes GST?",
+        answer:
+          "Divide the GST-inclusive price by (1 + GST rate as decimal). For Australia's 10%: divide by 1.10. For New Zealand's 15%: divide by 1.15. For example, A$110 ÷ 1.10 = A$100 ex-GST.",
+      },
+      {
+        question: "Is GST the same as VAT?",
+        answer:
+          "Yes — GST and VAT are economically identical taxes. Both are collected at each stage of the supply chain, and the end consumer bears the full cost. The name differs by country. The UK and EU use 'VAT'; Australia, NZ, Canada, and India use 'GST'.",
+      },
+    ],
+    seo: {
+      title: "GST Calculator – Add or Remove GST (Australia, NZ, Canada) | CalcBase",
+      description:
+        "Free GST calculator. Add GST to a net price or remove GST from an inclusive amount. Supports Australia 10%, New Zealand 15%, Canada 5%, India 18%, Singapore 9%. Instant results.",
+      canonical: "/gst-calculator",
+    },
+    keywords: [
+      "gst calculator", "gst calculator australia", "gst calculator nz", "gst calculator canada",
+      "add gst", "remove gst", "gst inclusive calculator", "gst exclusive calculator",
+      "how to calculate gst", "gst formula", "australian gst calculator", "new zealand gst calculator",
+      "canadian gst calculator", "gst rate", "gst calculator online free",
     ],
   },
 ];
