@@ -136,6 +136,21 @@ export const guides: GuideConfig[] = [
       canonical: "/guides/pricing-strategy-explained",
     },
   },
+  {
+    slug: "discount-impact-on-margin",
+    title: "How Discounts Destroy Your Margin (And How Much More You Need to Sell)",
+    description:
+      "A discount reduces your margin by more than you think. This guide shows the real math: how discounts shrink profit, the formula for required sales volume increase, and a reference table for every margin and discount combination.",
+    publishedDate: "2026-04-26",
+    updatedDate: "2026-04-26",
+    relatedCalculators: ["discount-calculator", "margin-calculator", "break-even-calculator", "profit-calculator"],
+    seo: {
+      title: "Discount Impact on Margin – The Math Behind Sales & Promotions | CalcBase",
+      description:
+        "See how discounts reduce profit margin and how much extra volume you need to break even. Includes the discount-margin formula, worked examples, and a full reference table.",
+      canonical: "/guides/discount-impact-on-margin",
+    },
+  },
 ];
 
 export function getGuide(slug: string): GuideConfig | undefined {

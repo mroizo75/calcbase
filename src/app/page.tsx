@@ -179,6 +179,7 @@ export default function HomePage() {
               { title: "How to Price a Product", href: "/guides/how-to-price-a-product", desc: "Pricing formulas, strategies, and common mistakes to avoid." },
               { title: "Pricing Strategy Guide", href: "/guides/pricing-strategy-explained", desc: "Cost-plus, value-based, competitive, and premium pricing." },
               { title: "How to Calculate ROI", href: "/guides/how-to-calculate-roi", desc: "ROI formula, worked examples, and common pitfalls." },
+              { title: "Discount Impact on Margin", href: "/guides/discount-impact-on-margin", desc: "How discounts destroy profit and how much more you need to sell." },
               { title: "How to Calculate Discount", href: "/guides/how-to-calculate-discount", desc: "Percentage discounts, stacking, and reverse calculations." },
               { title: "Break-even Formula", href: "/guides/break-even-formula", desc: "Fixed costs, variable costs, and finding your break-even point." },
             ].map((guide) => (

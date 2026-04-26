@@ -25,6 +25,7 @@ const footerLinks = {
     { label: "How to Price a Product", href: "/guides/how-to-price-a-product" },
     { label: "Pricing Strategy", href: "/guides/pricing-strategy-explained" },
     { label: "How to Calculate ROI", href: "/guides/how-to-calculate-roi" },
+    { label: "Discount Impact on Margin", href: "/guides/discount-impact-on-margin" },
     { label: "How to Calculate Discount", href: "/guides/how-to-calculate-discount" },
     { label: "Break-even Formula", href: "/guides/break-even-formula" },
   ],
