@@ -37,9 +37,11 @@ export function CalculatorShell({ config, children }: CalculatorShellProps) {
           <h1 className="mb-2 text-3xl font-bold tracking-tight sm:text-4xl">
             {config.title}
           </h1>
-          <p className="mb-8 max-w-2xl text-lg text-muted-foreground">
-            {config.longDescription}
-          </p>
+          <div className="mb-8 max-w-2xl space-y-3 text-base leading-relaxed text-muted-foreground">
+            {config.longDescription.split("\n\n").map((para, i) => (
+              <p key={i}>{para}</p>
+            ))}
+          </div>
 
           <AdBanner slot="calc-below-intro" />
 
