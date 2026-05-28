@@ -347,7 +347,7 @@ Margin analysis is useful across many practical contexts: evaluating the profita
   {
     slug: "markup-calculator",
     title: "Markup Calculator",
-    shortDescription: "Calculate markup percentage from cost and selling price, or find the selling price from a target markup.",
+    shortDescription: "Calculate markup percentage from cost and price, or find selling price from a target markup. Works for retail, wholesale, and any industry.",
     longDescription:
       `Markup is the percentage added to the cost of a product to arrive at the selling price. It is the foundational calculation in cost-plus pricing and is widely used in retail, wholesale, manufacturing, and service industries when setting prices from a known cost base. Getting markup right ensures you recover your costs, contribute to overheads, and generate the profit margin your business needs to be sustainable.
 
@@ -407,16 +407,17 @@ One of the most common sources of confusion in business pricing is the differenc
       },
     ],
     seo: {
-      title: "Markup Calculator – Find Markup % or Selling Price | CalcBase",
+      title: "Markup Calculator – Markup % from Cost & Price | CalcBase",
       description:
-        "Free markup calculator. Calculate markup percentage from cost and price, or find selling price from target markup. Includes markup-to-margin conversion table.",
+        "Free retail markup calculator. Find markup percentage from cost and price, or calculate selling price from a target markup. Covers keystone, wholesale, and cost-plus markup. Instant results.",
       canonical: "/markup-calculator",
     },
     keywords: [
       "markup calculator", "markup percentage calculator", "how to calculate markup", "markup formula",
       "markup vs margin", "cost plus markup calculator", "retail markup calculator",
       "markup to margin converter", "keystone markup", "100 percent markup",
-      "what is markup", "selling price calculator",
+      "what is markup", "selling price calculator", "price markup calculator",
+      "calculate markup", "calculate a markup", "markup price calculator",
     ],
   },
   {
@@ -482,9 +483,9 @@ An important caution applies when stacking multiple discounts: they are not addi
       },
     ],
     seo: {
-      title: "Discount Calculator – Percentage Off & Sale Price | CalcBase",
+      title: "Discount Calculator – Sale Price & Profit Impact | CalcBase",
       description:
-        "Free discount calculator. Enter original price and discount % to see savings and final sale price. Calculate 10%, 20%, 25%, 30%, 50% off any amount instantly.",
+        "Free discount calculator. Enter original price and discount % to see savings, final sale price, and profit impact. Calculate 10%, 20%, 25%, 30%, 50% off any amount instantly.",
       canonical: "/discount-calculator",
     },
     keywords: [
@@ -627,9 +628,9 @@ Break-even analysis has wide practical applications: assessing whether a new pro
       },
     ],
     seo: {
-      title: "Break-even Calculator – Find Your Break-even Point Free | CalcBase",
+      title: "Break-even Calculator – Units & Sales Revenue Needed | CalcBase",
       description:
-        "Free break-even calculator. Enter fixed costs, variable costs, and price to find how many units to sell to break even. See contribution margin and revenue needed.",
+        "Free break-even calculator. Enter fixed costs, variable costs, and selling price to find how many units and how much sales revenue you need to break even. Instant results.",
       canonical: "/break-even-calculator",
     },
     keywords: [
