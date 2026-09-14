@@ -32,6 +32,7 @@ export const seoOpportunity = defineType({
           { title: "Calculator query gap", value: "calculatorQueryGap" },
           { title: "News CTR", value: "newsCtr" },
           { title: "News review", value: "newsReview" },
+          { title: "Article draft (review)", value: "articleDraft" },
         ],
       },
       validation: (r) => r.required(),
@@ -102,7 +103,7 @@ export const seoOpportunity = defineType({
       type: "text",
       rows: 4,
       description:
-        "Human task only. Never auto-generates article/FAQ body. Do the work yourself, then mark Done (manual).",
+        "Human task. For articleDraft: open the linked article, edit thoroughly, then Publish to site. Never leave thin AI text live.",
       readOnly: true,
     }),
     defineField({
@@ -157,18 +158,101 @@ export const seoOpportunity = defineType({
           return true;
         }),
     }),
+    defineField({
+      name: "draftArticleId",
+      title: "Draft article ID",
+      type: "string",
+      description: "Linked Sanity article in draftReview. Not live until you Publish to site.",
+      readOnly: true,
+    }),
+    defineField({
+      name: "recommendedSlug",
+      title: "Recommended slug",
+      type: "string",
+      description:
+        "Only for news/article opportunities. Calculator URLs stay fixed (changing them hurts SEO).",
+    }),
+    defineField({
+      name: "recommendationSummary",
+      title: "Why this recommendation",
+      type: "text",
+      rows: 3,
+      description: "AI rationale for the proposed title/meta/slug package.",
+    }),
+    defineField({
+      name: "appliedAt",
+      title: "Applied at",
+      type: "datetime",
+      readOnly: true,
+    }),
+    defineField({
+      name: "followUpImpressions",
+      title: "Follow-up impressions",
+      type: "number",
+      readOnly: true,
+    }),
+    defineField({
+      name: "followUpClicks",
+      title: "Follow-up clicks",
+      type: "number",
+      readOnly: true,
+    }),
+    defineField({
+      name: "followUpCtr",
+      title: "Follow-up CTR",
+      type: "number",
+      readOnly: true,
+    }),
+    defineField({
+      name: "followUpPosition",
+      title: "Follow-up position",
+      type: "number",
+      readOnly: true,
+    }),
+    defineField({
+      name: "followUpAt",
+      title: "Follow-up measured at",
+      type: "datetime",
+      readOnly: true,
+    }),
+    defineField({
+      name: "outcome",
+      title: "Outcome",
+      type: "string",
+      readOnly: true,
+      options: {
+        list: [
+          { title: "Awaiting follow-up (~7 days)", value: "awaiting_followup" },
+          { title: "Improved CTR", value: "improved_ctr" },
+          { title: "Improved position", value: "improved_position" },
+          { title: "Improved both", value: "improved_both" },
+          { title: "Mixed", value: "mixed" },
+          { title: "No change", value: "no_change" },
+          { title: "Worse", value: "worse" },
+        ],
+      },
+    }),
+    defineField({
+      name: "outcomeNotes",
+      title: "Outcome notes (learning)",
+      type: "text",
+      rows: 3,
+      readOnly: true,
+      description: "What worked / did not — filled automatically ~7 days after apply.",
+    }),
   ],
   preview: {
     select: {
       title: "slug",
       kind: "kind",
       status: "status",
+      outcome: "outcome",
       impressions: "impressions",
     },
-    prepare({ title, kind, status, impressions }) {
+    prepare({ title, kind, status, outcome, impressions }) {
       return {
         title: title || "SEO opportunity",
-        subtitle: `${kind ?? "?"} · ${status ?? "?"} · ${impressions ?? 0} impr.`,
+        subtitle: `${kind ?? "?"} · ${status ?? "?"} · ${outcome ?? "no outcome"} · ${impressions ?? 0} impr.`,
       };
     },
   },

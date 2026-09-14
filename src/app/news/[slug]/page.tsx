@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 import { ArrowLeft, Calendar, Tag } from "lucide-react";
@@ -58,6 +59,7 @@ export default async function ArticlePage({ params }: Props) {
   const relatedCalcs = calculators.filter(
     (c) => article.relatedCalculators?.includes(c.slug),
   );
+  const coverUrl = article.coverImage?.asset?.url;
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6">
@@ -91,6 +93,19 @@ export default async function ArticlePage({ params }: Props) {
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">{article.title}</h1>
         <p className="mt-3 text-lg leading-relaxed text-muted-foreground">{article.excerpt}</p>
       </header>
+
+      {coverUrl ? (
+        <div className="mb-8 overflow-hidden rounded-lg">
+          <Image
+            src={coverUrl}
+            alt={article.coverImage?.alt || article.title}
+            width={1200}
+            height={675}
+            className="h-auto w-full object-cover"
+            priority
+          />
+        </div>
+      ) : null}
 
       <article className="prose-base space-y-4">
         <PortableText value={article.body} components={portableTextComponents} />

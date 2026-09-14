@@ -6,6 +6,17 @@ export type ArticleCategory =
   | "calculator-guides"
   | "economic-news";
 
+export type ArticleEditorialStatus = "draftReview" | "published";
+
+export interface ArticleImage {
+  alt?: string;
+  asset?: {
+    _id?: string;
+    url?: string;
+    metadata?: { dimensions?: { width?: number; height?: number } };
+  };
+}
+
 export interface ArticleSummary {
   _id: string;
   title: string;
@@ -14,6 +25,8 @@ export interface ArticleSummary {
   excerpt: string;
   category: ArticleCategory;
   relatedCalculators?: string[];
+  coverImage?: ArticleImage;
+  editorialStatus?: ArticleEditorialStatus;
 }
 
 export interface Article extends ArticleSummary {

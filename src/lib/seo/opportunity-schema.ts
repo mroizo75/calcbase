@@ -14,6 +14,7 @@ export const seoOpportunityKindSchema = z.enum([
   "calculatorQueryGap",
   "newsCtr",
   "newsReview",
+  "articleDraft",
 ]);
 
 export const seoOpportunityStatusSchema = z.enum([
@@ -43,10 +44,12 @@ export const scoredOpportunitySchema = z
     proposedTitle: z.string().min(50).max(60).optional(),
     proposedDescription: z.string().min(150).max(160).optional(),
     proposedTitleAlt: z.string().min(50).max(60).optional(),
+    draftArticleId: z.string().min(1).optional(),
   })
   .strict()
   .superRefine((value, ctx) => {
-    const forbidden = ["body", "faq", "longDescription", "portableText", "articleBody"] as const;
+    // seoOpportunity queue docs must not embed article body — drafts live on article docs.
+    const forbidden = ["body", "faq", "longDescription", "portableText", "articleBody", "blocks"] as const;
     for (const key of forbidden) {
       if (key in value) {
         ctx.addIssue({

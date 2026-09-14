@@ -6,9 +6,26 @@ export const article = defineType({
   type: "document",
   fields: [
     defineField({
-      name: "title",
-      title: "Title",
+      name: "editorialStatus",
+      title: "Editorial status",
       type: "string",
+      description:
+        "draftReview = only visible in Studio. published = live on /news. Never auto-publishes.",
+      options: {
+        list: [
+          { title: "Draft — review before release", value: "draftReview" },
+          { title: "Published (live)", value: "published" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "draftReview",
+      validation: (r) => r.required(),
+    }),
+    defineField({
+      name: "title",
+      title: "Title (H1)",
+      type: "string",
+      description: "Page H1 / browser title base. 20–80 characters.",
       validation: (r) => r.required().min(20).max(80),
     }),
     defineField({
@@ -19,9 +36,24 @@ export const article = defineType({
       validation: (r) => r.required(),
     }),
     defineField({
+      name: "coverImage",
+      title: "Cover image",
+      type: "image",
+      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Alt text",
+          type: "string",
+          validation: (r) => r.required().min(8).max(160),
+        }),
+      ],
+    }),
+    defineField({
       name: "publishedAt",
       title: "Published at",
       type: "datetime",
+      description: "Set when releasing to the site (Publish to site action updates this).",
       initialValue: () => new Date().toISOString(),
       validation: (r) => r.required(),
     }),
@@ -51,6 +83,7 @@ export const article = defineType({
       name: "body",
       title: "Body",
       type: "array",
+      description: "Use H2/H3 for structure. Do not put H1 in body — title is the H1.",
       of: [
         {
           type: "block",
@@ -85,8 +118,25 @@ export const article = defineType({
             ],
           },
         },
+        {
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "alt",
+              title: "Alt text",
+              type: "string",
+              validation: (r) => r.required(),
+            }),
+            defineField({
+              name: "caption",
+              title: "Caption",
+              type: "string",
+            }),
+          ],
+        },
       ],
-      validation: (r) => r.required(),
+      validation: (r) => r.required().min(1),
     }),
     defineField({
       name: "relatedCalculators",
@@ -95,9 +145,33 @@ export const article = defineType({
       of: [{ type: "string" }],
       description: "Slugs of related calculators (e.g. vat-calculator, markup-calculator)",
     }),
+    defineField({
+      name: "reviewNotes",
+      title: "Review notes",
+      type: "text",
+      rows: 4,
+      description: "Checklist / warnings for the editor before Publish to site.",
+    }),
+    defineField({
+      name: "sourceOpportunityId",
+      title: "Source SEO opportunity",
+      type: "string",
+      readOnly: true,
+    }),
   ],
   preview: {
-    select: { title: "title", subtitle: "publishedAt" },
+    select: {
+      title: "title",
+      status: "editorialStatus",
+      media: "coverImage",
+    },
+    prepare({ title, status, media }) {
+      return {
+        title: title || "Untitled",
+        subtitle: status === "published" ? "Live" : "Draft — review",
+        media,
+      };
+    },
   },
   orderings: [
     {

@@ -40,7 +40,16 @@ export const applyCalculatorSeoAction: DocumentActionComponent = (props) => {
           updatedAt: new Date().toISOString(),
           sourceOpportunityId: id,
         });
-        patch.execute([{ set: { status: "applied" } }]);
+        patch.execute([
+          {
+            set: {
+              status: "applied",
+              appliedAt: new Date().toISOString(),
+              outcome: "awaiting_followup",
+              outcomeNotes: "Baseline locked. Follow-up GSC metrics ~7 days after apply.",
+            },
+          },
+        ]);
         onComplete();
       } finally {
         setBusy(false);
@@ -83,7 +92,16 @@ export const markDoneManualAction: DocumentActionComponent = (props) => {
   return {
     label: "Mark done (manual)",
     onHandle: () => {
-      patch.execute([{ set: { status: "doneManual" } }]);
+      patch.execute([
+        {
+          set: {
+            status: "doneManual",
+            appliedAt: new Date().toISOString(),
+            outcome: "awaiting_followup",
+            outcomeNotes: "Marked done. Follow-up GSC metrics ~7 days later when possible.",
+          },
+        },
+      ]);
       onComplete();
     },
   };

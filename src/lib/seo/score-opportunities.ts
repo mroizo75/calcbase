@@ -14,7 +14,7 @@ import {
   type ScoredOpportunity,
 } from "@/lib/seo/opportunity-schema";
 
-const MAX_OPPORTUNITIES = 8;
+const MAX_OPPORTUNITIES = 15;
 
 export interface PageMetaSnapshot {
   title: string;

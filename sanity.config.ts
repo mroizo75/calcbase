@@ -8,6 +8,10 @@ import {
   markDoneManualAction,
   rejectSeoOpportunityAction,
 } from "./src/sanity/actions/seoOpportunityActions";
+import {
+  publishArticleToSiteAction,
+  unpublishArticleAction,
+} from "./src/sanity/actions/articleActions";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "disabled";
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
@@ -22,8 +26,13 @@ export default defineConfig({
   basePath: "/studio",
   document: {
     actions: (prev, context) => {
-      if (context.schemaType !== "seoOpportunity") return prev;
-      return [...prev, applyCalculatorSeoAction, markDoneManualAction, rejectSeoOpportunityAction];
+      if (context.schemaType === "seoOpportunity") {
+        return [...prev, applyCalculatorSeoAction, markDoneManualAction, rejectSeoOpportunityAction];
+      }
+      if (context.schemaType === "article") {
+        return [...prev, publishArticleToSiteAction, unpublishArticleAction];
+      }
+      return prev;
     },
   },
 });

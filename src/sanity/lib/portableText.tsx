@@ -1,7 +1,30 @@
 import type { PortableTextComponents } from "@portabletext/react";
+import Image from "next/image";
 import Link from "next/link";
 
 export const portableTextComponents: PortableTextComponents = {
+  types: {
+    image: ({ value }) => {
+      const url = value?.asset?.url as string | undefined;
+      if (!url) return null;
+      return (
+        <figure className="my-8">
+          <Image
+            src={url}
+            alt={value?.alt || ""}
+            width={1200}
+            height={675}
+            className="h-auto w-full rounded-lg"
+          />
+          {value?.caption ? (
+            <figcaption className="mt-2 text-center text-sm text-muted-foreground">
+              {value.caption}
+            </figcaption>
+          ) : null}
+        </figure>
+      );
+    },
+  },
   block: {
     h2: ({ children }) => (
       <h2 className="mt-10 scroll-mt-20 text-2xl font-bold tracking-tight text-foreground">
