@@ -123,7 +123,7 @@ export const seoOpportunity = defineType({
       name: "proposedTitle",
       title: "Proposed title",
       type: "string",
-      description: "Optional CTR suggestion for calculators only (50–60 chars). Review before approve.",
+      description: "CTR suggestion (50–60 chars). Use Generate title/meta if empty.",
       validation: (r) =>
         r.custom((value) => {
           if (!value) return true;

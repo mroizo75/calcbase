@@ -120,17 +120,19 @@ export async function GET(request: Request) {
       let recommendedSlug: string | undefined;
       let recommendationSummary: string | undefined;
 
-      if (opportunity.kind === "calculatorCtr" || opportunity.kind === "newsCtr") {
+      if (
+        opportunity.kind === "calculatorCtr" ||
+        opportunity.kind === "newsCtr" ||
+        opportunity.kind === "calculatorQueryGap"
+      ) {
         const suggestion = await suggestPageMeta(opportunity, existingTitles);
-        if (suggestion) {
-          proposedTitle = suggestion.proposedTitle;
-          proposedDescription = suggestion.proposedDescription;
-          proposedTitleAlt = suggestion.proposedTitleAlt;
-          recommendedSlug = suggestion.recommendedSlug;
-          recommendationSummary = suggestion.recommendationSummary;
-          existingTitles.push(suggestion.proposedTitle);
-          if (suggestion.proposedTitleAlt) existingTitles.push(suggestion.proposedTitleAlt);
-        }
+        proposedTitle = suggestion.proposedTitle;
+        proposedDescription = suggestion.proposedDescription;
+        proposedTitleAlt = suggestion.proposedTitleAlt;
+        recommendedSlug = suggestion.recommendedSlug;
+        recommendationSummary = suggestion.recommendationSummary;
+        existingTitles.push(suggestion.proposedTitle);
+        if (suggestion.proposedTitleAlt) existingTitles.push(suggestion.proposedTitleAlt);
       }
 
       const doc = {

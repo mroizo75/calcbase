@@ -5,6 +5,7 @@ import { schemas } from "./src/sanity/schemas";
 import { structure } from "./src/sanity/structure";
 import {
   applyCalculatorSeoAction,
+  generateProposalsAction,
   markDoneManualAction,
   rejectSeoOpportunityAction,
 } from "./src/sanity/actions/seoOpportunityActions";
@@ -27,7 +28,13 @@ export default defineConfig({
   document: {
     actions: (prev, context) => {
       if (context.schemaType === "seoOpportunity") {
-        return [...prev, applyCalculatorSeoAction, markDoneManualAction, rejectSeoOpportunityAction];
+        return [
+          ...prev,
+          applyCalculatorSeoAction,
+          generateProposalsAction,
+          markDoneManualAction,
+          rejectSeoOpportunityAction,
+        ];
       }
       if (context.schemaType === "article") {
         return [...prev, publishArticleToSiteAction, unpublishArticleAction];

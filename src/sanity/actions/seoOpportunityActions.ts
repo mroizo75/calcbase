@@ -106,3 +106,89 @@ export const markDoneManualAction: DocumentActionComponent = (props) => {
     },
   };
 };
+
+/** Fills empty proposed title/meta on this opportunity (OpenAI or fallback). */
+export const generateProposalsAction: DocumentActionComponent = (props) => {
+  const { id, type, draft, published, onComplete } = props;
+  const doc = draft || published;
+  const client = useClient({ apiVersion: WRITE_API_VERSION });
+  const [busy, setBusy] = useState(false);
+
+  if (type !== "seoOpportunity" || !doc) return null;
+  if (doc.status === "rejected" || doc.status === "applied") return null;
+  if (!["calculatorCtr", "newsCtr", "calculatorQueryGap"].includes(String(doc.kind))) {
+    return null;
+  }
+
+  return {
+    label: busy ? "Generating…" : "Generate title/meta",
+    disabled: busy,
+    onHandle: async () => {
+      setBusy(true);
+      try {
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "";
+        const secret = process.env.SANITY_STUDIO_CRON_SECRET || "";
+        // Studio cannot safely hold CRON_SECRET; patch via local heuristic through write if API unavailable.
+        // Prefer calling backfill when deployed with a public trigger is not possible without secret.
+        // Generate client-side fallback using current fields, then editor can refine.
+        const topQuery =
+          Array.isArray(doc.targetQueries) && doc.targetQueries[0]
+            ? String(doc.targetQueries[0])
+            : String(doc.slug || "calculator").replace(/-/g, " ");
+
+        const fit = (text: string, min: number, max: number) => {
+          let value = text.replace(/\s+/g, " ").trim();
+          if (value.length > max) {
+            value = value.slice(0, max);
+            const cut = value.lastIndexOf(" ");
+            if (cut >= min) value = value.slice(0, cut);
+          }
+          const pads = [" | Free CalcBase tool", " – free online calculator", " for business"];
+          let i = 0;
+          while (value.length < min && i < 12) {
+            value = `${value}${pads[i % pads.length]}`.slice(0, max);
+            i += 1;
+          }
+          return value.slice(0, max);
+        };
+
+        const proposedTitle = fit(`Free ${topQuery} Calculator – Instant Results`, 50, 60);
+        const proposedTitleAlt = fit(`${topQuery} Online – Free & Accurate Tool`, 50, 60);
+        const proposedDescription = fit(
+          String(
+            doc.currentDescription ||
+              `Use this free ${topQuery} tool on CalcBase. Fast, accurate results for pricing, invoices, and business decisions. No signup required.`,
+          ),
+          150,
+          160,
+        );
+
+        await client
+          .patch(id)
+          .set({
+            proposedTitle,
+            proposedTitleAlt,
+            proposedDescription,
+            recommendationSummary: `Generated in Studio from query “${topQuery}”. Prefer server backfill with OpenAI when available.`,
+          })
+          .commit();
+
+        // Optional server backfill overwrite when base URL + hint secret exist (local/dev only).
+        if (baseUrl && secret) {
+          void fetch(`${baseUrl}/api/seo/backfill-proposals`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${secret}`,
+            },
+            body: JSON.stringify({ opportunityId: id }),
+          });
+        }
+
+        onComplete();
+      } finally {
+        setBusy(false);
+      }
+    },
+  };
+};
