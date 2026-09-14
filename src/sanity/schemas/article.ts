@@ -10,7 +10,7 @@ export const article = defineType({
       title: "Editorial status",
       type: "string",
       description:
-        "draftReview = only visible in Studio. published = live on /news. Never auto-publishes.",
+        "Use the bottom action «Publish to site (/news)» to go live. Do not rely on the radio alone. draftReview = Studio only. published = live on /news.",
       options: {
         list: [
           { title: "Draft — review before release", value: "draftReview" },
@@ -20,6 +20,7 @@ export const article = defineType({
       },
       initialValue: "draftReview",
       validation: (r) => r.required(),
+      readOnly: ({ value }) => value === "published",
     }),
     defineField({
       name: "title",

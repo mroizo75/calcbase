@@ -37,7 +37,8 @@ export default defineConfig({
         ];
       }
       if (context.schemaType === "article") {
-        return [...prev, publishArticleToSiteAction, unpublishArticleAction];
+        // Put our live-site publish first so it's visible in the bottom action bar.
+        return [publishArticleToSiteAction, ...prev, unpublishArticleAction];
       }
       return prev;
     },
