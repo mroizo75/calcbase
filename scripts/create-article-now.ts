@@ -2,7 +2,7 @@ import { calculators } from "../src/lib/calculators/registry";
 import { guides } from "../src/lib/guides/registry";
 import { createReviewArticleDraft } from "../src/lib/seo/create-article-draft";
 import { fetchGscSnapshot } from "../src/lib/seo/gsc-client";
-import { generateArticleDraft } from "../src/lib/seo/generate-article-draft";
+import { generateArticleDraftDetailed } from "../src/lib/seo/generate-article-draft";
 import { scoreArticleTopics } from "../src/lib/seo/score-article-topics";
 import { getBaseUrl } from "../src/lib/utils/urls";
 import { getWriteClient } from "../src/sanity/lib/client";
@@ -36,11 +36,14 @@ async function main() {
   const topic = topics[0];
   console.log("Generating draft for:", topic.query, "→", topic.preferredSlug);
 
-  const draft = await generateArticleDraft({ topic, calculatorSlugs });
-  if (!draft) {
-    throw new Error("OpenAI draft generation/validation failed");
+  const generated = await generateArticleDraftDetailed({ topic, calculatorSlugs });
+  if (!generated.draft) {
+    throw new Error(
+      `OpenAI draft failed: ${generated.error ?? "unknown"} (models: ${generated.modelTried?.join(",")})`,
+    );
   }
 
+  const draft = generated.draft;
   const opportunityId = `seoOpportunity.articleDraft.${draft.slug}`;
   await writeClient.createOrReplace({
     _id: opportunityId,
@@ -82,6 +85,7 @@ async function main() {
         slug: draft.slug,
         title: draft.title,
         coverUploaded,
+        models: generated.modelTried,
         studioPath: "Articles → Drafts — review before release",
       },
       null,

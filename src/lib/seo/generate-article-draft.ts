@@ -1,5 +1,6 @@
 import {
   articleDraftPayloadSchema,
+  normalizeArticleDraftCandidate,
   type ArticleDraftPayload,
   type ArticleTopicCandidate,
 } from "@/lib/seo/article-draft-schema";
@@ -9,23 +10,21 @@ function key(): string | null {
   return process.env.OPENAI_API_KEY ?? null;
 }
 
-export async function generateArticleDraft(input: {
+async function callOpenAiArticleJson(input: {
+  apiKey: string;
+  model: string;
   topic: ArticleTopicCandidate;
   calculatorSlugs: string[];
-}): Promise<ArticleDraftPayload | null> {
-  const apiKey = key();
-  if (!apiKey) return null;
-
-  const suggestedSlug = input.topic.preferredSlug || topicToSlug(input.topic.query);
-
+  suggestedSlug: string;
+}): Promise<{ raw: string | null; status: number; errorText?: string }> {
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${apiKey}`,
+      Authorization: `Bearer ${input.apiKey}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: process.env.OPENAI_SEO_MODEL ?? "gpt-4o",
+      model: input.model,
       temperature: 0.35,
       response_format: { type: "json_object" },
       messages: [
@@ -41,21 +40,20 @@ export async function generateArticleDraft(input: {
             "- Include worked examples with realistic figures.",
             "- Link related calculators as plain paths like /vat-calculator inside paragraph text where natural.",
             "- Include at least one in-body image block with a concrete illustration prompt + alt.",
-            "- coverImagePrompt: clean editorial illustration, no text overlays, no logos, photoreal or simple diagram style.",
-            "- reviewNotes: tell the editor what to fact-check, localize, and improve before publish.",
+            "- coverImagePrompt: clean editorial illustration, no text overlays, no logos.",
+            "- reviewNotes: tell the editor what to fact-check before publish.",
             "- category one of: tax-news, business-finance, calculator-guides, economic-news.",
             "- relatedCalculators must be from the provided calculator slug list.",
-            "- excerpt 140-160 chars. slug kebab-case.",
-            "- Total paragraph text must be substantial (aim 3000+ characters across p blocks).",
-            "- No fluff, no 'In today's fast-paced world', no fake citations, no inventing laws.",
-            "- If uncertain about a regulation, say the reader should verify with official sources.",
+            "- excerpt EXACTLY 140-160 chars. slug must equal suggestedSlug.",
+            "- Total paragraph text across p blocks should exceed 2500 characters.",
+            "- No fluff, no fake citations, no inventing laws.",
           ].join(" "),
         },
         {
           role: "user",
           content: JSON.stringify({
             targetQuery: input.topic.query,
-            suggestedSlug,
+            suggestedSlug: input.suggestedSlug,
             gsc: {
               impressions: input.topic.impressions,
               clicks: input.topic.clicks,
@@ -66,7 +64,7 @@ export async function generateArticleDraft(input: {
             allCalculatorSlugs: input.calculatorSlugs,
             schemaHint: {
               title: "string",
-              slug: "kebab-case",
+              slug: input.suggestedSlug,
               excerpt: "140-160 chars",
               category: "calculator-guides|business-finance|tax-news|economic-news",
               relatedCalculators: ["slug"],
@@ -87,34 +85,101 @@ export async function generateArticleDraft(input: {
     }),
   });
 
-  if (!response.ok) return null;
+  if (!response.ok) {
+    return { raw: null, status: response.status, errorText: await response.text() };
+  }
 
   const data = (await response.json()) as {
     choices?: Array<{ message?: { content?: string } }>;
   };
-  const raw = data.choices?.[0]?.message?.content;
-  if (!raw) return null;
+  return { raw: data.choices?.[0]?.message?.content ?? null, status: 200 };
+}
 
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(raw);
-  } catch {
-    return null;
+export interface GenerateArticleDraftResult {
+  draft: ArticleDraftPayload | null;
+  error?: string;
+  modelTried?: string[];
+}
+
+/**
+ * Generates an article draft for human review. Never publishes.
+ */
+export async function generateArticleDraft(input: {
+  topic: ArticleTopicCandidate;
+  calculatorSlugs: string[];
+}): Promise<ArticleDraftPayload | null> {
+  const result = await generateArticleDraftDetailed(input);
+  return result.draft;
+}
+
+export async function generateArticleDraftDetailed(input: {
+  topic: ArticleTopicCandidate;
+  calculatorSlugs: string[];
+}): Promise<GenerateArticleDraftResult> {
+  const apiKey = key();
+  if (!apiKey) return { draft: null, error: "missing_OPENAI_API_KEY" };
+
+  const suggestedSlug = input.topic.preferredSlug || topicToSlug(input.topic.query);
+  const models = [
+    process.env.OPENAI_SEO_MODEL ?? "gpt-4o-mini",
+    "gpt-4o-mini",
+    "gpt-4o",
+  ].filter((m, i, arr) => arr.indexOf(m) === i);
+
+  const modelTried: string[] = [];
+  let lastError = "unknown";
+
+  for (const model of models) {
+    modelTried.push(model);
+    const { raw, status, errorText } = await callOpenAiArticleJson({
+      apiKey,
+      model,
+      topic: input.topic,
+      calculatorSlugs: input.calculatorSlugs,
+      suggestedSlug,
+    });
+
+    if (!raw) {
+      lastError = `openai_http_${status}:${(errorText || "").slice(0, 200)}`;
+      continue;
+    }
+
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(raw);
+    } catch {
+      lastError = "invalid_json";
+      continue;
+    }
+
+    const normalized = normalizeArticleDraftCandidate(parsed, suggestedSlug);
+    const result = articleDraftPayloadSchema.safeParse(normalized);
+    if (!result.success) {
+      lastError = `zod:${result.error.issues
+        .slice(0, 3)
+        .map((i) => `${i.path.join(".")}:${i.message}`)
+        .join("; ")}`;
+      continue;
+    }
+
+    const allowed = new Set(input.calculatorSlugs);
+    const related = result.data.relatedCalculators.filter((s) => allowed.has(s));
+    if (related.length === 0) {
+      lastError = "no_valid_related_calculators";
+      continue;
+    }
+
+    return {
+      draft: {
+        ...result.data,
+        slug: suggestedSlug,
+        relatedCalculators: related.slice(0, 4),
+      },
+      modelTried,
+    };
   }
 
-  const result = articleDraftPayloadSchema.safeParse(parsed);
-  if (!result.success) return null;
-
-  // Keep only known calculator slugs
-  const allowed = new Set(input.calculatorSlugs);
-  const related = result.data.relatedCalculators.filter((s) => allowed.has(s));
-  if (related.length === 0) return null;
-
-  return {
-    ...result.data,
-    slug: suggestedSlug,
-    relatedCalculators: related.slice(0, 4),
-  };
+  return { draft: null, error: lastError, modelTried };
 }
 
 export async function generateArticleImagePng(prompt: string): Promise<Buffer | null> {
@@ -135,7 +200,6 @@ export async function generateArticleImagePng(prompt: string): Promise<Buffer | 
   });
 
   if (!response.ok) {
-    // Fallback for accounts that only have dall-e-3
     const fallback = await fetch("https://api.openai.com/v1/images/generations", {
       method: "POST",
       headers: {

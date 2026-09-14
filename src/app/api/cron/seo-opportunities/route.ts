@@ -9,7 +9,7 @@ import {
   type SeoOutcome,
 } from "@/lib/seo/evaluate-outcomes";
 import { fetchGscSnapshot } from "@/lib/seo/gsc-client";
-import { generateArticleDraft } from "@/lib/seo/generate-article-draft";
+import { generateArticleDraftDetailed } from "@/lib/seo/generate-article-draft";
 import { assertNoContentBodyFields } from "@/lib/seo/opportunity-schema";
 import {
   buildCalculatorMetaMap,
@@ -221,9 +221,11 @@ export async function GET(request: Request) {
           continue;
         }
 
-        const draft = await generateArticleDraft({ topic, calculatorSlugs });
+        const generated = await generateArticleDraftDetailed({ topic, calculatorSlugs });
+        const draft = generated.draft;
         if (!draft) {
           articleDraftDiagnostics.skippedReason = "openai_draft_validation_failed";
+          articleDraftDiagnostics.error = generated.error ?? "unknown";
           continue;
         }
 
