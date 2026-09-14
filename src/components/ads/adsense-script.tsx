@@ -1,7 +1,6 @@
 "use client";
 
-import Script from "next/script";
-import { useSyncExternalStore } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 import { ADS_ENABLED, ADSENSE_PUBLISHER_ID } from "@/lib/ads/config";
 import { getConsentStatus } from "@/lib/consent/config";
 
@@ -14,14 +13,17 @@ export function AdsenseScript() {
     () => false,
   );
 
-  if (!ADS_ENABLED || !ADSENSE_PUBLISHER_ID || !hasConsent) return null;
+  useEffect(() => {
+    if (!ADS_ENABLED || !ADSENSE_PUBLISHER_ID || !hasConsent) return;
 
-  return (
-    <Script
-      async
-      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUBLISHER_ID}`}
-      crossOrigin="anonymous"
-      strategy="afterInteractive"
-    />
-  );
+    if (document.querySelector(`script[src*="adsbygoogle"]`)) return;
+
+    const script = document.createElement("script");
+    script.async = true;
+    script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUBLISHER_ID}`;
+    script.crossOrigin = "anonymous";
+    document.head.appendChild(script);
+  }, [hasConsent]);
+
+  return null;
 }

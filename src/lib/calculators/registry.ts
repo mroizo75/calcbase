@@ -409,7 +409,7 @@ One of the most common sources of confusion in business pricing is the differenc
     seo: {
       title: "Markup Calculator – Markup % from Cost & Price | CalcBase",
       description:
-        "Free retail markup calculator. Find markup percentage from cost and price, or calculate selling price from a target markup. Covers keystone, wholesale, and cost-plus markup. Instant results.",
+        "Free retail markup calculator. Find markup percentage from cost and price, or selling price from a target markup. Covers keystone, wholesale, and cost-plus.",
       canonical: "/markup-calculator",
     },
     keywords: [
@@ -485,7 +485,7 @@ An important caution applies when stacking multiple discounts: they are not addi
     seo: {
       title: "Discount Calculator – Sale Price & Profit Impact | CalcBase",
       description:
-        "Free discount calculator. Enter original price and discount % to see savings, final sale price, and profit impact. Calculate 10%, 20%, 25%, 30%, 50% off any amount instantly.",
+        "Free discount calculator. Enter original price and discount % to see savings, sale price, and profit impact. Works for 10%, 20%, 25%, 30% and 50% off.",
       canonical: "/discount-calculator",
     },
     keywords: [
@@ -630,7 +630,7 @@ Break-even analysis has wide practical applications: assessing whether a new pro
     seo: {
       title: "Break-even Calculator – Units & Sales Revenue Needed | CalcBase",
       description:
-        "Free break-even calculator. Enter fixed costs, variable costs, and selling price to find how many units and how much sales revenue you need to break even. Instant results.",
+        "Free break-even calculator. Enter fixed costs, variable costs, and selling price to find how many units and how much sales revenue you need to break even.",
       canonical: "/break-even-calculator",
     },
     keywords: [
@@ -1089,7 +1089,7 @@ Percentage change is used in virtually every type of business and financial anal
     seo: {
       title: "Percentage Change Calculator – Increase & Decrease | CalcBase",
       description:
-        "Free percentage change calculator. Calculate % increase or decrease between two numbers, or apply a change to find the new value. Includes percent increase and decrease formula.",
+        "Free percentage change calculator. Find the % increase or decrease between two numbers, or apply a change to get the new value. Includes the formula.",
       canonical: "/percentage-change-calculator",
     },
     keywords: [
@@ -1170,7 +1170,7 @@ In Australia, GST applies to most goods and services but exempts fresh food, bas
     seo: {
       title: "GST Calculator – Add or Remove GST (Australia, NZ, Canada) | CalcBase",
       description:
-        "Free GST calculator. Add GST to a net price or remove GST from an inclusive amount. Supports Australia 10%, New Zealand 15%, Canada 5%, India 18%, Singapore 9%. Instant results.",
+        "Free GST calculator. Add GST to a net price or remove GST from an inclusive amount. Supports Australia 10%, NZ 15%, Canada 5%, India 18% and Singapore 9%.",
       canonical: "/gst-calculator",
     },
     keywords: [

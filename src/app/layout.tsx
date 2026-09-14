@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
-import { SiteHeader } from "@/components/layout/site-header";
-import { SiteFooter } from "@/components/layout/site-footer";
-import { CookieBanner } from "@/components/consent/cookie-banner";
-import { AdsenseScript } from "@/components/ads/adsense-script";
+import { SiteChrome } from "@/components/layout/site-chrome";
 import { buildSiteMetadata } from "@/lib/seo/metadata";
 import { buildSiteGraphJsonLd } from "@/lib/seo/schema";
 import "./globals.css";
@@ -32,11 +29,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(buildSiteGraphJsonLd()) }}
         />
-        <SiteHeader />
-        <main className="flex-1">{children}</main>
-        <SiteFooter />
-        <CookieBanner />
-        <AdsenseScript />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );

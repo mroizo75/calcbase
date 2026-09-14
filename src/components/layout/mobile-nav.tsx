@@ -8,6 +8,7 @@ import { SearchBox } from "./search-box";
 const navLinks = [
   { label: "Calculators", href: "/calculators" },
   { label: "Guides", href: "/guides" },
+  { label: "News", href: "/news" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];

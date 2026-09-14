@@ -23,6 +23,7 @@ export function SiteHeader() {
           <HeaderSearch />
           <ActiveLink href="/calculators">Calculators</ActiveLink>
           <ActiveLink href="/guides">Guides</ActiveLink>
+          <ActiveLink href="/news">News</ActiveLink>
           <ActiveLink href="/about">About</ActiveLink>
         </div>
 

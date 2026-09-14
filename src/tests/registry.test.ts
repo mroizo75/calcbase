@@ -7,8 +7,8 @@ import {
 } from "@/lib/calculators/registry";
 
 describe("calculator registry", () => {
-  it("contains all 12 calculators", () => {
-    expect(calculators).toHaveLength(12);
+  it("contains all 15 calculators", () => {
+    expect(calculators).toHaveLength(15);
   });
 
   it("each calculator has required fields", () => {

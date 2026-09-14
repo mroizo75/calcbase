@@ -1,6 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  compiler: {
+    styledComponents: true,
+  },
+  // Prevent Next.js from bundling swr through the react-server condition,
+  // which breaks sanity's default import of useSWR in server context.
+  serverExternalPackages: ["swr"],
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 31536000,
@@ -17,10 +23,10 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        // X-Frame-Options is handled in middleware (skips /studio which uses iframes)
         source: "/(.*)",
         headers: [
           { key: "X-Content-Type-Options", value: "nosniff" },
-          { key: "X-Frame-Options", value: "DENY" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
           { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
