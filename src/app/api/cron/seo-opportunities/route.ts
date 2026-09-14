@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { calculators } from "@/lib/calculators/registry";
+import { guides } from "@/lib/guides/registry";
 import { createReviewArticleDraft } from "@/lib/seo/create-article-draft";
 import {
   buildFollowUpPatch,
@@ -111,6 +112,25 @@ export async function GET(request: Request) {
       recommendedSlug?: string;
     }> = [];
 
+    let articleDraftDiagnostics: {
+      openAiConfigured: boolean;
+      topicsFound: number;
+      topCandidate: {
+        query: string;
+        slug: string;
+        impressions: number;
+        position: number;
+      } | null;
+      skippedReason: string | null;
+      createdArticleId?: string;
+      error?: string;
+    } = {
+      openAiConfigured: Boolean(process.env.OPENAI_API_KEY),
+      topicsFound: 0,
+      topCandidate: null,
+      skippedReason: null,
+    };
+
     for (const opportunity of scored) {
       assertNoContentBodyFields(opportunity as unknown as Record<string, unknown>);
 
@@ -176,14 +196,36 @@ export async function GET(request: Request) {
         calculatorSlugs,
         existingArticleSlugs,
         pendingTopicKeys: pendingKeys,
+        existingGuideSlugs: new Set(guides.map((g) => g.slug)),
       });
 
+      articleDraftDiagnostics = {
+        openAiConfigured: true,
+        topicsFound: topics.length,
+        topCandidate: topics[0]
+          ? {
+              query: topics[0].query,
+              slug: topics[0].preferredSlug,
+              impressions: topics[0].impressions,
+              position: Number(topics[0].position.toFixed(1)),
+            }
+          : null,
+        skippedReason: topics.length === 0 ? "no_topics_matched_gsc_filters" : null,
+      };
+
       for (const topic of topics) {
-        const slug = topicToSlug(topic.query);
-        if (!slug || existingArticleSlugs.has(slug)) continue;
+        const guideSlugs = new Set(guides.map((g) => g.slug));
+        const slug = topic.preferredSlug || topicToSlug(topic.query, guideSlugs);
+        if (!slug || existingArticleSlugs.has(slug)) {
+          articleDraftDiagnostics.skippedReason = "slug_exists";
+          continue;
+        }
 
         const draft = await generateArticleDraft({ topic, calculatorSlugs });
-        if (!draft) continue;
+        if (!draft) {
+          articleDraftDiagnostics.skippedReason = "openai_draft_validation_failed";
+          continue;
+        }
 
         const opportunityId = `seoOpportunity.articleDraft.${draft.slug}`;
         await writeClient.createOrReplace({
@@ -208,25 +250,40 @@ export async function GET(request: Request) {
             "Review draft thoroughly. Publish to site only when quality is AdSense-safe. Then Mark done.",
         });
 
-        const { articleId } = await createReviewArticleDraft({
-          client: writeClient,
-          draft,
-          sourceOpportunityId: opportunityId,
-          baseUrl: getBaseUrl(),
-        });
+        try {
+          const { articleId } = await createReviewArticleDraft({
+            client: writeClient,
+            draft,
+            sourceOpportunityId: opportunityId,
+            baseUrl: getBaseUrl(),
+          });
 
-        await writeClient.patch(opportunityId).set({ draftArticleId: articleId }).commit();
-        created.push(opportunityId);
-        articleDrafts.push(articleId);
-        existingArticleSlugs.add(draft.slug);
-        recommendationPackages.push({
-          slug: draft.slug,
-          kind: "articleDraft",
-          proposedTitle: draft.title,
-          proposedDescription: draft.excerpt,
-          recommendedSlug: draft.slug,
-        });
+          await writeClient.patch(opportunityId).set({ draftArticleId: articleId }).commit();
+          created.push(opportunityId);
+          articleDrafts.push(articleId);
+          existingArticleSlugs.add(draft.slug);
+          recommendationPackages.push({
+            slug: draft.slug,
+            kind: "articleDraft",
+            proposedTitle: draft.title,
+            proposedDescription: draft.excerpt,
+            recommendedSlug: draft.slug,
+          });
+          articleDraftDiagnostics.skippedReason = null;
+          articleDraftDiagnostics.createdArticleId = articleId;
+        } catch (error) {
+          articleDraftDiagnostics.skippedReason = "sanity_create_failed";
+          articleDraftDiagnostics.error =
+            error instanceof Error ? error.message : "Unknown create error";
+        }
       }
+    } else {
+      articleDraftDiagnostics = {
+        openAiConfigured: false,
+        topicsFound: 0,
+        topCandidate: null,
+        skippedReason: "missing_OPENAI_API_KEY",
+      };
     }
 
     // --- Weekly learning report (red thread) ---
@@ -284,6 +341,7 @@ export async function GET(request: Request) {
       createdCount: created.length,
       created,
       articleDrafts,
+      articleDraftDiagnostics,
       followUpsMeasured: followUps,
       recommendationPackages,
       weeklyReportId: `seoWeeklyReport.${weekId}`,

@@ -86,4 +86,5 @@ export interface ArticleTopicCandidate {
   landingPage: string;
   score: number;
   relatedCalculatorSlugs: string[];
+  preferredSlug: string;
 }

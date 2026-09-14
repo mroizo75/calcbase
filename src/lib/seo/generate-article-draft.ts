@@ -16,7 +16,7 @@ export async function generateArticleDraft(input: {
   const apiKey = key();
   if (!apiKey) return null;
 
-  const suggestedSlug = topicToSlug(input.topic.query);
+  const suggestedSlug = input.topic.preferredSlug || topicToSlug(input.topic.query);
 
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
@@ -112,6 +112,7 @@ export async function generateArticleDraft(input: {
 
   return {
     ...result.data,
+    slug: suggestedSlug,
     relatedCalculators: related.slice(0, 4),
   };
 }

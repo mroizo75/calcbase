@@ -11,7 +11,7 @@ describe("topicToSlug", () => {
 describe("scoreArticleTopics", () => {
   it("returns at most one informational striking-distance topic", () => {
     const topics = scoreArticleTopics({
-      calculatorSlugs: ["vat-calculator", "margin-calculator"],
+      calculatorSlugs: ["vat-calculator", "margin-calculator", "commission-calculator"],
       existingArticleSlugs: new Set(),
       pendingTopicKeys: new Set(),
       snapshot: {
@@ -19,27 +19,27 @@ describe("scoreArticleTopics", () => {
         pages: [],
         queries: [
           {
-            page: "https://calcbase.io/vat-calculator",
-            query: "how to calculate vat on invoices",
-            impressions: 200,
-            clicks: 3,
-            ctr: 0.015,
-            position: 12,
+            page: "https://calcbase.io/guides/margin-vs-markup",
+            query: "what is difference between markup and margin",
+            impressions: 41,
+            clicks: 1,
+            ctr: 0.02,
+            position: 80,
           },
           {
-            page: "https://calcbase.io/",
-            query: "calcbase",
-            impressions: 500,
-            clicks: 40,
-            ctr: 0.08,
-            position: 1,
+            page: "https://calcbase.io/commission-calculator",
+            query: "commission calculator",
+            impressions: 76,
+            clicks: 1,
+            ctr: 0.01,
+            position: 62,
           },
         ],
       },
     });
 
     expect(topics.length).toBe(1);
-    expect(topics[0].query).toContain("vat");
+    expect(topics[0].query).toContain("difference");
   });
 
   it("skips existing article slugs", () => {

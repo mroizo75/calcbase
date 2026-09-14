@@ -28,46 +28,80 @@ function inferCalculators(query: string, calculatorSlugs: string[]): string[] {
       calculatorSlugs.includes(s),
     );
   }
+  if (q.includes("break") || q.includes("even")) {
+    return ["break-even-calculator"].filter((s) => calculatorSlugs.includes(s));
+  }
+  if (q.includes("commission")) {
+    return ["commission-calculator"].filter((s) => calculatorSlugs.includes(s));
+  }
+  if (q.includes("roi")) {
+    return ["roi-calculator"].filter((s) => calculatorSlugs.includes(s));
+  }
+  if (q.includes("discount")) {
+    return ["discount-calculator"].filter((s) => calculatorSlugs.includes(s));
+  }
   return calculatorSlugs.slice(0, 2);
 }
 
+function looksLikeArticleIntent(query: string): boolean {
+  return /\b(how|what|why|vs|versus|difference|rate|rates|formula|calculate|mean|example|guide|explain|rule of thumb|countries)\b/i.test(
+    query,
+  );
+}
+
 /**
- * Picks at most one article topic from GSC query gaps.
- * Prefers informational queries in striking distance that deserve a deep guide.
+ * Picks at most one article topic from GSC.
+ * Site may rank in positions 40–90 early on — still worth drafting guides for high-impression queries.
  */
 export function scoreArticleTopics(input: {
   snapshot: GscSnapshot;
   calculatorSlugs: string[];
   existingArticleSlugs: Set<string>;
   pendingTopicKeys: Set<string>;
+  /** Optional: known guide slugs to avoid near-duplicate news drafts */
+  existingGuideSlugs?: Set<string>;
 }): ArticleTopicCandidate[] {
-  const { snapshot, calculatorSlugs, existingArticleSlugs, pendingTopicKeys } = input;
+  const {
+    snapshot,
+    calculatorSlugs,
+    existingArticleSlugs,
+    pendingTopicKeys,
+    existingGuideSlugs = new Set(),
+  } = input;
   const byQuery = new Map<string, ArticleTopicCandidate>();
 
   for (const row of snapshot.queries) {
-    if (row.impressions < 40) continue;
-    if (row.position < 5 || row.position > 25) continue;
+    // Early-site reality: many valuable queries sit far below page 1.
+    if (row.impressions < 15) continue;
+    if (row.position < 3 || row.position > 100) continue;
 
     const q = row.query.toLowerCase().trim();
-    if (q.length < 8) continue;
-    // Prefer guide-like intent over pure navigational brand queries
-    const looksInformational =
-      /\b(how|what|why|vs|versus|rate|rates|formula|calculate|calculator|mean|example|guide)\b/i.test(
-        q,
-      );
-    if (!looksInformational) continue;
+    if (q.length < 6) continue;
+    if (!looksLikeArticleIntent(q) && !/\b(calculator|margin|markup|vat|gst|profit|commission|roi)\b/i.test(q)) {
+      continue;
+    }
+
+    // Navigational "{tool} calculator" queries belong on calculator pages, not news drafts
+    if (/^(?:free\s+)?[a-z0-9\s-]{2,40}\s+calculator$/i.test(q)) continue;
 
     const related = inferCalculators(q, calculatorSlugs);
     if (related.length === 0) continue;
 
-    const proposedSlug = slugifyQuery(q);
-    if (!proposedSlug || existingArticleSlugs.has(proposedSlug)) continue;
+    let proposedSlug = slugifyQuery(q);
+    if (!proposedSlug) continue;
+
+    // If a guide already owns this slug, create a distinct news angle slug
+    if (existingGuideSlugs.has(proposedSlug)) {
+      proposedSlug = `${proposedSlug}-practical-examples`;
+    }
+
+    if (existingArticleSlugs.has(proposedSlug)) continue;
     if (pendingTopicKeys.has(`articleDraft:${proposedSlug}`)) continue;
 
     const score =
       (row.impressions / Math.max(row.position, 1)) *
-      (1 + (row.position > 10 ? 0.3 : 0)) *
-      (looksInformational ? 1.2 : 1);
+      (1 + (row.position > 20 ? 0.4 : 0)) *
+      (looksLikeArticleIntent(q) ? 1.3 : 1);
 
     const existing = byQuery.get(proposedSlug);
     if (!existing || score > existing.score) {
@@ -80,6 +114,7 @@ export function scoreArticleTopics(input: {
         landingPage: row.page,
         score,
         relatedCalculatorSlugs: related,
+        preferredSlug: proposedSlug,
       });
     }
   }
@@ -89,6 +124,10 @@ export function scoreArticleTopics(input: {
     .slice(0, MAX_ARTICLE_TOPICS);
 }
 
-export function topicToSlug(query: string): string {
-  return slugifyQuery(query);
+export function topicToSlug(query: string, existingGuideSlugs?: Set<string>): string {
+  let slug = slugifyQuery(query);
+  if (existingGuideSlugs?.has(slug)) {
+    slug = `${slug}-practical-examples`;
+  }
+  return slug;
 }
