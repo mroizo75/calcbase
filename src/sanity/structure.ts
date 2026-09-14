@@ -15,6 +15,7 @@ export const structure: StructureResolver = (S) =>
                 .child(
                   S.documentList()
                     .title("Pending")
+                    .apiVersion("2024-01-01")
                     .filter('_type == "seoOpportunity" && status == "pending"')
                     .defaultOrdering([{ field: "impressions", direction: "desc" }]),
                 ),
@@ -23,6 +24,7 @@ export const structure: StructureResolver = (S) =>
                 .child(
                   S.documentList()
                     .title("Approved")
+                    .apiVersion("2024-01-01")
                     .filter('_type == "seoOpportunity" && status == "approved"'),
                 ),
               S.listItem()
