@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useClient, useDocumentOperation, type DocumentActionComponent } from "sanity";
+import { useClient, type DocumentActionComponent } from "sanity";
 
 const WRITE_API_VERSION = "2024-01-01";
 
@@ -10,7 +10,6 @@ export const publishArticleToSiteAction: DocumentActionComponent = (props) => {
   const { id, type, draft, published, onComplete } = props;
   const doc = draft || published;
   const client = useClient({ apiVersion: WRITE_API_VERSION });
-  const { patch } = useDocumentOperation(id, type);
   const [busy, setBusy] = useState(false);
 
   if (type !== "article" || !doc) return null;
@@ -23,14 +22,24 @@ export const publishArticleToSiteAction: DocumentActionComponent = (props) => {
     onHandle: async () => {
       setBusy(true);
       try {
-        patch.execute([
-          {
-            set: {
-              editorialStatus: "published",
-              publishedAt: new Date().toISOString(),
-            },
-          },
-        ]);
+        // Commit directly to the published document (avoid Studio draft staging).
+        const publishedId = id.replace(/^drafts\./, "");
+        await client
+          .patch(publishedId)
+          .set({
+            editorialStatus: "published",
+            publishedAt: new Date().toISOString(),
+          })
+          .commit({ autoGenerateArrayKeys: true });
+
+        // If a draft sibling exists, discard it after syncing fields
+        if (id.startsWith("drafts.")) {
+          try {
+            await client.delete(id);
+          } catch {
+            // ignore if already gone
+          }
+        }
 
         const sourceId = doc.sourceOpportunityId as string | undefined;
         if (sourceId) {
@@ -45,6 +54,20 @@ export const publishArticleToSiteAction: DocumentActionComponent = (props) => {
             })
             .commit();
         }
+
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+        const secret = process.env.SANITY_STUDIO_CRON_SECRET;
+        if (baseUrl && secret) {
+          void fetch(`${baseUrl}/api/seo/revalidate-news`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${secret}`,
+            },
+            body: JSON.stringify({ slug: doc.slug?.current ?? doc.slug }),
+          });
+        }
+
         onComplete();
       } finally {
         setBusy(false);
@@ -56,17 +79,28 @@ export const publishArticleToSiteAction: DocumentActionComponent = (props) => {
 export const unpublishArticleAction: DocumentActionComponent = (props) => {
   const { id, type, draft, published, onComplete } = props;
   const doc = draft || published;
-  const { patch } = useDocumentOperation(id, type);
+  const client = useClient({ apiVersion: WRITE_API_VERSION });
+  const [busy, setBusy] = useState(false);
 
   if (type !== "article" || !doc) return null;
   if (doc.editorialStatus !== "published") return null;
 
   return {
-    label: "Unpublish (back to review)",
+    label: busy ? "Unpublishing…" : "Unpublish (back to review)",
     tone: "caution",
-    onHandle: () => {
-      patch.execute([{ set: { editorialStatus: "draftReview" } }]);
-      onComplete();
+    disabled: busy,
+    onHandle: async () => {
+      setBusy(true);
+      try {
+        const publishedId = id.replace(/^drafts\./, "");
+        await client
+          .patch(publishedId)
+          .set({ editorialStatus: "draftReview" })
+          .commit();
+        onComplete();
+      } finally {
+        setBusy(false);
+      }
     },
   };
 };

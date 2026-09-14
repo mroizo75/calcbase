@@ -5,12 +5,12 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight } from "lucide-react";
 import { Breadcrumb } from "@/components/layout/breadcrumb";
 import { buildPageMetadata } from "@/lib/seo/metadata";
-import { client, isSanityConfigured } from "@/sanity/lib/client";
+import { getSanityClient, isSanityConfigured } from "@/sanity/lib/client";
 import { ARTICLES_QUERY } from "@/sanity/lib/queries";
 import type { ArticleSummary } from "@/sanity/types";
 import { categoryLabels } from "@/sanity/types";
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Business & Tax News – Finance Updates | CalcBase",
@@ -29,7 +29,7 @@ function formatDate(dateStr: string) {
 
 export default async function NewsPage() {
   const articles: ArticleSummary[] = isSanityConfigured()
-    ? await client.fetch(ARTICLES_QUERY).catch(() => [])
+    ? await getSanityClient().fetch(ARTICLES_QUERY).catch(() => [])
     : [];
 
   return (

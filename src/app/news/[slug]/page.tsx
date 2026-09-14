@@ -9,13 +9,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/layout/breadcrumb";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 import { calculators } from "@/lib/calculators/registry";
-import { client, isSanityConfigured } from "@/sanity/lib/client";
+import { getSanityClient, isSanityConfigured } from "@/sanity/lib/client";
 import { ARTICLE_BY_SLUG_QUERY, ARTICLE_SLUGS_QUERY } from "@/sanity/lib/queries";
 import { portableTextComponents } from "@/sanity/lib/portableText";
 import type { Article } from "@/sanity/types";
 import { categoryLabels } from "@/sanity/types";
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -23,13 +23,15 @@ interface Props {
 
 export async function generateStaticParams() {
   if (!isSanityConfigured()) return [];
-  const slugs: { slug: string }[] = await client.fetch(ARTICLE_SLUGS_QUERY).catch(() => []);
+  const slugs: { slug: string }[] = await getSanityClient()
+    .fetch(ARTICLE_SLUGS_QUERY)
+    .catch(() => []);
   return slugs.map((s) => ({ slug: s.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const article: Article | null = await client
+  const article: Article | null = await getSanityClient()
     .fetch(ARTICLE_BY_SLUG_QUERY, { slug })
     .catch(() => null);
   if (!article) return {};
@@ -50,7 +52,7 @@ function formatDate(dateStr: string) {
 
 export default async function ArticlePage({ params }: Props) {
   const { slug } = await params;
-  const article: Article | null = await client
+  const article: Article | null = await getSanityClient()
     .fetch(ARTICLE_BY_SLUG_QUERY, { slug })
     .catch(() => null);
 

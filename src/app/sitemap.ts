@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { getBaseUrl } from "@/lib/utils/urls";
 import { calculators } from "@/lib/calculators/registry";
 import { guides } from "@/lib/guides/registry";
-import { client, isSanityConfigured } from "@/sanity/lib/client";
+import { getSanityClient, isSanityConfigured } from "@/sanity/lib/client";
 import { ARTICLE_SLUGS_QUERY } from "@/sanity/lib/queries";
 
 const SITE_LAUNCHED = new Date("2026-04-15");
@@ -12,7 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = getBaseUrl();
 
   const articleSlugs: { slug: string; publishedAt: string }[] = isSanityConfigured()
-    ? await client.fetch(ARTICLE_SLUGS_QUERY).catch(() => [])
+    ? await getSanityClient().fetch(ARTICLE_SLUGS_QUERY).catch(() => [])
     : [];
 
   const staticPages: MetadataRoute.Sitemap = [
