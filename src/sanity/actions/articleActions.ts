@@ -57,14 +57,25 @@ export const publishArticleToSiteAction: DocumentActionComponent = (props) => {
 
         const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
         const secret = process.env.SANITY_STUDIO_CRON_SECRET;
-        if (baseUrl && secret) {
+        const slugValue = doc.slug;
+        const slug =
+          typeof slugValue === "string"
+            ? slugValue
+            : slugValue &&
+                typeof slugValue === "object" &&
+                "current" in slugValue &&
+                typeof (slugValue as { current?: unknown }).current === "string"
+              ? (slugValue as { current: string }).current
+              : undefined;
+
+        if (baseUrl && secret && slug) {
           void fetch(`${baseUrl}/api/seo/revalidate-news`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${secret}`,
             },
-            body: JSON.stringify({ slug: doc.slug?.current ?? doc.slug }),
+            body: JSON.stringify({ slug }),
           });
         }
 
