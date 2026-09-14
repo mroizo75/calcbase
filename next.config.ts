@@ -4,9 +4,16 @@ const nextConfig: NextConfig = {
   compiler: {
     styledComponents: true,
   },
-  // Prevent Next.js from bundling swr through the react-server condition,
-  // which breaks sanity's default import of useSWR in server context.
-  serverExternalPackages: ["swr"],
+  // Keep heavy Studio deps out of the Next server bundle (saves build memory).
+  // swr: Sanity imports useSWR via a broken react-server condition otherwise.
+  serverExternalPackages: [
+    "swr",
+    "sanity",
+    "next-sanity",
+    "@sanity/vision",
+    "styled-components",
+    "googleapis",
+  ],
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 31536000,
