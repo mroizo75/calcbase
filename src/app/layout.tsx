@@ -27,7 +27,9 @@ export default function RootLayout({
       <head>
         <meta
           name="impact-site-verification"
-          value="6791fc6c-c37b-4861-9b0b-561008d15f43"
+          {...({
+            value: "6791fc6c-c37b-4861-9b0b-561008d15f43",
+          } as React.ComponentProps<"meta">)}
         />
       </head>
       <body className="flex min-h-full flex-col">
