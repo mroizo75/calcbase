@@ -13,6 +13,7 @@ import {
   publishArticleToSiteAction,
   unpublishArticleAction,
 } from "./src/sanity/actions/articleActions";
+import { runWeeklySeoTool } from "./src/sanity/tools/run-weekly-seo";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "disabled";
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
@@ -22,7 +23,7 @@ export default defineConfig({
   title: "CalcBase",
   projectId,
   dataset,
-  plugins: [structureTool({ structure }), visionTool()],
+  plugins: [structureTool({ structure }), runWeeklySeoTool, visionTool()],
   schema: { types: schemas },
   basePath: "/studio",
   document: {
