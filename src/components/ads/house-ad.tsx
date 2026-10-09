@@ -19,11 +19,11 @@ interface HouseAdProps {
   frame: AdFrame;
 }
 
-export function HouseAd({ ad, frame }: HouseAdProps) {
+export function HouseAdView({ ad, frame }: HouseAdProps) {
   const size = FRAME_SIZE[frame];
 
   return (
-    <aside aria-label="Advertisement">
+    <div aria-label="Advertisement">
       <p className="mb-1 text-center text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
         Advertisement
       </p>
@@ -37,6 +37,6 @@ export function HouseAd({ ad, frame }: HouseAdProps) {
           className={`mx-auto h-auto w-auto max-w-full object-contain ${FRAME_CLASS[frame]}`}
         />
       </a>
-    </aside>
+    </div>
   );
 }
