@@ -5,6 +5,9 @@ export const structure: StructureResolver = (S) =>
     .title("Content")
     .items([
       S.listItem()
+        .title("Banner ads")
+        .child(S.documentTypeList("houseAd").title("Banner ads")),
+      S.listItem()
         .title("SEO Opportunities")
         .child(
           S.list()

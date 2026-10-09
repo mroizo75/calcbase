@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import { AdBanner } from "@/components/ads/ad-banner";
 import { SiteChrome } from "@/components/layout/site-chrome";
 import { buildSiteMetadata } from "@/lib/seo/metadata";
 import { buildSiteGraphJsonLd } from "@/lib/seo/schema";
@@ -37,7 +38,17 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(buildSiteGraphJsonLd()) }}
         />
-        <SiteChrome>{children}</SiteChrome>
+        <SiteChrome
+          banner={
+            <AdBanner
+              slot="site-below-header"
+              width="wide"
+              className="border-b border-border/70 bg-muted/40 px-4 py-3"
+            />
+          }
+        >
+          {children}
+        </SiteChrome>
       </body>
     </html>
   );

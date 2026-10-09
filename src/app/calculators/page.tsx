@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/layout/breadcrumb";
+import { AdBanner } from "@/components/ads/ad-banner";
 import { calculators } from "@/lib/calculators/registry";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
@@ -40,6 +41,8 @@ export default function CalculatorsPage() {
         Free, accurate business calculators — from VAT and margins to break-even analysis.
         Pick a calculator to get started.
       </p>
+
+      <AdBanner slot="index-below-header" className="mb-10" />
 
       {Object.entries(grouped).map(([category, calcs]) => (
         <section key={category} className="mb-10">

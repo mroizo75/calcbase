@@ -136,6 +136,21 @@ export const APPROVED_SEO_OPPORTUNITIES_QUERY = groq`
   }
 `;
 
+export const HOUSE_ADS_QUERY = groq`
+  *[_type == "houseAd" && active == true && defined(image.asset)] {
+    _id,
+    name,
+    alt,
+    href,
+    priority,
+    placements,
+    countries,
+    "imageUrl": image.asset->url,
+    "width": image.asset->metadata.dimensions.width,
+    "height": image.asset->metadata.dimensions.height
+  }
+`;
+
 export const SEO_OPPORTUNITY_BY_ID_QUERY = groq`
   *[_type == "seoOpportunity" && _id == $id][0] {
     _id,
