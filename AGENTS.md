@@ -2,9 +2,11 @@
 
 ## Project Purpose
 
-CalcBase.com is a production-ready, SEO-first business calculator platform. It provides free,
-accurate calculators for VAT, profit margins, markup, discounts, and break-even analysis,
-targeting English-speaking markets (US, UK, EU, Australia, Canada).
+CalcBase (https://www.calcbase.io) is a production-ready, SEO-first calculator platform.
+The audience is small online sellers and freelancers in the UK and EU who need to price
+products and services correctly with VAT, platform fees, and a target margin. The job is:
+tell them what price to charge so they actually make the margin they want after VAT and fees,
+and show why.
 
 ## Architecture
 
@@ -41,7 +43,8 @@ targeting English-speaking markets (US, UK, EU, Australia, Canada).
 - No templated SEO spam (same FAQ, same examples, just different title).
 - Calculator pages must include: intro, calculator UI, formula, worked examples, FAQ, related tools.
 - Guides must be practical, original, and linked to relevant calculators.
-- Do not create new calculator pages without distinct user intent and unique content.
+- No new page without a distinct job for the target audience. Do not add a page or feature
+  that does not help UK and EU sellers and freelancers price with VAT, fees, and margin.
 
 ### Performance
 
@@ -68,6 +71,7 @@ targeting English-speaking markets (US, UK, EU, Australia, Canada).
 4. The page uses `CalculatorShell` which auto-generates structured data, breadcrumbs, and sections.
 5. Update related calculator slugs in existing configs.
 6. Verify build passes and all tests pass.
+7. Do not add a calculator, guide, or article unless it does a distinct job for the target audience.
 
 ### Version Guidance
 

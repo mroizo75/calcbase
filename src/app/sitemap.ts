@@ -4,6 +4,7 @@ import { calculators } from "@/lib/calculators/registry";
 import { guides } from "@/lib/guides/registry";
 import { getSanityClient, isSanityConfigured } from "@/sanity/lib/client";
 import { ARTICLE_SLUGS_QUERY } from "@/sanity/lib/queries";
+import { retiredArticleDestinations } from "@/lib/seo/redirects";
 
 const SITE_LAUNCHED = new Date("2026-04-15");
 const LAST_CONTENT_UPDATE = new Date();
@@ -37,8 +38,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: `${baseUrl}/news`,
       lastModified: LAST_CONTENT_UPDATE,
-      changeFrequency: "daily",
-      priority: 0.8,
+      changeFrequency: "monthly",
+      priority: 0.3,
     },
     {
       url: `${baseUrl}/about`,
@@ -80,12 +81,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  const articlePages: MetadataRoute.Sitemap = articleSlugs.map((a) => ({
-    url: `${baseUrl}/news/${a.slug}`,
-    lastModified: new Date(a.publishedAt),
-    changeFrequency: "monthly" as const,
-    priority: 0.7,
-  }));
+  const articlePages: MetadataRoute.Sitemap = articleSlugs
+    .filter((article) => !retiredArticleDestinations[article.slug])
+    .map((article) => ({
+      url: `${baseUrl}/news/${article.slug}`,
+      lastModified: new Date(article.publishedAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }));
 
   return [...staticPages, ...calculatorPages, ...guidePages, ...articlePages];
 }

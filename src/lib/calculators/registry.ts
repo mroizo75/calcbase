@@ -20,31 +20,6 @@ export const VAT_PRESETS: VatPreset[] = [
   { country: "South Africa", rate: 15, label: "South Africa (15%)" },
 ];
 
-export interface SalesTaxPreset {
-  state: string;
-  rate: number;
-  label: string;
-}
-
-export const US_SALES_TAX_PRESETS: SalesTaxPreset[] = [
-  { state: "California", rate: 7.25, label: "California (7.25%)" },
-  { state: "Texas", rate: 6.25, label: "Texas (6.25%)" },
-  { state: "New York", rate: 4, label: "New York (4%)" },
-  { state: "Florida", rate: 6, label: "Florida (6%)" },
-  { state: "Illinois", rate: 6.25, label: "Illinois (6.25%)" },
-  { state: "Pennsylvania", rate: 6, label: "Pennsylvania (6%)" },
-  { state: "Ohio", rate: 5.75, label: "Ohio (5.75%)" },
-  { state: "Georgia", rate: 4, label: "Georgia (4%)" },
-  { state: "Washington", rate: 6.5, label: "Washington (6.5%)" },
-  { state: "New Jersey", rate: 6.625, label: "New Jersey (6.625%)" },
-  { state: "Michigan", rate: 6, label: "Michigan (6%)" },
-  { state: "Colorado", rate: 2.9, label: "Colorado (2.9%)" },
-  { state: "Oregon", rate: 0, label: "Oregon (0% – no sales tax)" },
-  { state: "Montana", rate: 0, label: "Montana (0% – no sales tax)" },
-  { state: "Delaware", rate: 0, label: "Delaware (0% – no sales tax)" },
-  { state: "New Hampshire", rate: 0, label: "New Hampshire (0% – no sales tax)" },
-];
-
 export const calculators: CalculatorConfig[] = [
   {
     slug: "vat-calculator",
@@ -57,7 +32,7 @@ This calculator works in both directions. To add VAT, enter the net amount (the 
 
 Whether you are preparing invoices, checking receipts, pricing products for international markets, or reclaiming business expenses, this tool handles the arithmetic instantly. The formula is always displayed alongside the result so you can verify the calculation yourself and understand the logic behind it. Choose from preset country rates or enter any custom rate for less common jurisdictions.`,
     category: "vat",
-    relatedSlugs: ["add-vat", "remove-vat", "sales-tax-calculator", "gst-calculator", "margin-calculator", "discount-calculator"],
+    relatedSlugs: ["add-vat", "remove-vat", "margin-calculator", "discount-calculator", "profit-calculator"],
     defaultInputs: { amount: 100, rate: 20, mode: "add" },
     formula: "VAT Amount = Net Amount × (VAT Rate ÷ 100)\nGross Amount = Net Amount + VAT Amount",
     formulaExplanation:
@@ -103,6 +78,11 @@ Whether you are preparing invoices, checking receipts, pricing products for inte
           "No. VAT is collected at every stage of the supply chain and each business remits the tax on the value it adds. Sales tax, used in the US, is collected only at the final point of sale to the consumer. From the consumer's perspective both add to the price paid, but the accounting and compliance obligations for businesses are very different.",
       },
       {
+        question: "Can I use this for GST?",
+        answer:
+          "Yes. GST is calculated the same way as VAT: tax equals the net amount times the rate, and the net amount equals the gross amount divided by (1 + the rate). Enter the rate that applies to your sale. This page does not keep a separate GST rate table.",
+      },
+      {
         question: "How do I convert net to gross (and gross to net)?",
         answer:
           "Net to gross: multiply the net amount by (1 + VAT rate). For 20% VAT: net × 1.20 = gross. Gross to net: divide the gross amount by (1 + VAT rate). For 20% VAT: gross ÷ 1.20 = net. The difference between gross and net is the VAT amount.",
@@ -137,7 +117,7 @@ This calculator takes the net amount and your VAT rate, and instantly shows the 
 
 Understanding the net-to-gross calculation is also important when quoting customers. Business-to-business (B2B) quotes are typically given in net terms, with VAT added separately. Consumer-facing (B2C) prices are usually shown inclusive of VAT. Knowing which applies to your context — and being able to convert between the two instantly — avoids invoicing errors and ensures customers are never surprised by the final amount they owe.`,
     category: "vat",
-    relatedSlugs: ["vat-calculator", "remove-vat", "gst-calculator", "markup-calculator", "margin-calculator"],
+    relatedSlugs: ["vat-calculator", "remove-vat", "markup-calculator", "margin-calculator"],
     defaultInputs: { amount: 100, rate: 20 },
     formula: "VAT Amount = Net Amount × (VAT Rate ÷ 100)\nGross Amount = Net Amount + VAT Amount",
     formulaExplanation:
@@ -211,7 +191,7 @@ The key to removing VAT correctly is to divide — not subtract. To remove 20% V
 
 Enter the gross (VAT-inclusive) amount and select your VAT rate. The calculator shows the net amount (excluding VAT) and the exact VAT component within the price. This works for any rate: UK standard 20%, UK reduced 5%, German 19%, French 20%, Australian GST 10%, New Zealand GST 15%, or a custom rate you define. The breakdown is shown immediately, making it easy to verify the split against a supplier invoice or receipt.`,
     category: "vat",
-    relatedSlugs: ["vat-calculator", "add-vat", "gst-calculator", "discount-calculator", "margin-calculator"],
+    relatedSlugs: ["vat-calculator", "add-vat", "discount-calculator", "margin-calculator"],
     defaultInputs: { amount: 120, rate: 20 },
     formula: "Net Amount = Gross Amount ÷ (1 + VAT Rate ÷ 100)\nVAT Amount = Gross Amount − Net Amount",
     formulaExplanation:
@@ -285,7 +265,7 @@ To use this calculator, enter your revenue (the selling price) and your cost (wh
 
 Margin analysis is useful across many practical contexts: evaluating the profitability of individual products, comparing performance across a product range, setting minimum acceptable prices, or modelling the impact of cost increases or discounts. If a supplier raises prices by 10%, you can use this calculator to instantly see how it affects your margin — and what selling price adjustment you need to restore it. For converting between margin and markup, use the Margin to Markup Converter.`,
     category: "pricing",
-    relatedSlugs: ["markup-calculator", "profit-calculator", "margin-markup-converter", "break-even-calculator", "percentage-calculator", "percentage-change-calculator"],
+    relatedSlugs: ["markup-calculator", "profit-calculator", "margin-markup-converter", "break-even-calculator", "percentage-change-calculator"],
     defaultInputs: { revenue: 100, cost: 60 },
     formula: "Profit = Revenue − Cost\nMargin % = (Profit ÷ Revenue) × 100",
     formulaExplanation:
@@ -431,7 +411,7 @@ Enter the original price and the discount percentage. The calculator shows the a
 
 An important caution applies when stacking multiple discounts: they are not additive. A 20% discount followed by a 10% discount on a £100 item gives £72, not £70 — because the second discount applies to the already-reduced price of £80, not the original £100. This distinction matters in negotiations, promotions, and supply chain contracts. For a deeper analysis of how discounts erode your profit margins, see the Discount Impact on Margin guide.`,
     category: "pricing",
-    relatedSlugs: ["vat-calculator", "margin-calculator", "markup-calculator", "break-even-calculator", "percentage-calculator"],
+    relatedSlugs: ["vat-calculator", "margin-calculator", "markup-calculator", "break-even-calculator", "percentage-change-calculator"],
     defaultInputs: { originalPrice: 100, discountPercent: 25 },
     formula: "Discount Amount = Original Price × (Discount % ÷ 100)\nFinal Price = Original Price − Discount Amount",
     formulaExplanation:
@@ -576,7 +556,7 @@ Enter your fixed costs (the costs that remain constant regardless of output — 
 
 Break-even analysis has wide practical applications: assessing whether a new product can realistically reach profitability at your expected sales volume, understanding how a price increase or cost reduction changes your break-even threshold, evaluating the minimum viable scale for a business or project, and stress-testing financial projections. It is most powerful when used alongside margin and ROI analysis to build a complete picture of a venture's economics before committing resources.`,
     category: "business",
-    relatedSlugs: ["margin-calculator", "roi-calculator", "profit-calculator", "markup-calculator"],
+    relatedSlugs: ["margin-calculator", "profit-calculator", "markup-calculator", "commission-calculator"],
     defaultInputs: { fixedCosts: 10000, variableCostPerUnit: 25, sellingPricePerUnit: 50 },
     formula: "Break-even Units = Fixed Costs ÷ (Selling Price − Variable Cost per Unit)\nBreak-even Revenue = Break-even Units × Selling Price",
     formulaExplanation:
@@ -642,81 +622,6 @@ Break-even analysis has wide practical applications: assessing whether a new pro
     ],
   },
   {
-    slug: "roi-calculator",
-    title: "ROI Calculator",
-    shortDescription: "Calculate return on investment. See your ROI percentage and net profit instantly.",
-    longDescription:
-      `Return on investment (ROI) measures the financial efficiency of a decision — how much profit you generated relative to the cost of generating it. It is one of the most universal metrics in business and finance, used to compare marketing campaigns, evaluate capital expenditures, assess business acquisitions, and measure the performance of investments. The higher the ROI percentage, the more value was generated per unit of money invested.
-
-Enter the total investment cost and the total gain (or current value) from that investment. The calculator shows the net profit (gain minus investment) and the ROI percentage. If you invested £10,000 and received £14,000 in return, the net profit is £4,000 and the ROI is 40%. A negative ROI means the investment returned less than it cost — a loss. ROI is always expressed relative to the original investment, which makes it easy to compare decisions of very different sizes.
-
-ROI has important limitations worth understanding. It does not account for the time value of money — a 40% return over one year is far better than 40% over ten years. It also ignores risk and does not distinguish between different types of gain (cash, equity, non-monetary benefits). For comparing investments held over different timeframes, annualised ROI is more informative. Despite these limitations, simple ROI remains an excellent first-pass metric for evaluating business decisions and communicating investment performance to stakeholders.`,
-    category: "business",
-    relatedSlugs: ["profit-calculator", "break-even-calculator", "margin-calculator", "commission-calculator", "percentage-change-calculator"],
-    defaultInputs: { investment: 10000, gain: 15000 },
-    formula: "Net Profit = Gain − Investment\nROI % = (Net Profit ÷ Investment) × 100",
-    formulaExplanation:
-      "ROI measures the efficiency of an investment. Subtract the cost from the gain to find net profit, then divide by the original investment and multiply by 100 to express it as a percentage.",
-    examples: [
-      {
-        title: "Marketing campaign ROI",
-        description: "A business spends $5,000 on ads and generates $12,000 in revenue.",
-        inputs: { Investment: "$5,000", "Total return": "$12,000" },
-        result: "Net profit = $7,000. ROI = 140%.",
-      },
-      {
-        title: "Equipment purchase ROI",
-        description: "A £20,000 machine generates £28,000 in additional revenue over its lifetime.",
-        inputs: { Investment: "£20,000", "Total return": "£28,000" },
-        result: "Net profit = £8,000. ROI = 40%.",
-      },
-    ],
-    faq: [
-      {
-        question: "What is a good ROI?",
-        answer:
-          "A good ROI depends on context. In stock markets, 7–10% annual ROI is considered average long-term. For marketing campaigns, a 5:1 ratio (400% ROI) is widely cited as a reasonable digital marketing benchmark. For real estate, 8–12% annually is typical. For business investments, the benchmark is typically the cost of capital or the opportunity cost of alternative uses of the money.",
-      },
-      {
-        question: "Can ROI be negative?",
-        answer:
-          "Yes. A negative ROI means you lost money — the gain was less than the investment. For example, investing £1,000 and getting back £800 gives an ROI of −20%. Negative ROI does not always indicate a bad decision — some investments generate non-financial value or strategic benefits — but it does mean the financial return alone does not justify the cost.",
-      },
-      {
-        question: "What is the difference between ROI and profit margin?",
-        answer:
-          "ROI measures the return relative to the investment cost. Profit margin measures profit relative to revenue. ROI tells you how efficiently money was deployed; margin tells you how much of each sale is profit. A business can have high margins but poor ROI (if the investment required was very large), or low margins but good ROI (if the investment was very small).",
-      },
-      {
-        question: "How do I calculate ROI on a marketing campaign?",
-        answer:
-          "Subtract the total campaign cost from the revenue it generated, then divide by the campaign cost. If a £2,000 campaign generates £10,000 in attributed revenue: (£10,000 − £2,000) ÷ £2,000 = 400% ROI. The main challenge is attribution — accurately connecting revenue to the specific campaign that drove it, especially in multi-channel environments.",
-      },
-      {
-        question: "What is a good ROI for a marketing campaign?",
-        answer:
-          "A 5:1 revenue-to-spend ratio (400% ROI) is a common benchmark for digital marketing, meaning you generate £5 for every £1 spent. A 10:1 ratio (900% ROI) is excellent. However, benchmarks vary by channel — email marketing typically delivers higher ROI than paid ads. Attribution accuracy also matters significantly, as multi-touch customer journeys make single-channel ROI difficult to measure precisely.",
-      },
-      {
-        question: "How is annualised ROI calculated?",
-        answer:
-          "Simple ROI does not account for the time period of the investment. Annualised ROI adjusts for this: Annualised ROI = (1 + ROI)^(1/n) − 1, where n is the number of years. For example, a total ROI of 40% over 2 years corresponds to an annualised ROI of approximately 18.3% per year. Annualised ROI is more useful when comparing investments held for different lengths of time.",
-      },
-    ],
-    seo: {
-      title: "ROI Calculator – Calculate Return on Investment Free | CalcBase",
-      description:
-        "Free ROI calculator. Enter investment cost and gain to calculate return on investment percentage and net profit. Evaluate marketing, business, and investment ROI.",
-      canonical: "/roi-calculator",
-    },
-    keywords: [
-      "roi calculator", "return on investment calculator", "roi formula", "calculate roi",
-      "marketing roi calculator", "investment return calculator", "how to calculate roi",
-      "roi percentage calculator", "what is a good roi", "roi calculator free",
-      "return on investment formula", "business roi calculator",
-    ],
-  },
-  {
     slug: "profit-calculator",
     title: "Profit Calculator",
     shortDescription: "Calculate profit, selling price, and margins from cost and revenue. Three flexible input modes.",
@@ -727,7 +632,7 @@ Three input modes cover different real-world scenarios. If you know your cost an
 
 The distinction between profit, margin, and markup — three closely related but different concepts — is a frequent source of confusion. Profit is an absolute amount in currency. Margin is profit as a percentage of revenue. Markup is profit as a percentage of cost. The same deal produces three different numbers, and confusing them leads to systematic pricing errors. This calculator makes the relationship concrete by showing all three at once and labelling them clearly, so you always know exactly which metric you are working with.`,
     category: "pricing",
-    relatedSlugs: ["margin-calculator", "markup-calculator", "roi-calculator", "break-even-calculator"],
+    relatedSlugs: ["margin-calculator", "markup-calculator", "break-even-calculator", "discount-calculator"],
     defaultInputs: { cost: 60, revenue: 100, mode: "fromRevenue" },
     formula: "Profit = Revenue − Cost\nMargin % = (Profit ÷ Revenue) × 100\nMarkup % = (Profit ÷ Cost) × 100",
     formulaExplanation:
@@ -792,81 +697,6 @@ The distinction between profit, margin, and markup — three closely related but
     ],
   },
   {
-    slug: "sales-tax-calculator",
-    title: "Sales Tax Calculator",
-    shortDescription: "Calculate US sales tax for any amount. Includes state tax rate presets.",
-    longDescription:
-      `Sales tax in the United States is charged at the point of sale on most consumer goods and some services. Unlike VAT — which is applied at every stage of the supply chain — sales tax is collected only when a product reaches the final consumer. The rate is not uniform nationally: it is set at the state level, and counties and municipalities can add additional surcharges on top, making the actual combined rate vary significantly by location.
-
-This calculator takes any pre-tax price and a sales tax rate, and instantly shows the tax amount and the total price including tax. All 50 US state base rates are built in as presets. Note that these are state base rates — the actual combined rate in many cities and counties is higher once local levies are included. For example, the total combined rate in parts of Tennessee and Louisiana can exceed 10%. For the precise combined rate at a specific address, consult your state's department of revenue.
-
-Sales tax compliance has grown more complex for businesses since the 2018 Supreme Court ruling in South Dakota v. Wayfair. States can now require out-of-state online sellers to collect sales tax even without a physical presence in that state, once certain economic nexus thresholds are met. Five states — Oregon, Montana, Delaware, New Hampshire, and Alaska — have no statewide sales tax, though Alaska allows local jurisdictions to impose their own rates.`,
-    category: "vat",
-    relatedSlugs: ["vat-calculator", "add-vat", "remove-vat", "gst-calculator", "discount-calculator", "roi-calculator"],
-    defaultInputs: { price: 100, rate: 7.25 },
-    formula: "Sales Tax = Price × (Tax Rate ÷ 100)\nTotal Price = Price + Sales Tax",
-    formulaExplanation:
-      "In the US, sales tax is added on top of the listed price at the point of sale. Multiply the pre-tax price by the sales tax rate to find the tax amount, then add it to get the total.",
-    examples: [
-      {
-        title: "California sales tax on a $50 purchase",
-        description: "Buying a $50 item in California with a 7.25% state sales tax.",
-        inputs: { Price: "$50", "Sales tax rate": "7.25%" },
-        result: "Sales tax = $3.63. Total price = $53.63.",
-      },
-      {
-        title: "Comparing prices across states",
-        description: "A $500 laptop purchased in Oregon (0%) vs New York (4% state + local).",
-        inputs: { Price: "$500", "Tax rate": "8%" },
-        result: "In NY: $40 tax, $540 total. In Oregon: $0 tax, $500 total.",
-      },
-    ],
-    faq: [
-      {
-        question: "How is sales tax different from VAT?",
-        answer:
-          "Sales tax is collected only at the final point of sale to the consumer. VAT is collected at every stage of the supply chain — each business charges VAT on its sales and reclaims VAT on its purchases, remitting only the net difference. From the consumer's perspective both add to the price paid, but VAT is more complex from a business compliance standpoint. Most countries outside the US use VAT rather than sales tax.",
-      },
-      {
-        question: "Which US states have no sales tax?",
-        answer:
-          "Five states have no statewide sales tax: Oregon, Montana, Delaware, New Hampshire, and Alaska. However, Alaska allows local jurisdictions to impose their own sales tax, so some Alaskan cities and boroughs do charge tax at the local level. If you are comparing prices across states, buying in a no-sales-tax state can produce significant savings on large purchases.",
-      },
-      {
-        question: "Does sales tax apply to online purchases?",
-        answer:
-          "Yes, in most cases. Since the 2018 Supreme Court ruling in South Dakota v. Wayfair, states can require online retailers to collect sales tax even if they have no physical presence (nexus) in that state, once economic thresholds are met. Most large e-commerce retailers now collect sales tax in all states that have it. The rules around what exactly is taxable and at what rate remain complex and vary by state.",
-      },
-      {
-        question: "Why do sales tax rates vary so much?",
-        answer:
-          "US sales tax is set at the state, county, and city level — three layers can all add to the rate. State rates range from 0% to 7.25%. Counties often add 0.5–2%. Cities can add another 0.5–3% or more. The combined rate in some urban areas (such as parts of Chicago or New York City) can exceed 10%. This is why the exact rate at a specific address matters for accurate tax calculations.",
-      },
-      {
-        question: "What is the difference between the state rate and the combined rate?",
-        answer:
-          "The state rate is the base tax set by state law. The combined rate adds county and municipal taxes on top of the state rate. This calculator uses state base rates. For the exact combined rate at a specific address, use your state's tax rate lookup tool or a tax automation service. The difference can be 2–5 percentage points in many metropolitan areas.",
-      },
-      {
-        question: "Is sales tax the same as use tax?",
-        answer:
-          "Use tax is the complement to sales tax. When you purchase taxable goods without paying sales tax (e.g. from an out-of-state seller who does not collect your state's sales tax), you are legally required to remit use tax to your state at the same rate that sales tax would have applied. Use tax is largely self-reported by individuals and businesses, though enforcement has increased since the Wayfair ruling.",
-      },
-    ],
-    seo: {
-      title: "Sales Tax Calculator – US State Sales Tax Calculator | CalcBase",
-      description:
-        "Free US sales tax calculator. Enter price and tax rate to find sales tax and total. Includes all US state tax rates. Compare prices across states instantly.",
-      canonical: "/sales-tax-calculator",
-    },
-    keywords: [
-      "sales tax calculator", "us sales tax calculator", "sales tax calculator by state",
-      "calculate sales tax", "sales tax formula", "how to calculate sales tax",
-      "state sales tax rates", "sales tax rate calculator", "total price with tax",
-      "tax calculator usa", "sales tax vs vat", "reverse sales tax calculator",
-    ],
-  },
-  {
     slug: "commission-calculator",
     title: "Commission Calculator",
     shortDescription: "Calculate sales commission earned and net amount. Supports percentage-based commissions.",
@@ -877,7 +707,7 @@ Enter the total sales amount and the commission rate. The calculator shows the c
 
 Commission structures vary considerably across industries and roles. Flat-rate commission (as calculated here) is the simplest structure. Tiered commissions pay an increasing rate once a volume target is reached, rewarding high performers disproportionately. Split commissions divide the fee between multiple parties, such as a listing agent and a buyer's agent in real estate. Gross profit commissions pay a percentage of margin rather than revenue, aligning the salesperson's incentive more closely with business profitability.`,
     category: "business",
-    relatedSlugs: ["profit-calculator", "roi-calculator", "margin-calculator", "discount-calculator"],
+    relatedSlugs: ["profit-calculator", "margin-calculator", "discount-calculator", "break-even-calculator"],
     defaultInputs: { salesAmount: 50000, commissionRate: 5 },
     formula: "Commission = Sales Amount × (Commission Rate ÷ 100)\nNet Amount = Sales Amount − Commission",
     formulaExplanation:
@@ -943,82 +773,6 @@ Commission structures vary considerably across industries and roles. Flat-rate c
     ],
   },
   {
-    slug: "percentage-calculator",
-    title: "Percentage Calculator",
-    shortDescription: "Find X% of a number, calculate what percentage one number is of another, or reverse-calculate the whole from a known part.",
-    longDescription:
-      `Percentages appear in almost every domain of business and daily life: discounts, profit margins, tax rates, interest, tips, statistics, performance metrics, and more. Despite being a fundamental concept, percentage calculations trip up even experienced professionals — especially when working backwards from a result, or when dealing with percentage change versus percentage point differences. This calculator covers the three most common percentage operations in a single tool.
-
-Mode 1 finds the amount: what is 15% of 200? (Answer: 30.) Mode 2 finds the rate: 45 is what percentage of 180? (Answer: 25%.) Mode 3 finds the whole: if 30 represents 12% of something, what is the total? (Answer: 250.) Each mode uses the same underlying relationship between part, whole, and percentage — the calculator rearranges the formula to solve for whichever value you need. Every result shows the formula so you can verify or reproduce the calculation in a spreadsheet.
-
-Percentage calculations are the foundation of many other financial metrics. Profit margin is profit as a percentage of revenue. VAT is a percentage of the net price. Discount is a percentage of the original price. Sales growth is the percentage change from last year. By understanding how to compute percentages fluently in both directions, you gain the ability to quickly sanity-check figures that appear in spreadsheets, invoices, reports, and proposals — an essential skill in any analytical or commercial role.`,
-    category: "business",
-    relatedSlugs: ["percentage-change-calculator", "discount-calculator", "margin-calculator", "markup-calculator", "roi-calculator"],
-    defaultInputs: { percent: 15, total: 200, mode: "find-amount" },
-    formula: "Amount = Total × (Percent ÷ 100)\nPercent = (Part ÷ Total) × 100\nWhole = Part ÷ (Percent ÷ 100)",
-    formulaExplanation:
-      "All three percentage calculations use the same relationship: Percent × Total = Part × 100. Rearrange for what you need: to find the amount multiply total by the rate; to find the rate divide part by total; to find the whole divide part by the rate.",
-    examples: [
-      {
-        title: "What is 15% of $200?",
-        description: "A sales rep earning a 15% commission on a $200 sale.",
-        inputs: { Percent: "15%", Total: "$200" },
-        result: "15% of $200 = $30.",
-      },
-      {
-        title: "45 is what percent of 180?",
-        description: "A business made $45 profit on a $180 sale — what is the margin?",
-        inputs: { Part: "45", Total: "180" },
-        result: "45 is 25% of 180.",
-      },
-      {
-        title: "30 is 12%, what is the whole?",
-        description: "A discount of $30 represents 12% off — what was the original price?",
-        inputs: { Part: "$30", Percent: "12%" },
-        result: "The whole = $250.",
-      },
-    ],
-    faq: [
-      {
-        question: "How do I calculate a percentage of a number?",
-        answer:
-          "Multiply the number by the percentage divided by 100. For example, 15% of 200 = 200 × 0.15 = 30. Equivalently, move the decimal point two places left and multiply: 15% = 0.15, and 0.15 × 200 = 30. This works for any percentage and any number, including decimals.",
-      },
-      {
-        question: "How do I find what percentage one number is of another?",
-        answer:
-          "Divide the part by the whole, then multiply by 100. For example, 45 out of 180 = (45 ÷ 180) × 100 = 25%. This formula is also used for profit margin (profit ÷ revenue × 100), completion rates, and any situation where you need to express one quantity relative to another as a percentage.",
-      },
-      {
-        question: "How do I find the original number before a percentage was taken?",
-        answer:
-          "Divide the known part by the percentage rate (as a decimal). If 30 represents 12% of something: 30 ÷ 0.12 = 250. This is the reverse percentage calculation. It is also used to find the original price before a discount: if you paid £76 after a 5% discount, the original price is £76 ÷ 0.95 = £80.",
-      },
-      {
-        question: "What is the difference between percentage and percentage points?",
-        answer:
-          "A percentage is a proportion of a total. A percentage point is the arithmetic difference between two percentages. If a tax rate goes from 10% to 15%, it increased by 5 percentage points — but the relative change (percentage change) is 50%, because 5 is 50% of 10. In financial reporting, mixing up percentage change and percentage points is a common source of misleading statements.",
-      },
-      {
-        question: "How do I calculate percentage increase or decrease?",
-        answer:
-          "Use the Percentage Change Calculator for increases and decreases. The formula is: ((new − old) ÷ |old|) × 100. A positive result means increase; a negative result means decrease. This is different from finding a percentage of a number — it measures how much something changed relative to its starting point.",
-      },
-    ],
-    seo: {
-      title: "Percentage Calculator – What is X% of Y? | CalcBase",
-      description:
-        "Free percentage calculator. Find what X% of a number is, calculate what percentage one number is of another, or reverse-calculate the whole. Instant results with formula.",
-      canonical: "/percentage-calculator",
-    },
-    keywords: [
-      "percentage calculator", "what is 15 percent of 200", "percent of calculator",
-      "how to calculate percentage", "percentage formula", "x is what percent of y",
-      "percentage calculator online", "calculate percentage of number", "reverse percentage calculator",
-      "find the whole from percentage", "percent calculator", "percentage of a number",
-    ],
-  },
-  {
     slug: "percentage-change-calculator",
     title: "Percentage Change Calculator",
     shortDescription: "Calculate the percentage increase or decrease between two numbers, or find the new value after applying a percentage change.",
@@ -1029,7 +783,7 @@ This calculator works in two modes. The first finds the percentage change betwee
 
 Percentage change is used in virtually every type of business and financial analysis: year-on-year revenue growth, price movement tracking, salary review calculations, portfolio performance measurement, and comparing results across reporting periods. An important distinction to understand is the difference between percentage change and percentage points — a variable moving from 4% to 6% is a 2 percentage-point increase but a 50% relative change. Confusing these two measures is one of the most common errors in financial communication and reporting.`,
     category: "business",
-    relatedSlugs: ["percentage-calculator", "roi-calculator", "discount-calculator", "margin-calculator", "profit-calculator"],
+    relatedSlugs: ["discount-calculator", "margin-calculator", "profit-calculator", "markup-calculator"],
     defaultInputs: { from: 80, to: 100, mode: "find-change" },
     formula: "Percentage Change = ((New − Old) ÷ |Old|) × 100\nNew Value = Old Value × (1 + Change% ÷ 100)",
     formulaExplanation:
@@ -1085,6 +839,11 @@ Percentage change is used in virtually every type of business and financial anal
         answer:
           "ROI (Return on Investment) uses the same percentage change formula but applied specifically to financial returns: (Gain − Investment) ÷ Investment × 100. Percentage change is the general-purpose version of the same calculation applied to any two values. When the 'old value' is your initial investment and the 'new value' is the total return, percentage change equals ROI.",
       },
+      {
+        question: "How do I find a percentage of a number?",
+        answer:
+          "Multiply the number by the percent and divide by 100. For example, 15% of 80 is 80 × 15 ÷ 100 = 12. A discount uses the same idea on a price — use the discount calculator when you are taking a percent off what you charge.",
+      },
     ],
     seo: {
       title: "Percentage Change Calculator – Increase & Decrease | CalcBase",
@@ -1097,87 +856,6 @@ Percentage change is used in virtually every type of business and financial anal
       "percentage decrease calculator", "how to calculate percentage change", "percent increase formula",
       "percentage change formula", "calculate percent increase", "percent difference calculator",
       "percentage growth calculator", "price change percentage", "percent change formula",
-    ],
-  },
-  {
-    slug: "gst-calculator",
-    title: "GST Calculator",
-    shortDescription: "Add or remove GST from any amount. Supports Australia (10%), New Zealand (15%), Canada (5%), India (18%), and more.",
-    longDescription:
-      `Goods and Services Tax (GST) is the name used in several major economies for a consumption tax that is structurally identical to VAT: it is levied at each stage of the supply chain, with businesses remitting tax on the value they add and reclaiming tax paid on their inputs. The name differs by country — the UK and EU use "VAT", while Australia, New Zealand, Canada, India, and Singapore use "GST" — but the mechanics of calculation are the same. The rates vary significantly: Australia charges 10%, New Zealand 15%, Canada 5% (federal), India 5–28% depending on the product category, and Singapore 9%.
-
-This calculator handles both adding and removing GST. To add GST to a net (excluding GST) price, enter the amount and select your country's rate — the calculator shows the GST amount and the total GST-inclusive price you charge customers. To remove GST from a price that already includes it, switch to remove mode and enter the gross amount — the calculator extracts the GST component and shows the original pre-tax price. Preset rates are included for all major GST countries, and you can enter a custom rate for any jurisdiction or product category.
-
-In Australia, GST applies to most goods and services but exempts fresh food, basic health products, medical services, and educational courses. New Zealand applies GST with very few exemptions — almost all goods and services including food are taxed. In Canada, the federal GST of 5% is supplemented by provincial sales taxes (PST) or Harmonised Sales Tax (HST) that varies by province — Ontario's HST is 13% (5% federal + 8% provincial). In India, GST replaced multiple state and central taxes in 2017 and operates across four rate slabs (5%, 12%, 18%, and 28%) with some items exempt.`,
-    category: "vat",
-    relatedSlugs: ["vat-calculator", "add-vat", "remove-vat", "sales-tax-calculator", "percentage-calculator"],
-    defaultInputs: { amount: 100, rate: 10, mode: "add" },
-    formula: "GST Amount = Net Amount × (GST Rate ÷ 100)\nGross Amount = Net Amount + GST Amount\nNet Amount = Gross Amount ÷ (1 + GST Rate ÷ 100)",
-    formulaExplanation:
-      "GST works identically to VAT: to add GST, multiply the net amount by the GST rate and add it to the net. To remove (extract) GST from an inclusive price, divide by (1 + GST rate as decimal). For Australia's 10% GST, that means dividing by 1.10.",
-    examples: [
-      {
-        title: "Adding 10% GST in Australia",
-        description: "An Australian contractor invoicing A$1,500 before GST.",
-        inputs: { "Net amount": "A$1,500", "GST rate": "10%" },
-        result: "GST = A$150. Total inc. GST = A$1,650.",
-      },
-      {
-        title: "Removing 15% GST in New Zealand",
-        description: "Finding the pre-GST price of a NZ$230 product.",
-        inputs: { "GST-inclusive price": "NZ$230", "GST rate": "15%" },
-        result: "Net price = NZ$200.00. GST included = NZ$30.00.",
-      },
-      {
-        title: "Adding 5% GST in Canada",
-        description: "A Canadian freelancer adding federal GST to a C$800 invoice.",
-        inputs: { "Net amount": "C$800", "GST rate": "5%" },
-        result: "GST = C$40. Total = C$840.",
-      },
-    ],
-    faq: [
-      {
-        question: "What is GST?",
-        answer:
-          "GST (Goods and Services Tax) is a value-added tax on most goods and services sold domestically. It is economically equivalent to VAT used in the UK and EU. Countries using GST include Australia (10%), New Zealand (15%), Canada (5% federal), India (5–28% by category), and Singapore (9%). The name differs by country but the mechanism — tax at each supply chain stage with input tax credits — is the same.",
-      },
-      {
-        question: "What is the GST rate in Australia?",
-        answer:
-          "Australia's standard GST rate is 10%, introduced in July 2000. It applies to most goods and services. GST-free supplies include most fresh food, basic health and medical services, childcare, and educational courses. Some supplies are input-taxed (like residential rent and financial services), meaning the supplier cannot claim GST credits on related purchases.",
-      },
-      {
-        question: "What is the GST rate in New Zealand?",
-        answer:
-          "New Zealand's GST rate is 15%, increased from 12.5% in 2010. Unlike Australia, New Zealand has very few GST-free items — almost all goods and services, including food, are subject to GST. The simplicity of New Zealand's GST system is often cited as a model for consumption tax design.",
-      },
-      {
-        question: "What is the GST rate in Canada?",
-        answer:
-          "Canada's federal GST rate is 5%. However, most provinces also charge a provincial sales tax (PST) separately or combine it with the federal GST into a Harmonised Sales Tax (HST). Ontario charges 13% HST (5% + 8%), British Columbia charges 12% (5% GST + 7% PST), and Alberta has no provincial sales tax, making the total rate just the 5% federal GST.",
-      },
-      {
-        question: "How do I remove GST from a price that includes GST?",
-        answer:
-          "Divide the GST-inclusive price by (1 + GST rate as a decimal). For Australia's 10%: divide by 1.10. For New Zealand's 15%: divide by 1.15. For Canada's 5%: divide by 1.05. For example, A$110 ÷ 1.10 = A$100 ex-GST, and the GST component is A$10. Never subtract the rate percentage directly — that gives the wrong answer.",
-      },
-      {
-        question: "Is GST the same as VAT?",
-        answer:
-          "Yes — GST and VAT are economically and mechanically identical taxes. Both are collected at each stage of the supply chain, with businesses claiming credits for tax paid on inputs. The end consumer bears the full tax cost. The difference is purely in naming: the UK and most of Europe call it VAT; Australia, New Zealand, Canada, and India call it GST. The calculation formulas are identical.",
-      },
-    ],
-    seo: {
-      title: "GST Calculator – Add or Remove GST (Australia, NZ, Canada) | CalcBase",
-      description:
-        "Free GST calculator. Add GST to a net price or remove GST from an inclusive amount. Supports Australia 10%, NZ 15%, Canada 5%, India 18% and Singapore 9%.",
-      canonical: "/gst-calculator",
-    },
-    keywords: [
-      "gst calculator", "gst calculator australia", "gst calculator nz", "gst calculator canada",
-      "add gst", "remove gst", "gst inclusive calculator", "gst exclusive calculator",
-      "how to calculate gst", "gst formula", "australian gst calculator", "new zealand gst calculator",
-      "canadian gst calculator", "gst rate", "gst calculator online free",
     ],
   },
 ];

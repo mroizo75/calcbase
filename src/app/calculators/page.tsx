@@ -8,8 +8,9 @@ import { calculators } from "@/lib/calculators/registry";
 import { buildPageMetadata } from "@/lib/seo/metadata";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Free Business Calculators – VAT, Margin, ROI, Sales Tax & More",
-  description: `Browse all ${calculators.length} free calculators: VAT, GST, sales tax, profit margin, markup, ROI, commission, discount, and break-even. Accurate, instant results for business professionals.`,
+  title: "Free Calculators – VAT, Margin, Markup & Break-even",
+  description:
+    "Browse 11 free calculators for UK and EU sellers: VAT, margin, markup, discount, profit, commission, and break-even. Instant results, no signup required.",
   canonical: "/calculators",
 });
 

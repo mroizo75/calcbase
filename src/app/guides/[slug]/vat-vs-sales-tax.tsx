@@ -157,11 +157,7 @@ export function VatVsSalesTaxContent() {
         <Link href="/vat-calculator" className="font-medium underline underline-offset-4 hover:text-primary">
           VAT Calculator
         </Link>{" "}
-        to add or remove VAT at any rate, or the{" "}
-        <Link href="/sales-tax-calculator" className="font-medium underline underline-offset-4 hover:text-primary">
-          Sales Tax Calculator
-        </Link>{" "}
-        for US-style tax calculations. You can also{" "}
+        to add or remove VAT at any rate. You can also{" "}
         <Link href="/add-vat" className="font-medium underline underline-offset-4 hover:text-primary">
           Add VAT
         </Link>{" "}

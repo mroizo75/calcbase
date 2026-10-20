@@ -15,23 +15,20 @@ This is a **review + learning loop**, not a content farm.
 |------|---------|
 | Calculator CTR | `proposedTitle`, `proposedTitleAlt`, `proposedDescription`, `recommendationSummary`. **Slug stays fixed** (URL changes hurt SEO). |
 | News CTR | Same + optional `recommendedSlug` if current slug is weak. |
-| Article draft | Full draft article + recommended slug/title/excerpt. **Not live** until Publish to site. |
 | Query gap / news review | Action brief only (you edit content yourself). |
 
 ## What it must never do
 
-- Auto-publish articles
+- Generate or auto-publish articles
 - Auto-change calculator URLs
-- Leave thin unedited AI text live
 - Mass-create keyword pages
 
 ## Studio workflow
 
 1. **SEO Opportunities → Pending** — open each package, edit proposals if needed.
 2. Calculator: **Approve & apply title/meta** → status `applied`, outcome `awaiting_followup`.
-3. Article: edit draft → **Publish to site** when ready.
-4. Next week: **Outcomes — what worked** + **SEO Weekly Reports**.
-5. If outcome is `worse`, revert override / unpublish and note the pattern.
+3. Next week: **Outcomes — what worked** + **SEO Weekly Reports**.
+4. If outcome is `worse`, revert the title/meta and note the pattern.
 
 ## Manual cron
 

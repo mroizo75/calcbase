@@ -9,13 +9,14 @@ import { getSanityClient, isSanityConfigured } from "@/sanity/lib/client";
 import { ARTICLES_QUERY } from "@/sanity/lib/queries";
 import type { ArticleSummary } from "@/sanity/types";
 import { categoryLabels } from "@/sanity/types";
+import { retiredArticleDestinations } from "@/lib/seo/redirects";
 
 export const revalidate = 60;
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Business & Tax News – Finance Updates | CalcBase",
+  title: "News – Only Topics No Guide or Calculator Covers Yet",
   description:
-    "Daily news and analysis on VAT changes, tax law updates, pricing strategy, and business finance. Stay current with economic developments that affect your business.",
+    "News is reserved for a topic no calculator or guide already covers. VAT, margin, markup, fees, and pricing for UK and EU sellers live in the tools and guides.",
   canonical: "/news",
 });
 
@@ -28,24 +29,31 @@ function formatDate(dateStr: string) {
 }
 
 export default async function NewsPage() {
-  const articles: ArticleSummary[] = isSanityConfigured()
+  const published: ArticleSummary[] = isSanityConfigured()
     ? await getSanityClient().fetch(ARTICLES_QUERY).catch(() => [])
     : [];
+  const articles = published.filter((article) => !retiredArticleDestinations[article.slug]);
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
       <Breadcrumb items={[{ label: "News" }]} />
 
       <h1 className="mb-2 text-3xl font-bold tracking-tight sm:text-4xl">
-        Business &amp; Tax News
+        News
       </h1>
       <p className="mb-10 max-w-2xl text-lg text-muted-foreground">
-        Daily updates on VAT, tax law changes, pricing strategy, and economic developments
-        relevant to business owners and finance professionals.
+        A page here only exists when the topic is not already covered by a calculator or a guide.
+        Pricing, VAT, margin, and fees live in those tools.
       </p>
 
       {articles.length === 0 ? (
-        <p className="text-muted-foreground">No articles published yet. Check back soon.</p>
+        <p className="text-muted-foreground">
+          Practical reading lives in the{" "}
+          <Link href="/guides" className="underline underline-offset-4 hover:text-foreground">
+            guides
+          </Link>
+          . News is only for a topic that no guide or calculator already covers.
+        </p>
       ) : (
         <div className="grid gap-4">
           {articles.map((article) => (

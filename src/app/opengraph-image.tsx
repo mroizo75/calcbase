@@ -59,7 +59,7 @@ export default function OgImage() {
             marginBottom: "40px",
           }}
         >
-          Free business calculators for VAT, margins, markup, ROI, sales tax, commissions, and break-even analysis.
+          Pricing calculators for UK and EU sellers: VAT, margin, markup, discounts, commission, and break-even.
         </p>
         <div
           style={{
@@ -69,7 +69,7 @@ export default function OgImage() {
             justifyContent: "center",
           }}
         >
-          {["VAT", "Margin", "Markup", "ROI", "Sales Tax", "Discount", "Commission", "Break-even"].map((label) => (
+          {["VAT", "Margin", "Markup", "Discount", "Profit", "Commission", "Break-even"].map((label) => (
             <span
               key={label}
               style={{

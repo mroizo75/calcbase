@@ -133,12 +133,8 @@ export function VatRatesByCountryContent() {
         <Link href="/remove-vat" className="font-medium underline underline-offset-4 hover:text-primary">
           Remove VAT
         </Link>{" "}
-        for the specific calculation you need. If you operate in the US and deal with sales tax
-        instead, try the{" "}
-        <Link href="/sales-tax-calculator" className="font-medium underline underline-offset-4 hover:text-primary">
-          Sales Tax Calculator
-        </Link>
-        .
+        for the specific calculation you need. The difference between VAT and US sales tax is
+        explained in the VAT vs sales tax guide.
       </p>
       <p>
         For a broader explanation of how VAT works, including registration thresholds and filing

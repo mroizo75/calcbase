@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { permanentRedirects } from "./src/lib/seo/redirects";
 
 const nextConfig: NextConfig = {
   compiler: {
@@ -25,13 +26,11 @@ const nextConfig: NextConfig = {
     ],
   },
   async redirects() {
-    return [
-      {
-        source: "/margin-vs-markup-calculator",
-        destination: "/margin-markup-converter",
-        permanent: true,
-      },
-    ];
+    return permanentRedirects.map((redirect) => ({
+      source: redirect.source,
+      destination: redirect.destination,
+      permanent: true as const,
+    }));
   },
   async headers() {
     return [

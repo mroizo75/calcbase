@@ -4,7 +4,7 @@ import { getCanonicalUrl, getBaseUrl } from "@/lib/utils/urls";
 
 const SITE_NAME = "CalcBase";
 const DEFAULT_DESCRIPTION =
-  "Free online business calculators for VAT, sales tax, profit margin, markup, ROI, commissions, discounts, and break-even. 12 tools plus guides. Trusted by professionals.";
+  "Calculators for UK and EU sellers and freelancers. Price with VAT, margin, markup, discounts, commission, and break-even before you publish a number. Free.";
 
 export function buildSiteMetadata(): Metadata {
   const pubId = process.env.NEXT_PUBLIC_ADSENSE_PUB_ID;
@@ -12,7 +12,7 @@ export function buildSiteMetadata(): Metadata {
   return {
     metadataBase: new URL(getBaseUrl()),
     title: {
-      default: `${SITE_NAME} – Free Business Calculators | VAT, Margin, Markup & More`,
+      default: `${SITE_NAME} – Pricing Calculators for UK and EU Sellers`,
       template: `%s | ${SITE_NAME}`,
     },
     description: DEFAULT_DESCRIPTION,
@@ -27,9 +27,9 @@ export function buildSiteMetadata(): Metadata {
       locale: "en_US",
       url: getBaseUrl(),
       siteName: SITE_NAME,
-      title: `${SITE_NAME} – Free Business Calculators | VAT, Margin, Markup & More`,
+      title: `${SITE_NAME} – Pricing Calculators for UK and EU Sellers`,
       description: DEFAULT_DESCRIPTION,
-      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "CalcBase – Free Business Calculators" }],
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "CalcBase – Pricing Calculators for UK and EU Sellers" }],
     },
     twitter: {
       card: "summary_large_image",

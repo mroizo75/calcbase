@@ -13,6 +13,7 @@ import {
   calculateRoi,
   calculateSalesTax,
   calculateCommission,
+  calculatePercentageOf,
 } from "@/lib/utils/math";
 
 describe("round", () => {
@@ -206,6 +207,12 @@ describe("calculateCommission", () => {
     const { commission, netAfterCommission } = calculateCommission(1000, 100);
     expect(commission).toBe(1000);
     expect(netAfterCommission).toBe(0);
+  });
+});
+
+describe("calculatePercentageOf", () => {
+  it("finds 15% of 80", () => {
+    expect(calculatePercentageOf(15, 80)).toBe(12);
   });
 });
 

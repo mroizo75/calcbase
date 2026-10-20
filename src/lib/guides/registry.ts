@@ -68,7 +68,7 @@ export const guides: GuideConfig[] = [
       "A comprehensive reference of VAT, GST, and consumption tax rates for major economies worldwide. Includes UK, EU, Australia, Canada, India, and more.",
     publishedDate: "2026-04-26",
     updatedDate: "2026-04-26",
-    relatedCalculators: ["vat-calculator", "add-vat", "remove-vat", "sales-tax-calculator"],
+    relatedCalculators: ["vat-calculator", "add-vat", "remove-vat"],
     seo: {
       title: "VAT Rates by Country 2026 – Global VAT & GST Rate Table | CalcBase",
       description:
@@ -83,7 +83,7 @@ export const guides: GuideConfig[] = [
       "VAT and sales tax both add cost to purchases, but they work differently. This guide explains the key differences, how each is calculated, and which countries use which system.",
     publishedDate: "2026-04-26",
     updatedDate: "2026-04-26",
-    relatedCalculators: ["vat-calculator", "sales-tax-calculator", "add-vat", "remove-vat"],
+    relatedCalculators: ["vat-calculator", "add-vat", "remove-vat"],
     seo: {
       title: "VAT vs Sales Tax – Key Differences Explained Simply | CalcBase",
       description:
@@ -113,7 +113,7 @@ export const guides: GuideConfig[] = [
       "Return on investment measures the efficiency of an investment. Learn the ROI formula, see worked examples for marketing, real estate, and business investments, and understand ROI limitations.",
     publishedDate: "2026-04-26",
     updatedDate: "2026-04-26",
-    relatedCalculators: ["roi-calculator", "profit-calculator", "break-even-calculator"],
+    relatedCalculators: ["profit-calculator", "break-even-calculator", "margin-calculator"],
     seo: {
       title: "How to Calculate ROI – Formula, Examples & Pitfalls | CalcBase",
       description:

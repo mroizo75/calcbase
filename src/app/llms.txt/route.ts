@@ -15,7 +15,7 @@ export function GET() {
 
   const body = `# CalcBase – Free Business Calculators
 
-> CalcBase provides free, accurate online calculators for VAT, profit margins, markup, discounts, ROI, sales tax, commissions, and break-even analysis. Built for business owners, freelancers, accountants, and finance professionals.
+> CalcBase helps small online sellers and freelancers in the UK and EU price products and services with VAT, margin, markup, discounts, commission, and break-even.
 
 ## Calculators
 

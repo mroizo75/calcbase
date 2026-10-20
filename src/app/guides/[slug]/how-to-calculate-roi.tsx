@@ -32,11 +32,8 @@ export function HowToCalculateRoiContent() {
       </ol>
       <p>
         For every pound invested in advertising, you earned £1.50 back (your original £1 plus £0.50
-        profit). Use the{" "}
-        <Link href="/roi-calculator" className="font-medium underline underline-offset-4 hover:text-primary">
-          ROI Calculator
-        </Link>{" "}
-        to run this calculation with your own numbers.
+        profit). The same steps work for any investment: subtract what you spent from what you got
+        back, then divide by what you spent.
       </p>
 
       <h2 className="text-xl font-semibold">ROI for Different Investments</h2>
@@ -153,11 +150,7 @@ export function HowToCalculateRoiContent() {
 
       <h2 className="text-xl font-semibold">Calculate Your ROI</h2>
       <p>
-        Use the{" "}
-        <Link href="/roi-calculator" className="font-medium underline underline-offset-4 hover:text-primary">
-          ROI Calculator
-        </Link>{" "}
-        to find your return on any investment. For broader profitability analysis, try the{" "}
+        For the profit left after costs on a product or service, use the{" "}
         <Link href="/profit-calculator" className="font-medium underline underline-offset-4 hover:text-primary">
           Profit Calculator
         </Link>{" "}

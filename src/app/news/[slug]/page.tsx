@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { PortableText } from "@portabletext/react";
@@ -14,6 +14,7 @@ import { ARTICLE_BY_SLUG_QUERY, ARTICLE_SLUGS_QUERY } from "@/sanity/lib/queries
 import { portableTextComponents } from "@/sanity/lib/portableText";
 import type { Article } from "@/sanity/types";
 import { categoryLabels } from "@/sanity/types";
+import { retiredArticleDestinations } from "@/lib/seo/redirects";
 
 export const revalidate = 60;
 
@@ -26,11 +27,14 @@ export async function generateStaticParams() {
   const slugs: { slug: string }[] = await getSanityClient()
     .fetch(ARTICLE_SLUGS_QUERY)
     .catch(() => []);
-  return slugs.map((s) => ({ slug: s.slug }));
+  return slugs
+    .filter((item) => !retiredArticleDestinations[item.slug])
+    .map((item) => ({ slug: item.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
+  if (retiredArticleDestinations[slug]) return {};
   const article: Article | null = await getSanityClient()
     .fetch(ARTICLE_BY_SLUG_QUERY, { slug })
     .catch(() => null);
@@ -52,6 +56,8 @@ function formatDate(dateStr: string) {
 
 export default async function ArticlePage({ params }: Props) {
   const { slug } = await params;
+  const retired = retiredArticleDestinations[slug];
+  if (retired) redirect(retired);
   const article: Article | null = await getSanityClient()
     .fetch(ARTICLE_BY_SLUG_QUERY, { slug })
     .catch(() => null);

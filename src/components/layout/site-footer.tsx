@@ -7,18 +7,14 @@ const footerLinks = {
     { label: "VAT Calculator", href: "/vat-calculator" },
     { label: "Add VAT", href: "/add-vat" },
     { label: "Remove VAT", href: "/remove-vat" },
-    { label: "Sales Tax Calculator", href: "/sales-tax-calculator" },
     { label: "Margin Calculator", href: "/margin-calculator" },
     { label: "Markup Calculator", href: "/markup-calculator" },
     { label: "Profit Calculator", href: "/profit-calculator" },
     { label: "Discount Calculator", href: "/discount-calculator" },
-    { label: "ROI Calculator", href: "/roi-calculator" },
     { label: "Commission Calculator", href: "/commission-calculator" },
     { label: "Break-even Calculator", href: "/break-even-calculator" },
     { label: "Margin ↔ Markup", href: "/margin-markup-converter" },
-    { label: "Percentage Calculator", href: "/percentage-calculator" },
     { label: "% Change Calculator", href: "/percentage-change-calculator" },
-    { label: "GST Calculator", href: "/gst-calculator" },
   ],
   guides: [
     { label: "VAT Explained", href: "/guides/vat-explained" },
@@ -56,7 +52,7 @@ export function SiteFooter() {
               />
             </Link>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Free, accurate business calculators for professionals.
+              Pricing tools for small online sellers and freelancers in the UK and EU.
             </p>
           </div>
           <div>

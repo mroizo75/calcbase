@@ -9,13 +9,8 @@ interface JobResult {
   createdCount?: number;
   weeklyReportId?: string;
   followUpsMeasured?: string[];
-  articleDrafts?: string[];
   pages?: number;
   queries?: number;
-  articleDraftDiagnostics?: {
-    skippedReason?: string | null;
-    error?: string;
-  };
 }
 
 function RunWeeklySeoTool() {
@@ -104,8 +99,6 @@ function RunWeeklySeoTool() {
           </p>
           <p style={{ margin: "4px 0 0" }}>
             Follow-ups measured: <strong>{result.followUpsMeasured?.length ?? 0}</strong>
-            {" · "}
-            Article drafts: <strong>{result.articleDrafts?.length ?? 0}</strong>
           </p>
           {result.weeklyReportId ? (
             <p style={{ margin: "4px 0 0" }}>
@@ -122,14 +115,6 @@ function RunWeeklySeoTool() {
               Open SEO Opportunities → Pending review, and SEO Weekly Reports.
             </p>
           )}
-          {result.articleDraftDiagnostics?.skippedReason ? (
-            <p style={{ margin: "8px 0 0" }}>
-              Article draft: {result.articleDraftDiagnostics.skippedReason}
-              {result.articleDraftDiagnostics.error
-                ? ` (${result.articleDraftDiagnostics.error})`
-                : ""}
-            </p>
-          ) : null}
         </div>
       ) : null}
     </div>
