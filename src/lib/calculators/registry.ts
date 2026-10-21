@@ -22,6 +22,110 @@ export const VAT_PRESETS: VatPreset[] = [
 
 export const calculators: CalculatorConfig[] = [
   {
+    slug: "price-builder",
+    title: "Price Builder",
+    shortDescription: "Set a price that still hits your margin after VAT, platform fees, and payment fees.",
+    longDescription:
+      `You know the cost of the product. You know the margin you want. What you do not know, until the fees come out, is the price that actually leaves you that margin. VAT, an Etsy or Amazon percentage, and a card fee each take a slice, and a discount takes another. Price Builder does that sum in one place, in either direction.
+
+Ask what you should charge, and it returns the price excluding VAT, the VAT, and what the customer pays. Ask what you make at a price you already have, and it returns the margin that is left. Up to three scenarios sit side by side, so you can test a discount or another channel without starting again.
+
+The platform presets are filled from the fee pages linked next to them, and you can edit every figure. A fee changes when the platform says it changes. The breakdown shows the path from the customer's payment to your profit, so you can see which line ate the margin.`,
+    category: "pricing",
+    relatedSlugs: ["margin-calculator", "markup-calculator", "vat-calculator", "discount-calculator", "profit-calculator"],
+    defaultInputs: { cost: 8, margin: 35, vat: 20 },
+    formula:
+      "Net price after discount = (unit costs + fixed fees) ÷ (1 − target margin − percentage fees on the net price)\nA fee charged on the VAT-inclusive price is multiplied by (1 + the VAT rate) first, so it is measured on the net price.\nCustomer pays = net price × (1 + VAT rate) when you are VAT-registered. If you are not, the customer pays the net price and no VAT is added.",
+    formulaExplanation:
+      "Margin is profit divided by the price excluding VAT. Profit is that price minus unit cost, shipping, other per-unit costs, the platform fee, and the payment fee. VAT is not profit: if you are registered you collect it and pass it on. Fixed fees are added to the costs before dividing, because they do not shrink when the price shrinks. If the margin plus the percentage fees use the whole price, no selling price can hit the target.",
+    examples: [
+      {
+        title: "Etsy seller, 35% margin, UK VAT",
+        description:
+          "A UK seller lists a mug that costs £8 to make and £3.50 to post. They are VAT-registered and want a 35% margin after Etsy's transaction fee, regulatory operating fee, and payment processing. Fees verified 21 October 2026.",
+        inputs: {
+          "Unit cost": "£8.00",
+          "Shipping": "£3.50",
+          "Platform fee": "6.98% of the VAT-inclusive price",
+          "Payment fee": "4% + £0.20 of the VAT-inclusive price",
+          "VAT": "20%",
+          "Target margin": "35%",
+        },
+        result:
+          "Price excluding VAT £22.57. VAT £4.51. Customer pays £27.08. Platform fee £1.89. Payment fee £1.28. Costs £11.50. Profit £7.90. Margin 35%. Markup 68.7%.",
+      },
+      {
+        title: "Amazon UK footwear, 25% margin",
+        description:
+          "A VAT-registered seller sends a pair of shoes that cost £12, plus £2.50 postage. Amazon's footwear referral fee is 15% of the amount the buyer pays. The £0.25 minimum and the selling-plan fee are not in this example. Fee verified 21 October 2026.",
+        inputs: {
+          "Unit cost": "£12.00",
+          "Shipping": "£2.50",
+          "Referral fee": "15% of the VAT-inclusive price",
+          "VAT": "20%",
+          "Target margin": "25%",
+        },
+        result:
+          "Price excluding VAT £25.44. VAT £5.09. Customer pays £30.53. Platform fee £4.58. Costs £14.50. Profit £6.36. Margin 25%. Markup 43.86%.",
+      },
+      {
+        title: "Freelancer, digital file, not VAT-registered",
+        description:
+          "A freelancer who is not VAT-registered sells a digital download. The cost they count per sale is £15. The buyer pays by a standard UK card through Stripe, at 1.5% + 20p. No VAT is added, and the VAT in their tools cannot be reclaimed. Fee verified 21 October 2026.",
+        inputs: {
+          "Other per-unit cost": "£15.00",
+          "Payment fee": "1.5% + £0.20",
+          "VAT registered": "No",
+          "Target margin": "50%",
+        },
+        result:
+          "Price excluding VAT £31.34. VAT £0.00. Customer pays £31.34. Payment fee £0.67. Costs £15.00. Profit £15.67. Margin 50%. Markup 104.47%. A 50% margin is not a 50% markup.",
+      },
+    ],
+    faq: [
+      {
+        question: "Why is my margin lower once Etsy or Amazon takes a fee?",
+        answer:
+          "The fee comes off the price, and a percentage fee also grows as the price grows. A 35% margin target plus a fee on the VAT-inclusive price needs a higher price than cost divided by 0.65. Price Builder puts the fee on the correct side of VAT before it solves for the price.",
+      },
+      {
+        question: "I think in markup. Will a 40% markup give me a 40% margin?",
+        answer:
+          "No. Markup is profit divided by cost. Margin is profit divided by the price excluding VAT. A 40% markup is a 28.6% margin. If you type 40 into the margin field, the note under the result says so.",
+      },
+      {
+        question: "What changes if I am not VAT-registered?",
+        answer:
+          "The price the customer pays has no VAT added. You also cannot reclaim VAT on the unit cost, postage, or materials, so enter those costs as the full amount you paid. The tool says this next to the result whenever VAT-registered is off.",
+      },
+      {
+        question: "Does a preset include every fee the platform charges?",
+        answer:
+          "No. Each preset states what it includes and what it leaves out, and links to the official page. Amazon and eBay rates depend on the category, so those presets name the category. Shopify's monthly plan, Amazon's selling plan, Etsy's listing fee, and Offsite Ads are not in the percentage.",
+      },
+      {
+        question: "Why does it say the target margin is impossible?",
+        answer:
+          "Percentage fees and the margin both have to fit inside the price. When they add up to 100% or more, there is nothing left for the product cost, however high you set the price. Lower the margin, or the fee, before a price exists.",
+      },
+      {
+        question: "What does a discount do to the price I need to charge?",
+        answer:
+          "The margin is worked out on the price the customer actually pays. A 15% discount means the listed price has to be higher if you still want the same margin after the discount. Add a scenario and change only the discount to see the difference.",
+      },
+    ],
+    seo: {
+      title: "Price Builder – Keep Your Margin After VAT and Fees",
+      description:
+        "Set the price that still hits your margin after VAT, platform fees and card fees. For UK and EU sellers and freelancers. See where every pound goes next.",
+      canonical: "/price-builder",
+    },
+    keywords: [
+      "price builder", "pricing calculator", "margin after fees", "etsy fees calculator",
+      "amazon seller fees", "vat pricing", "what price should I charge",
+    ],
+  },
+  {
     slug: "vat-calculator",
     title: "VAT Calculator",
     shortDescription: "Add or remove VAT from any amount instantly. Supports UK, EU, and international VAT rates.",
@@ -32,7 +136,7 @@ This calculator works in both directions. To add VAT, enter the net amount (the 
 
 Whether you are preparing invoices, checking receipts, pricing products for international markets, or reclaiming business expenses, this tool handles the arithmetic instantly. The formula is always displayed alongside the result so you can verify the calculation yourself and understand the logic behind it. Choose from preset country rates or enter any custom rate for less common jurisdictions.`,
     category: "vat",
-    relatedSlugs: ["add-vat", "remove-vat", "margin-calculator", "discount-calculator", "profit-calculator"],
+    relatedSlugs: ["price-builder", "add-vat", "remove-vat", "margin-calculator", "discount-calculator"],
     defaultInputs: { amount: 100, rate: 20, mode: "add" },
     formula: "VAT Amount = Net Amount × (VAT Rate ÷ 100)\nGross Amount = Net Amount + VAT Amount",
     formulaExplanation:
@@ -265,7 +369,7 @@ To use this calculator, enter your revenue (the selling price) and your cost (wh
 
 Margin analysis is useful across many practical contexts: evaluating the profitability of individual products, comparing performance across a product range, setting minimum acceptable prices, or modelling the impact of cost increases or discounts. If a supplier raises prices by 10%, you can use this calculator to instantly see how it affects your margin — and what selling price adjustment you need to restore it. For converting between margin and markup, use the Margin to Markup Converter.`,
     category: "pricing",
-    relatedSlugs: ["markup-calculator", "profit-calculator", "margin-markup-converter", "break-even-calculator", "percentage-change-calculator"],
+    relatedSlugs: ["price-builder", "markup-calculator", "profit-calculator", "margin-markup-converter", "break-even-calculator"],
     defaultInputs: { revenue: 100, cost: 60 },
     formula: "Profit = Revenue − Cost\nMargin % = (Profit ÷ Revenue) × 100",
     formulaExplanation:
@@ -335,7 +439,7 @@ This calculator works in two modes. If you know the cost and the current selling
 
 One of the most common sources of confusion in business pricing is the difference between markup and margin. A 50% markup on a £60 cost produces a selling price of £90 and a margin of 33.3% — not 50%. If a business target says "achieve a 40% margin" and a buyer sets prices using a 40% markup, the margin will only be 28.6%. Use the Margin to Markup Converter to translate between the two precisely, or use the Profit Calculator to set prices from a target margin directly.`,
     category: "pricing",
-    relatedSlugs: ["margin-calculator", "margin-markup-converter", "discount-calculator", "break-even-calculator"],
+    relatedSlugs: ["price-builder", "margin-calculator", "margin-markup-converter", "discount-calculator", "break-even-calculator"],
     defaultInputs: { cost: 60, sellingPrice: 100, mode: "fromPrice" },
     formula: "Markup % = ((Selling Price − Cost) ÷ Cost) × 100\nSelling Price = Cost × (1 + Markup % ÷ 100)",
     formulaExplanation:
@@ -411,7 +515,7 @@ Enter the original price and the discount percentage. The calculator shows the a
 
 An important caution applies when stacking multiple discounts: they are not additive. A 20% discount followed by a 10% discount on a £100 item gives £72, not £70 — because the second discount applies to the already-reduced price of £80, not the original £100. This distinction matters in negotiations, promotions, and supply chain contracts. For a deeper analysis of how discounts erode your profit margins, see the Discount Impact on Margin guide.`,
     category: "pricing",
-    relatedSlugs: ["vat-calculator", "margin-calculator", "markup-calculator", "break-even-calculator", "percentage-change-calculator"],
+    relatedSlugs: ["price-builder", "vat-calculator", "margin-calculator", "markup-calculator", "break-even-calculator"],
     defaultInputs: { originalPrice: 100, discountPercent: 25 },
     formula: "Discount Amount = Original Price × (Discount % ÷ 100)\nFinal Price = Original Price − Discount Amount",
     formulaExplanation:
@@ -632,7 +736,7 @@ Three input modes cover different real-world scenarios. If you know your cost an
 
 The distinction between profit, margin, and markup — three closely related but different concepts — is a frequent source of confusion. Profit is an absolute amount in currency. Margin is profit as a percentage of revenue. Markup is profit as a percentage of cost. The same deal produces three different numbers, and confusing them leads to systematic pricing errors. This calculator makes the relationship concrete by showing all three at once and labelling them clearly, so you always know exactly which metric you are working with.`,
     category: "pricing",
-    relatedSlugs: ["margin-calculator", "markup-calculator", "break-even-calculator", "discount-calculator"],
+    relatedSlugs: ["price-builder", "margin-calculator", "markup-calculator", "break-even-calculator", "discount-calculator"],
     defaultInputs: { cost: 60, revenue: 100, mode: "fromRevenue" },
     formula: "Profit = Revenue − Cost\nMargin % = (Profit ÷ Revenue) × 100\nMarkup % = (Profit ÷ Cost) × 100",
     formulaExplanation:

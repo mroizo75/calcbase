@@ -68,20 +68,20 @@ export default function HomePage() {
       <section className="border-b bg-gradient-to-b from-background to-muted/30 px-4 py-12 sm:px-6 sm:py-24">
         <div className="mx-auto max-w-4xl text-center">
           <h1 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-            The base for practical business calculations
+            The price that still leaves your margin
           </h1>
           <p className="mx-auto mb-8 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            Free online calculators for VAT, profit margins, markup, discounts, and break-even analysis.
-            Accurate, fast, and built for professionals.
+            For small online sellers and freelancers in the UK and EU. Work out what to charge
+            after VAT, platform fees, and the margin you want — then see where the money goes.
           </p>
           <div className="mx-auto mb-6 max-w-md">
             <SearchBox />
           </div>
           <Link
-            href="/vat-calculator"
+            href="/price-builder"
             className="inline-flex h-12 items-center gap-2 rounded-lg bg-primary px-6 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Try the VAT Calculator
+            Open the Price Builder
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

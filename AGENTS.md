@@ -50,7 +50,7 @@ and show why.
 
 - Minimize JS payload. Prefer server rendering for content.
 - Isolate calculator interactivity to small client components.
-- Use `display: "swap"` on fonts to prevent layout shift.
+- Use `display: "optional"` on fonts so a late font file does not move the page.
 - Lazy-load non-critical components.
 - Target LCP < 2.5s, INP < 200ms, CLS < 0.1.
 

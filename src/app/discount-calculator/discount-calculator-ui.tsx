@@ -9,6 +9,7 @@ import { ResultCard } from "@/components/calculator/result-card";
 import { calculateDiscount } from "@/lib/utils/math";
 import { formatNumber, parseNumericInput } from "@/lib/utils/format-number";
 import { buildShareUrl } from "@/lib/utils/urls";
+import { PriceBuilderNudge, priceBuilderHref } from "@/components/calculator/price-builder-nudge";
 import { addHistoryEntry } from "@/lib/history/config";
 import type { CalculatorResult } from "@/lib/calculators/types";
 
@@ -115,6 +116,7 @@ export function DiscountCalculatorUi() {
 
       <div className="flex flex-col gap-4">
         <ResultCard results={results} formulaUsed={formulaUsed} shareUrl={shareUrl} title="Discount Calculation" />
+        <PriceBuilderNudge href={priceBuilderHref({ price: originalPrice, discount: discountPercent, mode: "check" })} />
         <Card className="bg-muted/30">
           <CardContent className="pt-5">
             <h3 className="mb-2 text-sm font-semibold">How discounts work</h3>

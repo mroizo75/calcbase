@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ADS_ENABLED, type AdFrame, type AdPlacement } from "@/lib/ads/config";
+import { type AdFrame, type AdPlacement } from "@/lib/ads/config";
 import { pickHouseAd, type HouseAd } from "@/lib/ads/house-ad";
 import { AdSlot } from "./ad-slot";
 import { HouseAdView } from "./house-ad";
@@ -62,9 +62,13 @@ export function HouseAdSlot({
   if (!payload) return null;
 
   const ad = pickHouseAd(payload.ads, placement, payload.country);
-  if (!ad && !ADS_ENABLED) return null;
+  if (!ad) {
+    const slot = <AdSlot slot={placement} className={className} />;
+    if (variant === "sidebar") return <aside className="hidden xl:block">{slot}</aside>;
+    return slot;
+  }
 
-  const creative = ad ? <HouseAdView ad={ad} frame={frame} /> : <AdSlot slot={placement} />;
+  const creative = <HouseAdView ad={ad} frame={frame} />;
 
   if (variant === "sidebar") {
     return (

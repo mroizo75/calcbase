@@ -3,8 +3,8 @@ import { getCanonicalUrl, getCalculatorUrl, getGuideUrl, buildShareUrl } from "@
 
 describe("URL utilities", () => {
   it("builds canonical URLs correctly", () => {
-    expect(getCanonicalUrl("/vat-calculator")).toBe("https://calcbase.com/vat-calculator");
-    expect(getCanonicalUrl("about")).toBe("https://calcbase.com/about");
+    expect(getCanonicalUrl("/vat-calculator")).toBe("https://www.calcbase.io/vat-calculator");
+    expect(getCanonicalUrl("about")).toBe("https://www.calcbase.io/about");
   });
 
   it("builds calculator URLs", () => {
@@ -17,6 +17,6 @@ describe("URL utilities", () => {
 
   it("builds share URLs with query params", () => {
     const url = buildShareUrl("vat-calculator", { amount: 100, rate: 20 });
-    expect(url).toBe("https://calcbase.com/vat-calculator?amount=100&rate=20");
+    expect(url).toBe("https://www.calcbase.io/vat-calculator?amount=100&rate=20");
   });
 });

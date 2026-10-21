@@ -10,16 +10,17 @@ interface ResultCardProps {
   formulaUsed?: string;
   shareUrl?: string;
   title?: string;
+  emphasizeExport?: boolean;
 }
 
 function slugify(text: string): string {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 
-export function ResultCard({ results, formulaUsed, shareUrl, title }: ResultCardProps) {
+export function ResultCard({ results, formulaUsed, shareUrl, title, emphasizeExport = false }: ResultCardProps) {
   const [copied, setCopied] = useState<"text" | "link" | null>(null);
 
-  if (results.length === 0) return null;
+  if (results.length === 0 && !emphasizeExport) return null;
 
   const heading = title ?? "Calculation Result";
   const summaryText = results.map((r) => `${r.label}: ${r.formatted}`).join("\n");
@@ -94,7 +95,7 @@ export function ResultCard({ results, formulaUsed, shareUrl, title }: ResultCard
 ${formulaRow}
 <div class="footer">
 <p>This is for informational purposes only and should not replace professional financial, tax, or legal advice.</p>
-<p>calcbase.com</p>
+<p>calcbase.io</p>
 </div></body></html>`;
 
     const w = window.open("", "_blank", "width=700,height=600");
@@ -108,6 +109,29 @@ ${formulaRow}
   return (
     <Card className="border-primary/20 bg-primary/[0.02]">
       <CardContent className="pt-6">
+        {emphasizeExport && shareUrl ? (
+          <div className="mb-4 flex flex-col gap-2 sm:flex-row">
+            <button
+              type="button"
+              onClick={() => {
+                void navigator.clipboard.writeText(shareUrl).then(() => {
+                  setCopied("link");
+                  setTimeout(() => setCopied(null), 2000);
+                });
+              }}
+              className="inline-flex h-11 items-center justify-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground"
+            >
+              {copied === "link" ? "Link copied" : "Copy link"}
+            </button>
+            <button
+              type="button"
+              onClick={handleExportPdf}
+              className="inline-flex h-11 items-center justify-center rounded-lg border border-border bg-transparent px-4 text-sm font-medium text-foreground"
+            >
+              Download PDF
+            </button>
+          </div>
+        ) : null}
         <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
             Result

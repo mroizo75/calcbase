@@ -8,13 +8,13 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-        <Link href="/" className="relative flex shrink-0 items-center">
+        <Link href="/" className="relative block h-16 w-[179px] shrink-0">
           <Image
             src="/calclogo.png"
             alt="CalcBase – Business Calculators"
-            width={200}
-            height={64}
-            className="h-16 w-auto"
+            fill
+            sizes="179px"
+            className="object-contain object-left"
             priority
           />
         </Link>

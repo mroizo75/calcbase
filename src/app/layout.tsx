@@ -9,7 +9,7 @@ import "./globals.css";
 const geistSans = Geist({
   variable: "--font-sans",
   subsets: ["latin"],
-  display: "swap",
+  display: "optional",
   preload: true,
 });
 

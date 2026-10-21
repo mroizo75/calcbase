@@ -9,6 +9,7 @@ import { ResultCard } from "@/components/calculator/result-card";
 import { calculateMarkup, calculateMarkupFromPercent } from "@/lib/utils/math";
 import { formatNumber, parseNumericInput } from "@/lib/utils/format-number";
 import { buildShareUrl } from "@/lib/utils/urls";
+import { PriceBuilderNudge, priceBuilderHref } from "@/components/calculator/price-builder-nudge";
 import { addHistoryEntry } from "@/lib/history/config";
 import type { CalculatorResult } from "@/lib/calculators/types";
 
@@ -167,6 +168,15 @@ export function MarkupCalculatorUi() {
 
       <div className="flex flex-col gap-4">
         <ResultCard results={results} formulaUsed={formulaUsed} shareUrl={shareUrl} title="Markup Calculation" />
+        <PriceBuilderNudge
+          href={priceBuilderHref({
+            cost,
+            price: mode === "fromPrice"
+              ? sellingPrice
+              : String(calculateMarkupFromPercent(numCost, numTargetMarkup).sellingPrice),
+            mode: "check",
+          })}
+        />
         <Card className="bg-muted/30">
           <CardContent className="pt-5">
             <h3 className="mb-2 text-sm font-semibold">Markup vs margin</h3>

@@ -43,7 +43,7 @@ export function CalculatorShell({ config, children }: CalculatorShellProps) {
             ))}
           </div>
 
-          <AdBanner slot="calc-below-intro" />
+          {config.slug === "price-builder" ? null : <AdBanner slot="calc-below-intro" />}
 
           <Suspense>
             <div className="mb-12">{children}</div>

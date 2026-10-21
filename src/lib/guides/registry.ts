@@ -98,7 +98,7 @@ export const guides: GuideConfig[] = [
       "Pricing determines profitability. This guide covers cost-plus pricing, margin-based pricing, competitive pricing, and the formulas behind each approach.",
     publishedDate: "2026-04-26",
     updatedDate: "2026-04-26",
-    relatedCalculators: ["margin-calculator", "markup-calculator", "profit-calculator", "break-even-calculator"],
+    relatedCalculators: ["price-builder", "margin-calculator", "markup-calculator", "profit-calculator"],
     seo: {
       title: "How to Price a Product – Pricing Formulas & Strategies | CalcBase",
       description:

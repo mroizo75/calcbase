@@ -4,6 +4,7 @@ import { CookieSettingsButton } from "./cookie-settings-button";
 
 const footerLinks = {
   calculators: [
+    { label: "Price Builder", href: "/price-builder" },
     { label: "VAT Calculator", href: "/vat-calculator" },
     { label: "Add VAT", href: "/add-vat" },
     { label: "Remove VAT", href: "/remove-vat" },
@@ -42,13 +43,13 @@ export function SiteFooter() {
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
           <div className="sm:col-span-2 md:col-span-1">
-            <Link href="/" className="mb-3 inline-block">
+            <Link href="/" className="relative mb-3 block h-16 w-[179px]">
               <Image
                 src="/calclogo.png"
                 alt="CalcBase"
-                width={200}
-                height={40}
-                className="h-16 w-auto"
+                fill
+                sizes="179px"
+                className="object-contain object-left"
               />
             </Link>
             <p className="text-sm leading-relaxed text-muted-foreground">

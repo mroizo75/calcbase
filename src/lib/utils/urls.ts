@@ -1,4 +1,4 @@
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://calcbase.com";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://www.calcbase.io";
 
 export function getBaseUrl(): string {
   return BASE_URL;
