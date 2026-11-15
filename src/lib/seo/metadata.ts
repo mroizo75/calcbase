@@ -6,6 +6,15 @@ const SITE_NAME = "CalcBase";
 const DEFAULT_DESCRIPTION =
   "Calculators for UK and EU sellers and freelancers. Price with VAT, margin, markup, discounts, commission, and break-even before you publish a number. Free.";
 
+/**
+ * Layout-templaten (`%s | CalcBase`) legger allerede til merkenavnet.
+ * Mange titler inneholder det fra før, så vi fjerner det bak i tittelen
+ * for å unngå «… | CalcBase | CalcBase» i <title>.
+ */
+function withoutBrandSuffix(title: string): string {
+  return title.replace(new RegExp(`\\s*[|–-]\\s*${SITE_NAME}\\s*$`, "i"), "").trim();
+}
+
 export function buildSiteMetadata(): Metadata {
   const pubId = process.env.NEXT_PUBLIC_ADSENSE_PUB_ID;
 
@@ -44,7 +53,7 @@ export function buildSiteMetadata(): Metadata {
 
 export function buildCalculatorMetadata(config: CalculatorConfig): Metadata {
   return {
-    title: config.seo.title,
+    title: withoutBrandSuffix(config.seo.title),
     description: config.seo.description,
     alternates: {
       canonical: config.seo.canonical,
@@ -71,7 +80,7 @@ export function buildPageMetadata(opts: {
   canonical: string;
 }): Metadata {
   return {
-    title: opts.title,
+    title: withoutBrandSuffix(opts.title),
     description: opts.description,
     alternates: {
       canonical: opts.canonical,

@@ -788,9 +788,9 @@ The distinction between profit, margin, and markup — three closely related but
       },
     ],
     seo: {
-      title: "Profit Calculator – Calculate Profit & Selling Price | CalcBase",
+      title: "Profit Calculator: Profit, Margin & Markup | CalcBase",
       description:
-        "Free profit calculator. Find profit, margin, and markup from cost and revenue. Set target margins to find the right selling price. Three flexible input modes.",
+        "Free profit calculator: enter cost and revenue to get profit, margin and markup at once. Or set a target margin to find your selling price. Formula included.",
       canonical: "/profit-calculator",
     },
     keywords: [
@@ -863,9 +863,9 @@ Commission structures vary considerably across industries and roles. Flat-rate c
       },
     ],
     seo: {
-      title: "Commission Calculator – Sales Commission Calculator Free | CalcBase",
+      title: "Commission Calculator: Find Commission & Net Pay | CalcBase",
       description:
-        "Free commission calculator. Calculate sales commission earned and net amount from any sale. Includes real estate, sales rep, and affiliate commission examples.",
+        "Free commission calculator: enter the sale amount and rate to see commission earned and net amount. Worked examples for real estate, sales reps and affiliates.",
       canonical: "/commission-calculator",
     },
     keywords: [
@@ -950,9 +950,9 @@ Percentage change is used in virtually every type of business and financial anal
       },
     ],
     seo: {
-      title: "Percentage Change Calculator – Increase & Decrease | CalcBase",
+      title: "Percentage Change Calculator: % Increase/Decrease | CalcBase",
       description:
-        "Free percentage change calculator. Find the % increase or decrease between two numbers, or apply a change to get the new value. Includes the formula.",
+        "Free percentage change calculator: enter an old and new value to get the % increase or decrease, or apply a % to find the new number. Formula and examples.",
       canonical: "/percentage-change-calculator",
     },
     keywords: [
