@@ -20,13 +20,13 @@ export default function PrivacyPolicyPage() {
       <h1 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
         Privacy Policy
       </h1>
-      <p className="mb-8 text-sm text-muted-foreground">Last updated: April 2026</p>
+      <p className="mb-8 text-sm text-muted-foreground">Last updated: November 2026</p>
 
       <div className="space-y-6 text-base leading-relaxed">
         <h2 className="text-xl font-semibold">Overview</h2>
         <p>
           CalcBase (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) operates the website
-          calcbase.com. This Privacy Policy explains what information we collect, how we use it,
+          calcbase.io. This Privacy Policy explains what information we collect, how we use it,
           and your rights regarding that information.
         </p>
         <p>
@@ -118,9 +118,12 @@ export default function PrivacyPolicyPage() {
           .
         </p>
         <p>
-          When you first visit CalcBase, we ask for your consent before enabling personalized
-          advertising cookies. You can change your cookie preferences at any time using the cookie
-          settings link in our website footer.
+          Whether we ask for consent depends on where you are. In the European Economic Area,
+          the United Kingdom and Switzerland, we ask for your consent before showing ads or setting
+          advertising cookies. Elsewhere, for example in the USA, Canada and Australia, ads may be
+          shown without a prior consent prompt. You can reject advertising or change your cookie
+          preferences at any time using the cookie settings link in our website footer. If you
+          reject, no ads are shown and no advertising cookies are set.
         </p>
 
         <h2 className="text-xl font-semibold">Cookies</h2>
@@ -171,6 +174,22 @@ export default function PrivacyPolicyPage() {
             <strong>Google Search Console:</strong> To monitor how our site appears in search
             results.
           </li>
+          <li>
+            <strong>api.country.is:</strong> Used to look up which country a visitor is in, based
+            on their IP address, when our hosting does not provide the country. This decides
+            whether consent is required before ads are shown. The IP address is sent to this
+            service for the lookup. We keep the result in server memory for a short time (up to
+            six hours) and do not store IP addresses in a database. See{" "}
+            <a
+              href="https://country.is"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-4 hover:text-primary"
+            >
+              country.is
+            </a>
+            .
+          </li>
         </ul>
 
         <h2 className="text-xl font-semibold">Data Retention</h2>
@@ -202,10 +221,10 @@ export default function PrivacyPolicyPage() {
           Since we collect minimal data, there is typically no personal data to retrieve. For any
           data-related requests, contact us at{" "}
           <a
-            href="mailto:hello@calcbase.com"
+            href="mailto:hello@calcbase.io"
             className="underline underline-offset-4 hover:text-primary"
           >
-            hello@calcbase.com
+            hello@calcbase.io
           </a>
           .
         </p>
@@ -231,10 +250,10 @@ export default function PrivacyPolicyPage() {
           collect, request its deletion, and opt out of the sale of personal information. CalcBase
           does not sell personal information. For requests, contact{" "}
           <a
-            href="mailto:hello@calcbase.com"
+            href="mailto:hello@calcbase.io"
             className="underline underline-offset-4 hover:text-primary"
           >
-            hello@calcbase.com
+            hello@calcbase.io
           </a>
           .
         </p>
@@ -256,10 +275,10 @@ export default function PrivacyPolicyPage() {
         <p>
           If you have questions about this Privacy Policy, contact us at{" "}
           <a
-            href="mailto:hello@calcbase.com"
+            href="mailto:hello@calcbase.io"
             className="underline underline-offset-4 hover:text-primary"
           >
-            hello@calcbase.com
+            hello@calcbase.io
           </a>
           .
         </p>

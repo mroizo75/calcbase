@@ -24,7 +24,7 @@ export default function TermsPage() {
       <div className="space-y-6 text-base leading-relaxed">
         <h2 className="text-xl font-semibold">Acceptance of Terms</h2>
         <p>
-          By accessing and using CalcBase (calcbase.com), you agree to these Terms of Service.
+          By accessing and using CalcBase (calcbase.io), you agree to these Terms of Service.
           If you do not agree, please do not use the site.
         </p>
 
@@ -116,8 +116,8 @@ export default function TermsPage() {
         <h2 className="text-xl font-semibold">Contact</h2>
         <p>
           For questions about these terms, contact us at{" "}
-          <a href="mailto:hello@calcbase.com" className="underline underline-offset-4 hover:text-primary">
-            hello@calcbase.com
+          <a href="mailto:hello@calcbase.io" className="underline underline-offset-4 hover:text-primary">
+            hello@calcbase.io
           </a>.
         </p>
       </div>

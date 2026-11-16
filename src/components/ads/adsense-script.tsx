@@ -1,17 +1,11 @@
 "use client";
 
-import { useEffect, useSyncExternalStore } from "react";
+import { useEffect } from "react";
 import { ADS_ENABLED, ADSENSE_PUBLISHER_ID } from "@/lib/ads/config";
-import { getConsentStatus } from "@/lib/consent/config";
-
-const NOOP_SUBSCRIBE = () => () => {};
+import { useAdsAllowed } from "@/lib/consent/use-ads-allowed";
 
 export function AdsenseScript() {
-  const hasConsent = useSyncExternalStore(
-    NOOP_SUBSCRIBE,
-    () => getConsentStatus() === "accepted",
-    () => false,
-  );
+  const hasConsent = useAdsAllowed() === true;
 
   useEffect(() => {
     if (!ADS_ENABLED || !ADSENSE_PUBLISHER_ID || !hasConsent) return;

@@ -29,10 +29,10 @@ export default function ContactPage() {
         <p>
           Email us at{" "}
           <a
-            href="mailto:hello@calcbase.com"
+            href="mailto:hello@calcbase.io"
             className="font-medium underline underline-offset-4 hover:text-primary"
           >
-            hello@calcbase.com
+            hello@calcbase.io
           </a>
         </p>
 

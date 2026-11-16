@@ -1,10 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useSyncExternalStore } from "react";
+import { useEffect, useRef } from "react";
 import { ADS_ENABLED, AD_SLOTS, type AdPlacement } from "@/lib/ads/config";
-import { getConsentStatus } from "@/lib/consent/config";
-
-const NOOP_SUBSCRIBE = () => () => {};
+import { useAdsAllowed } from "@/lib/consent/use-ads-allowed";
 
 interface AdSlotProps {
   slot: AdPlacement;
@@ -15,11 +13,7 @@ export function AdSlot({ slot, className = "" }: AdSlotProps) {
   const adRef = useRef<HTMLModElement>(null);
   const pushed = useRef(false);
   const config = AD_SLOTS[slot];
-  const hasConsent = useSyncExternalStore(
-    NOOP_SUBSCRIBE,
-    () => getConsentStatus() === "accepted",
-    () => false,
-  );
+  const hasConsent = useAdsAllowed() === true;
 
   useEffect(() => {
     if (!ADS_ENABLED || !hasConsent || !adRef.current || pushed.current) return;

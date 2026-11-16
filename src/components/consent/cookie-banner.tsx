@@ -1,18 +1,26 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { getConsentStatus, setConsentStatus } from "@/lib/consent/config";
-
-const NOOP_SUBSCRIBE = () => () => {};
+import { visitorNeedsConsent } from "@/lib/consent/visitor-region";
 
 export function CookieBanner() {
   const [dismissed, setDismissed] = useState(false);
-  const isUndecided = useSyncExternalStore(
-    NOOP_SUBSCRIBE,
-    () => getConsentStatus() === "undecided",
-    () => false,
-  );
+  const [isUndecided, setIsUndecided] = useState(false);
+
+  // Banneret vises bare der samtykke faktisk kreves (EU/EØS/UK/CH).
+  useEffect(() => {
+    let active = true;
+    if (getConsentStatus() === "undecided") {
+      void visitorNeedsConsent().then((needs) => {
+        if (active) setIsUndecided(needs);
+      });
+    }
+    return () => {
+      active = false;
+    };
+  }, []);
 
   if (!isUndecided || dismissed) return null;
 
