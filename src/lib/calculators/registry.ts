@@ -743,7 +743,7 @@ The distinction between profit, margin, and markup — three closely related but
       "Profit is the difference between what you sell for and what it costs. Margin expresses that profit as a percentage of revenue; markup expresses it as a percentage of cost. Both describe the same profit from different perspectives.",
     examples: [
       {
-        title: "Selling price from a 30% margin",
+        title: "Margin on a $100 sale at $60 cost",
         description: "A product that costs $60 to produce is sold for $100.",
         inputs: { Cost: "$60", Revenue: "$100" },
         result: "Profit = $40. Margin = 40%. Markup = 66.67%.",
