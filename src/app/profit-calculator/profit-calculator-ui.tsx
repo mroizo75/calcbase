@@ -221,7 +221,7 @@ export function ProfitCalculatorUi() {
           <button
             type="button"
             onClick={handleReset}
-            className="text-sm text-muted-foreground underline-offset-4 hover:underline"
+            className="inline-flex min-h-[44px] items-center text-sm text-muted-foreground underline-offset-4 hover:underline"
           >
             Reset
           </button>

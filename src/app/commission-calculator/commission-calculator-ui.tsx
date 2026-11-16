@@ -98,7 +98,7 @@ export function CommissionCalculatorUi() {
                   key={r}
                   type="button"
                   onClick={() => handlePreset(r)}
-                  className={`min-h-[36px] min-w-[44px] rounded-md border px-2.5 py-1.5 text-xs font-medium transition-colors ${
+                  className={`min-h-[44px] min-w-[44px] rounded-md border px-2.5 py-1.5 text-xs font-medium transition-colors ${
                     parseFloat(commissionRate) === r
                       ? "border-primary bg-primary/10 text-primary"
                       : "text-muted-foreground hover:bg-accent"
@@ -113,7 +113,7 @@ export function CommissionCalculatorUi() {
           <button
             type="button"
             onClick={handleReset}
-            className="text-sm text-muted-foreground underline-offset-4 hover:underline"
+            className="inline-flex min-h-[44px] items-center text-sm text-muted-foreground underline-offset-4 hover:underline"
           >
             Reset
           </button>

@@ -183,7 +183,7 @@ ${formulaRow}
             <div key={r.label} className="flex items-baseline justify-between gap-4">
               <span className="shrink-0 text-sm text-muted-foreground">{r.label}</span>
               <span
-                className={`truncate text-right text-lg font-semibold tabular-nums ${r.highlight ? "text-primary" : ""}`}
+                className={`min-w-0 break-all text-right text-lg font-semibold tabular-nums ${r.highlight ? "text-primary" : ""}`}
               >
                 {r.formatted}
               </span>
