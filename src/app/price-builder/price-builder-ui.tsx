@@ -270,16 +270,16 @@ export function PriceBuilderUi() {
                   ))}
                 </div>
 
-                <fieldset className="space-y-3">
-                  <legend className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Costs</legend>
+                <fieldset className="grid gap-3 md:grid-cols-2">
+                  <legend className="md:col-span-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Costs</legend>
                   <Field id={`${scenario.id}-cost`} label="Unit cost" value={scenario.unitCost} onChange={(unitCost) => update(scenario.id, { unitCost })} />
                   <Field id={`${scenario.id}-ship`} label="Shipping / packaging" value={scenario.shipping} onChange={(shipping) => update(scenario.id, { shipping })} />
                   <Field id={`${scenario.id}-other`} label="Other per-unit costs" value={scenario.other} onChange={(other) => update(scenario.id, { other })} />
                 </fieldset>
 
-                <fieldset className="space-y-3">
-                  <legend className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Platform and payments</legend>
-                  <div>
+                <fieldset className="grid gap-3 md:grid-cols-2">
+                  <legend className="md:col-span-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Platform and payments</legend>
+                  <div className="md:col-span-2">
                     <Label htmlFor={`${scenario.id}-preset`}>Preset</Label>
                     <select
                       id={`${scenario.id}-preset`}
@@ -294,7 +294,7 @@ export function PriceBuilderUi() {
                     </select>
                   </div>
                   {preset ? (
-                    <div className="text-xs leading-relaxed text-muted-foreground">
+                    <div className="md:col-span-2 text-xs leading-relaxed text-muted-foreground">
                       <p>
                         Fees last verified {verifiedOn(preset.lastVerified)} —{" "}
                         <a href={preset.sourceUrl} className="underline underline-offset-4" target="_blank" rel="noreferrer">
@@ -343,9 +343,9 @@ export function PriceBuilderUi() {
                   />
                 </fieldset>
 
-                <fieldset className="space-y-3">
-                  <legend className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">VAT</legend>
-                  <label className="flex items-center gap-2 text-sm">
+                <fieldset className="grid gap-3 md:grid-cols-2">
+                  <legend className="md:col-span-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">VAT</legend>
+                  <label className="md:col-span-2 flex items-center gap-2 text-sm">
                     <input
                       type="checkbox"
                       checked={scenario.vatRegistered}
@@ -353,7 +353,7 @@ export function PriceBuilderUi() {
                     />
                     VAT-registered
                   </label>
-                  <div>
+                  <div className="md:col-span-2">
                     <Label htmlFor={`${scenario.id}-vat-preset`}>Country rate</Label>
                     <select
                       id={`${scenario.id}-vat-preset`}
@@ -381,8 +381,8 @@ export function PriceBuilderUi() {
                   />
                 </fieldset>
 
-                <fieldset className="space-y-3">
-                  <legend className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Goal</legend>
+                <fieldset className="grid gap-3 md:grid-cols-2">
+                  <legend className="md:col-span-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Goal</legend>
                   {scenario.mode === "charge" ? (
                     <Field id={`${scenario.id}-margin`} label="Target margin %" value={scenario.targetMargin} onChange={(targetMargin) => update(scenario.id, { targetMargin })} />
                   ) : (

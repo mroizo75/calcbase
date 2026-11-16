@@ -17,6 +17,7 @@ interface CalculatorShellProps {
 
 export function CalculatorShell({ config, children }: CalculatorShellProps) {
   const graph = buildCalculatorPageGraph(config);
+  const wide = config.slug === "price-builder";
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
@@ -26,7 +27,7 @@ export function CalculatorShell({ config, children }: CalculatorShellProps) {
       />
 
       <div className="flex gap-8">
-        <div className="min-w-0 max-w-4xl flex-1">
+        <div className={`min-w-0 flex-1 ${wide ? "" : "max-w-4xl"}`}>
           <Breadcrumb
             items={[
               { label: "Calculators", href: "/calculators" },
@@ -70,7 +71,7 @@ export function CalculatorShell({ config, children }: CalculatorShellProps) {
           </p>
         </div>
 
-        <AdSidebar slot="calc-sidebar" />
+        {wide ? null : <AdSidebar slot="calc-sidebar" />}
       </div>
     </div>
   );
