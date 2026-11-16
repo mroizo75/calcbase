@@ -1,0 +1,48 @@
+export type DisplayCurrency = "USD" | "GBP";
+
+export const CURRENCY_COOKIE = "calcbase-currency";
+export const CURRENCY_EVENT = "calcbase-currency-change";
+
+export const CURRENCY_SYMBOL: Record<DisplayCurrency, string> = {
+  USD: "$",
+  GBP: "£",
+};
+
+export function isDisplayCurrency(value: unknown): value is DisplayCurrency {
+  return value === "USD" || value === "GBP";
+}
+
+/** Leser valg fra cookie. Returnerer null hvis brukeren ikke har valgt noe. */
+export function readStoredCurrency(): DisplayCurrency | null {
+  if (typeof document === "undefined") return null;
+  const match = document.cookie.match(/(?:^|;\s*)calcbase-currency=([^;]+)/);
+  const value = match ? decodeURIComponent(match[1]) : null;
+  return isDisplayCurrency(value) ? value : null;
+}
+
+export function storeCurrency(currency: DisplayCurrency): void {
+  document.cookie = `${CURRENCY_COOKIE}=${currency}; path=/; max-age=31536000; SameSite=Lax`;
+  window.dispatchEvent(new CustomEvent(CURRENCY_EVENT, { detail: currency }));
+}
+
+/** Formaterer beløp med symbol, f.eks. $1,234.50 eller -£5.00. Tallformat er som formatNumber. */
+export function formatMoney(value: number, symbol: string, formattedAbs: string): string {
+  return value < 0 ? `-${symbol}${formattedAbs}` : `${symbol}${formattedAbs}`;
+}
+
+/**
+ * Standard for besøkende uten valgt cookie: GBP hvis språk/tidssone er britisk, ellers USD.
+ * Kun brukt på klienten etter mount, så serverrendering og Google ser alltid USD.
+ */
+export function detectDefaultCurrency(): DisplayCurrency {
+  if (typeof navigator === "undefined") return "USD";
+  const lang = (navigator.language || "").toLowerCase();
+  let tz = "";
+  try {
+    tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+  } catch {
+    tz = "";
+  }
+  if (lang === "en-gb" || tz === "Europe/London") return "GBP";
+  return "USD";
+}

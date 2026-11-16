@@ -6,8 +6,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ResultCard } from "@/components/calculator/result-card";
+import { CurrencyToggle } from "@/components/calculator/currency-toggle";
 import { calculateMargin, calculateMarkup, calculateMarkupFromPercent } from "@/lib/utils/math";
 import { formatNumber, parseNumericInput } from "@/lib/utils/format-number";
+import { formatMoney } from "@/lib/currency/currency";
+import { useCurrency } from "@/lib/currency/use-currency";
 import { buildShareUrl } from "@/lib/utils/urls";
 import { PriceBuilderNudge, priceBuilderHref } from "@/components/calculator/price-builder-nudge";
 import { addHistoryEntry } from "@/lib/history/config";
@@ -18,6 +21,7 @@ type ProfitMode = "fromRevenue" | "fromMargin" | "fromMarkup";
 
 export function ProfitCalculatorUi() {
   const searchParams = useSearchParams();
+  const { symbol } = useCurrency();
   const [cost, setCost] = useState(searchParams.get("cost") ?? "60");
   const [revenue, setRevenue] = useState(searchParams.get("revenue") ?? "100");
   const [targetMargin, setTargetMargin] = useState(searchParams.get("margin") ?? "30");
@@ -33,6 +37,9 @@ export function ProfitCalculatorUi() {
   const numTargetMargin = parseNumericInput(targetMargin);
   const numTargetMarkup = parseNumericInput(targetMarkup);
 
+  // Pengebeløp med valgt valutasymbol. Prosent og antall beholdes uten symbol.
+  const money = (v: number) => formatMoney(v, symbol, formatNumber(v));
+
   let results: CalculatorResult[] = [];
   let formulaUsed = "";
 
@@ -40,36 +47,36 @@ export function ProfitCalculatorUi() {
     const { profit, marginPercent } = calculateMargin(numRevenue, numCost);
     const { markupPercent } = calculateMarkup(numCost, numRevenue);
     results = [
-      { label: "Revenue", value: numRevenue, formatted: formatNumber(numRevenue) },
-      { label: "Cost", value: numCost, formatted: formatNumber(numCost) },
-      { label: "Profit", value: profit, formatted: formatNumber(profit), highlight: true },
+      { label: "Revenue", value: numRevenue, formatted: money(numRevenue) },
+      { label: "Cost", value: numCost, formatted: money(numCost) },
+      { label: "Profit", value: profit, formatted: money(profit), highlight: true },
       { label: "Margin", value: marginPercent, formatted: `${marginPercent}%` },
       { label: "Markup", value: markupPercent, formatted: `${markupPercent}%` },
     ];
-    formulaUsed = `${formatNumber(numRevenue)} − ${formatNumber(numCost)} = ${formatNumber(profit)} profit (${marginPercent}% margin, ${markupPercent}% markup)`;
+    formulaUsed = `${money(numRevenue)} − ${money(numCost)} = ${money(profit)} profit (${marginPercent}% margin, ${markupPercent}% markup)`;
   } else if (mode === "fromMargin" && numCost > 0 && numTargetMargin > 0 && numTargetMargin < 100) {
     const sellingPrice = round(numCost / (1 - numTargetMargin / 100));
     const profit = round(sellingPrice - numCost);
     const { markupPercent } = calculateMarkup(numCost, sellingPrice);
     results = [
-      { label: "Cost", value: numCost, formatted: formatNumber(numCost) },
+      { label: "Cost", value: numCost, formatted: money(numCost) },
       { label: "Target Margin", value: numTargetMargin, formatted: `${numTargetMargin}%` },
-      { label: "Selling Price", value: sellingPrice, formatted: formatNumber(sellingPrice), highlight: true },
-      { label: "Profit", value: profit, formatted: formatNumber(profit) },
+      { label: "Selling Price", value: sellingPrice, formatted: money(sellingPrice), highlight: true },
+      { label: "Profit", value: profit, formatted: money(profit) },
       { label: "Markup", value: markupPercent, formatted: `${markupPercent}%` },
     ];
-    formulaUsed = `${formatNumber(numCost)} ÷ (1 − ${numTargetMargin}%) = ${formatNumber(sellingPrice)}`;
+    formulaUsed = `${money(numCost)} ÷ (1 − ${numTargetMargin}%) = ${money(sellingPrice)}`;
   } else if (mode === "fromMarkup" && numCost > 0 && numTargetMarkup >= 0) {
     const { sellingPrice, profit } = calculateMarkupFromPercent(numCost, numTargetMarkup);
     const { marginPercent } = calculateMargin(sellingPrice, numCost);
     results = [
-      { label: "Cost", value: numCost, formatted: formatNumber(numCost) },
+      { label: "Cost", value: numCost, formatted: money(numCost) },
       { label: "Target Markup", value: numTargetMarkup, formatted: `${numTargetMarkup}%` },
-      { label: "Selling Price", value: sellingPrice, formatted: formatNumber(sellingPrice), highlight: true },
-      { label: "Profit", value: profit, formatted: formatNumber(profit) },
+      { label: "Selling Price", value: sellingPrice, formatted: money(sellingPrice), highlight: true },
+      { label: "Profit", value: profit, formatted: money(profit) },
       { label: "Margin", value: marginPercent, formatted: `${marginPercent}%` },
     ];
-    formulaUsed = `${formatNumber(numCost)} × (1 + ${numTargetMarkup}%) = ${formatNumber(sellingPrice)}`;
+    formulaUsed = `${money(numCost)} × (1 + ${numTargetMarkup}%) = ${money(sellingPrice)}`;
   }
 
   const shareUrl = results.length > 0
@@ -160,8 +167,10 @@ export function ProfitCalculatorUi() {
             </div>
           </fieldset>
 
+          <CurrencyToggle />
+
           <div>
-            <Label htmlFor="profit-cost">Cost</Label>
+            <Label htmlFor="profit-cost">Cost ({symbol})</Label>
             <Input
               id="profit-cost"
               type="text"
@@ -175,7 +184,7 @@ export function ProfitCalculatorUi() {
 
           {mode === "fromRevenue" && (
             <div>
-              <Label htmlFor="profit-revenue">Revenue (Selling Price)</Label>
+              <Label htmlFor="profit-revenue">Revenue (Selling Price) ({symbol})</Label>
               <Input
                 id="profit-revenue"
                 type="text"
