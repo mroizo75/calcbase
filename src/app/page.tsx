@@ -1,81 +1,92 @@
 import Link from "next/link";
-import { ArrowRight, Calculator, Zap, Shield, Globe, Share2, FileText, History } from "lucide-react";
+import { ArrowRight, Calculator, Percent, Receipt, Store, Tag } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { SearchBox } from "@/components/layout/search-box";
 import { AdBanner } from "@/components/ads/ad-banner";
-import { calculators } from "@/lib/calculators/registry";
+import { CurrencyToggle } from "@/components/calculator/currency-toggle";
 
-const categoryLabels: Record<string, string> = {
-  vat: "VAT & Tax",
-  pricing: "Pricing",
-  business: "Business",
+type CategoryCard = {
+  title: string;
+  description: string;
+  icon: typeof Calculator;
+  links: { label: string; href: string }[];
 };
 
-const whyReasons = [
+const categories: CategoryCard[] = [
   {
-    icon: Zap,
-    title: "Instant Results",
-    description: "Calculations update in real time as you type. No page reloads, no waiting.",
+    title: "Pricing",
+    description: "Set a price that still leaves the margin you want after VAT and fees.",
+    icon: Tag,
+    links: [
+      { label: "Price Builder", href: "/price-builder" },
+      { label: "Profit Calculator", href: "/profit-calculator" },
+      { label: "Break-even Calculator", href: "/break-even-calculator" },
+    ],
   },
   {
-    icon: Shield,
-    title: "Accurate & Transparent",
-    description: "Every calculator shows the formula used and step-by-step breakdowns so you can verify results.",
+    title: "Margin and markup",
+    description: "Convert between margin and markup, the two numbers that are easy to mix up.",
+    icon: Percent,
+    links: [
+      { label: "Margin Calculator", href: "/margin-calculator" },
+      { label: "Markup Calculator", href: "/markup-calculator" },
+      { label: "Margin and Markup Converter", href: "/margin-markup-converter" },
+    ],
   },
   {
-    icon: Globe,
-    title: "International Support",
-    description: "Built-in VAT rates for the UK, EU, Australia, Canada, and more. Works for any currency.",
+    title: "Discounts",
+    description: "See what a discount does to your price, your margin and your break-even point.",
+    icon: Receipt,
+    links: [
+      { label: "Discount Calculator", href: "/discount-calculator" },
+      { label: "Percentage Change Calculator", href: "/percentage-change-calculator" },
+    ],
   },
   {
+    title: "VAT and tax",
+    description: "Add or remove VAT, and convert between net and gross prices.",
     icon: Calculator,
-    title: "Built for Business",
-    description: "Focused on the calculations businesses actually need — margins, markup, VAT, and break-even analysis.",
+    links: [
+      { label: "VAT Calculator", href: "/vat-calculator" },
+      { label: "Add VAT", href: "/add-vat" },
+      { label: "Remove VAT", href: "/remove-vat" },
+    ],
+  },
+  {
+    title: "Marketplace fees",
+    description: "Work out what Etsy, Amazon, eBay or Shopify take from each sale.",
+    icon: Store,
+    links: [
+      { label: "Commission Calculator", href: "/commission-calculator" },
+      { label: "Price Builder with platform presets", href: "/price-builder" },
+    ],
   },
 ];
 
-const features = [
-  {
-    icon: Share2,
-    title: "Shareable Links",
-    description: "Share any calculation with pre-filled values. Recipients see exactly what you calculated.",
-  },
-  {
-    icon: FileText,
-    title: "Export to PDF & CSV",
-    description: "Download results as a professional PDF summary or a spreadsheet-ready CSV file.",
-  },
-  {
-    icon: History,
-    title: "Calculation History",
-    description: "Your recent calculations are saved locally so you can quickly revisit them from the search bar.",
-  },
+const guides = [
+  { title: "How to Price a Product", href: "/guides/how-to-price-a-product", desc: "Pricing formulas, strategies, and common mistakes to avoid." },
+  { title: "Margin vs Markup", href: "/guides/margin-vs-markup", desc: "The crucial difference and why confusing them costs money." },
+  { title: "VAT Explained", href: "/guides/vat-explained", desc: "What VAT is, how it works, and how it differs from sales tax." },
+  { title: "Discount Impact on Margin", href: "/guides/discount-impact-on-margin", desc: "How discounts destroy profit and how much more you need to sell." },
 ];
 
 export default function HomePage() {
-  const grouped = calculators.reduce<Record<string, typeof calculators>>(
-    (acc, calc) => {
-      const cat = calc.category;
-      if (!acc[cat]) acc[cat] = [];
-      acc[cat].push(calc);
-      return acc;
-    },
-    {},
-  );
-
   return (
     <>
-      <section className="border-b bg-gradient-to-b from-background to-muted/30 px-4 py-12 sm:px-6 sm:py-24">
+      <section className="border-b bg-gradient-to-b from-background to-muted/30 px-4 py-12 sm:px-6 sm:py-20">
         <div className="mx-auto max-w-4xl text-center">
           <h1 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
             The price that still leaves your margin
           </h1>
           <p className="mx-auto mb-8 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            For small online sellers and freelancers in the UK and US. Work out what to charge
-            after VAT, platform fees, and the margin you want — then see where the money goes.
+            Free pricing calculators for UK and US sellers and freelancers. Work out what to charge
+            after VAT, platform fees and the margin you want, then see where the money goes.
           </p>
-          <div className="mx-auto mb-6 max-w-md">
+          <div className="mx-auto mb-4 max-w-md">
             <SearchBox />
+          </div>
+          <div className="mb-8 flex justify-center">
+            <CurrencyToggle />
           </div>
           <Link
             href="/price-builder"
@@ -84,107 +95,57 @@ export default function HomePage() {
             Open the Price Builder
             <ArrowRight className="h-4 w-4" />
           </Link>
+          <p className="mt-4 text-sm text-muted-foreground">Free. No signup. UK and US.</p>
         </div>
       </section>
 
-      <section className="py-14">
+      <section className="py-14" aria-labelledby="categories-heading">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <h2 className="mb-2 text-center text-2xl font-bold tracking-tight">
-            All Calculators
+          <h2 id="categories-heading" className="mb-2 text-center text-2xl font-bold tracking-tight">
+            Pick what you want to calculate
           </h2>
           <p className="mb-8 text-center text-muted-foreground">
-            Choose a calculator to get started — all free, no signup required.
+            Five groups, all free. Each calculator shows the formula it uses.
           </p>
-          {Object.entries(grouped).map(([category, calcs]) => (
-            <div key={category} className="mb-8 last:mb-0">
-              <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                {categoryLabels[category] ?? category}
-              </h3>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {calcs.map((calc) => (
-                  <Link key={calc.slug} href={`/${calc.slug}`}>
-                    <Card className="h-full transition-colors hover:border-primary/30 hover:bg-accent/50">
-                      <CardContent className="pt-5">
-                        <h4 className="mb-1 font-semibold">{calc.title}</h4>
-                        <p className="text-sm text-muted-foreground">
-                          {calc.shortDescription}
-                        </p>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          ))}
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {categories.map((cat) => (
+              <Card key={cat.title} className="h-full">
+                <CardContent className="pt-5">
+                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
+                    <cat.icon className="h-5 w-5 text-primary" aria-hidden="true" />
+                  </div>
+                  <h3 className="mb-1 font-semibold">{cat.title}</h3>
+                  <p className="mb-4 text-sm text-muted-foreground">{cat.description}</p>
+                  <ul className="space-y-2">
+                    {cat.links.map((link) => (
+                      <li key={link.href}>
+                        <Link href={link.href} className="text-sm font-medium text-primary hover:underline">
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
 
       <AdBanner slot="home-below-featured" />
 
-      <section className="border-t bg-muted/20 py-14">
+      <section className="border-t bg-muted/20 py-14" aria-labelledby="guides-heading">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <h2 className="mb-8 text-center text-2xl font-bold tracking-tight">
-            Why CalcBase?
-          </h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {whyReasons.map((reason) => (
-              <div key={reason.title} className="text-center">
-                <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                  <reason.icon className="h-5 w-5 text-primary" />
-                </div>
-                <h3 className="mb-1 font-semibold">{reason.title}</h3>
-                <p className="text-sm text-muted-foreground">{reason.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-14">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <h2 className="mb-2 text-center text-2xl font-bold tracking-tight">
-            Powerful Features
+          <h2 id="guides-heading" className="mb-2 text-center text-2xl font-bold tracking-tight">
+            Guides to the numbers
           </h2>
           <p className="mb-8 text-center text-muted-foreground">
-            More than a calculator — tools designed for how you actually work.
+            Short guides that explain the formulas behind the calculators.
           </p>
-          <div className="grid gap-6 sm:grid-cols-3">
-            {features.map((feature) => (
-              <div key={feature.title} className="text-center">
-                <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                  <feature.icon className="h-5 w-5 text-primary" />
-                </div>
-                <h3 className="mb-1 font-semibold">{feature.title}</h3>
-                <p className="text-sm text-muted-foreground">{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-t bg-muted/20 py-14">
-        <div className="mx-auto max-w-4xl px-4 text-center sm:px-6">
-          <h2 className="mb-4 text-2xl font-bold tracking-tight">
-            Learn the Fundamentals
-          </h2>
-          <p className="mb-8 text-muted-foreground">
-            Short, practical guides that explain the formulas and concepts behind each calculator.
-          </p>
-          <div className="grid gap-3 text-left sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              { title: "VAT Explained", href: "/guides/vat-explained", desc: "What VAT is, how it works, and how it differs from sales tax." },
-              { title: "VAT Rates by Country", href: "/guides/vat-rates-by-country", desc: "Complete 2026 reference of VAT and GST rates for major economies." },
-              { title: "VAT vs Sales Tax", href: "/guides/vat-vs-sales-tax", desc: "Key differences between VAT and sales tax explained simply." },
-              { title: "Margin vs Markup", href: "/guides/margin-vs-markup", desc: "The crucial difference and why confusing them costs money." },
-              { title: "How to Price a Product", href: "/guides/how-to-price-a-product", desc: "Pricing formulas, strategies, and common mistakes to avoid." },
-              { title: "Pricing Strategy Guide", href: "/guides/pricing-strategy-explained", desc: "Cost-plus, value-based, competitive, and premium pricing." },
-              { title: "How to Calculate ROI", href: "/guides/how-to-calculate-roi", desc: "ROI formula, worked examples, and common pitfalls." },
-              { title: "Discount Impact on Margin", href: "/guides/discount-impact-on-margin", desc: "How discounts destroy profit and how much more you need to sell." },
-              { title: "How to Calculate Discount", href: "/guides/how-to-calculate-discount", desc: "Percentage discounts, stacking, and reverse calculations." },
-              { title: "Break-even Formula", href: "/guides/break-even-formula", desc: "Fixed costs, variable costs, and finding your break-even point." },
-            ].map((guide) => (
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {guides.map((guide) => (
               <Link key={guide.href} href={guide.href}>
-                <Card className="transition-colors hover:border-primary/30 hover:bg-accent/50">
+                <Card className="h-full transition-colors hover:border-primary/30 hover:bg-accent/50">
                   <CardContent className="pt-5">
                     <h3 className="mb-1 font-medium">{guide.title}</h3>
                     <p className="text-sm text-muted-foreground">{guide.desc}</p>
@@ -192,6 +153,11 @@ export default function HomePage() {
                 </Card>
               </Link>
             ))}
+          </div>
+          <div className="mt-6 text-center">
+            <Link href="/guides" className="text-sm font-medium text-primary hover:underline">
+              See all guides
+            </Link>
           </div>
         </div>
       </section>
