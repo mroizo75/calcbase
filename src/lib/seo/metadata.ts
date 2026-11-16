@@ -4,7 +4,7 @@ import { getCanonicalUrl, getBaseUrl } from "@/lib/utils/urls";
 
 const SITE_NAME = "CalcBase";
 const DEFAULT_DESCRIPTION =
-  "Calculators for UK and EU sellers and freelancers. Price with VAT, margin, markup, discounts, commission, and break-even before you publish a number. Free.";
+  "Calculators for UK and US sellers and freelancers. Price with VAT, margin, markup, discounts, commission, and break-even before you publish a number. Free.";
 
 /**
  * Layout-templaten (`%s | CalcBase`) legger allerede til merkenavnet.
@@ -21,7 +21,7 @@ export function buildSiteMetadata(): Metadata {
   return {
     metadataBase: new URL(getBaseUrl()),
     title: {
-      default: `${SITE_NAME} – Pricing Calculators for UK and EU Sellers`,
+      default: `${SITE_NAME} – Pricing Calculators for UK and US Sellers`,
       template: `%s | ${SITE_NAME}`,
     },
     description: DEFAULT_DESCRIPTION,
@@ -36,9 +36,9 @@ export function buildSiteMetadata(): Metadata {
       locale: "en_US",
       url: getBaseUrl(),
       siteName: SITE_NAME,
-      title: `${SITE_NAME} – Pricing Calculators for UK and EU Sellers`,
+      title: `${SITE_NAME} – Pricing Calculators for UK and US Sellers`,
       description: DEFAULT_DESCRIPTION,
-      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "CalcBase – Pricing Calculators for UK and EU Sellers" }],
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "CalcBase – Pricing Calculators for UK and US Sellers" }],
     },
     twitter: {
       card: "summary_large_image",

@@ -71,7 +71,7 @@ export default function HomePage() {
             The price that still leaves your margin
           </h1>
           <p className="mx-auto mb-8 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            For small online sellers and freelancers in the UK and EU. Work out what to charge
+            For small online sellers and freelancers in the UK and US. Work out what to charge
             after VAT, platform fees, and the margin you want — then see where the money goes.
           </p>
           <div className="mx-auto mb-6 max-w-md">

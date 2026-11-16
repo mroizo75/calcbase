@@ -117,7 +117,7 @@ The platform presets are filled from the fee pages linked next to them, and you 
     seo: {
       title: "Price Builder – Keep Your Margin After VAT and Fees",
       description:
-        "Set the price that still hits your margin after VAT, platform fees and card fees. For UK and EU sellers and freelancers. See where every pound goes next.",
+        "Set the price that still hits your margin after VAT, platform fees and card fees. For UK and US sellers and freelancers. See where every pound goes next.",
       canonical: "/price-builder",
     },
     keywords: [

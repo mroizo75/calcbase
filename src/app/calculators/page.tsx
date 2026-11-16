@@ -10,7 +10,7 @@ import { buildPageMetadata } from "@/lib/seo/metadata";
 export const metadata: Metadata = buildPageMetadata({
   title: "Free Calculators – VAT, Margin, Markup & Break-even",
   description:
-    "Browse 12 calculators for UK and EU sellers, led by the Price Builder. VAT, margin, markup, fees, discount, and break-even. Instant results, no signup.",
+    "Browse 12 calculators for UK and US sellers, led by the Price Builder. VAT, margin, markup, fees, discount, and break-even. Instant results, no signup.",
   canonical: "/calculators",
 });
 

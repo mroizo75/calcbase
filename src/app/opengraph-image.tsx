@@ -59,7 +59,7 @@ export default function OgImage() {
             marginBottom: "40px",
           }}
         >
-          Pricing calculators for UK and EU sellers: VAT, margin, markup, discounts, commission, and break-even.
+          Pricing calculators for UK and US sellers: VAT, margin, markup, discounts, commission, and break-even.
         </p>
         <div
           style={{

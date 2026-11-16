@@ -53,7 +53,7 @@ export function SiteFooter() {
               />
             </Link>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Pricing tools for small online sellers and freelancers in the UK and EU.
+              Pricing tools for small online sellers and freelancers in the UK and US.
             </p>
           </div>
           <div>

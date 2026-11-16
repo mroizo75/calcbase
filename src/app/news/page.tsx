@@ -16,7 +16,7 @@ export const revalidate = 60;
 export const metadata: Metadata = buildPageMetadata({
   title: "News – Only Topics No Guide or Calculator Covers Yet",
   description:
-    "News is reserved for a topic no calculator or guide already covers. VAT, margin, markup, fees, and pricing for UK and EU sellers live in the tools and guides.",
+    "News is reserved for a topic no calculator or guide already covers. VAT, margin, markup, fees, and pricing for UK and US sellers live in the tools and guides.",
   canonical: "/news",
 });
 

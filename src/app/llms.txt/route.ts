@@ -15,7 +15,7 @@ export function GET() {
 
   const body = `# CalcBase – Free Business Calculators
 
-> CalcBase helps small online sellers and freelancers in the UK and EU price products and services with VAT, margin, markup, discounts, commission, and break-even.
+> CalcBase helps small online sellers and freelancers in the UK and US price products and services with VAT, margin, markup, discounts, commission, and break-even.
 
 ## Calculators
 
