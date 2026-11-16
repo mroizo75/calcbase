@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { SearchBox } from "@/components/layout/search-box";
 import { AdBanner } from "@/components/ads/ad-banner";
 import { CurrencyToggle } from "@/components/calculator/currency-toggle";
+import { HeroPreview } from "@/components/home/hero-preview";
 
 type CategoryCard = {
   title: string;
@@ -73,29 +74,41 @@ const guides = [
 export default function HomePage() {
   return (
     <>
-      <section className="border-b bg-gradient-to-b from-background to-muted/30 px-4 py-12 sm:px-6 sm:py-20">
-        <div className="mx-auto max-w-4xl text-center">
-          <h1 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-            The price that still leaves your margin
-          </h1>
-          <p className="mx-auto mb-8 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            Free pricing calculators for UK and US sellers and freelancers. Work out what to charge
-            after VAT, platform fees and the margin you want, then see where the money goes.
-          </p>
-          <div className="mx-auto mb-4 max-w-md">
-            <SearchBox />
+      <section className="relative overflow-hidden bg-zinc-950 px-4 py-14 text-white sm:px-6 sm:py-24">
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(59,130,246,0.25),transparent_60%)]"
+          aria-hidden="true"
+        />
+        <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
+          <div>
+            <p className="mb-4 inline-flex rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium text-zinc-300">
+              Free for UK and US sellers
+            </p>
+            <h1 className="mb-5 text-4xl font-bold tracking-tight sm:text-5xl">
+              The price that still leaves your margin
+            </h1>
+            <p className="mb-8 max-w-xl text-base text-zinc-300 sm:text-lg">
+              Free pricing calculators for UK and US sellers and freelancers. Work out what to charge
+              after VAT, platform fees and the margin you want, then see where the money goes.
+            </p>
+            <div className="mb-6 max-w-md rounded-xl bg-background p-4 text-foreground">
+              <SearchBox />
+              <div className="mt-4 flex justify-start">
+                <CurrencyToggle />
+              </div>
+            </div>
+            <Link
+              href="/price-builder"
+              className="inline-flex h-12 items-center gap-2 rounded-lg bg-white px-6 text-sm font-medium text-zinc-950 transition-colors hover:bg-zinc-200"
+            >
+              Open the Price Builder
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+            <p className="mt-4 text-sm text-zinc-400">No signup. Works in $ and £.</p>
           </div>
-          <div className="mb-8 flex justify-center">
-            <CurrencyToggle />
+          <div className="w-full max-w-md justify-self-center lg:justify-self-end">
+            <HeroPreview />
           </div>
-          <Link
-            href="/price-builder"
-            className="inline-flex h-12 items-center gap-2 rounded-lg bg-primary px-6 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Open the Price Builder
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-          <p className="mt-4 text-sm text-muted-foreground">Free. No signup. UK and US.</p>
         </div>
       </section>
 
@@ -109,7 +122,7 @@ export default function HomePage() {
           </p>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {categories.map((cat) => (
-              <Card key={cat.title} className="h-full">
+              <Card key={cat.title} className="h-full transition-colors hover:border-primary/30">
                 <CardContent className="pt-5">
                   <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
                     <cat.icon className="h-5 w-5 text-primary" aria-hidden="true" />
