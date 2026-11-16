@@ -788,9 +788,9 @@ The distinction between profit, margin, and markup — three closely related but
       },
     ],
     seo: {
-      title: "Profit Calculator: Profit, Margin & Markup | CalcBase",
+      title: "Profit Calculator Online: Profit, Margin & Markup | CalcBase",
       description:
-        "Free profit calculator: enter cost and revenue to get profit, margin and markup at once. Or set a target margin to find your selling price. Formula included.",
+        "Free profit calculator. Enter cost and revenue to get profit, margin and markup at once, or set a target margin to find the selling price. Formula and examples included.",
       canonical: "/profit-calculator",
     },
     keywords: [
@@ -861,11 +861,16 @@ Commission structures vary considerably across industries and roles. Flat-rate c
         answer:
           "Commission income is taxable income in most jurisdictions, treated the same as regular earnings. For employees, commission is usually included in payroll and taxed via PAYE (UK) or income tax withholding (US). For self-employed individuals and freelancers, commission is reported as business income and subject to income tax and National Insurance or self-employment tax. Consult a tax professional for advice specific to your situation.",
       },
+      {
+        question: "How do I calculate commission on a sale, for example $31,000 at 3%?",
+        answer:
+          "Multiply the sale amount by the rate as a decimal. $31,000 × 0.03 = $930 commission. The net amount after commission is $31,000 − $930 = $30,070. The same method works for any amount: $50,000 at 2% is $1,000, and $450,000 at 1.5% is $6,750.",
+      },
     ],
     seo: {
-      title: "Commission Calculator: Find Commission & Net Pay | CalcBase",
+      title: "Sales Commission Calculator: $ in Sales at % Commission | CalcBase",
       description:
-        "Free commission calculator: enter the sale amount and rate to see commission earned and net amount. Worked examples for real estate, sales reps and affiliates.",
+        "Free commission calculator. Enter any sale amount and rate, e.g. $31,000 at 3% = $930 commission. Shows commission earned and net amount. Real estate, sales reps, affiliates.",
       canonical: "/commission-calculator",
     },
     keywords: [
@@ -950,9 +955,9 @@ Percentage change is used in virtually every type of business and financial anal
       },
     ],
     seo: {
-      title: "Percentage Change Calculator: % Increase/Decrease | CalcBase",
+      title: "% Change Calculator: Percentage Increase & Decrease | CalcBase",
       description:
-        "Free percentage change calculator: enter an old and new value to get the % increase or decrease, or apply a % to find the new number. Formula and examples.",
+        "Free % change calculator. Enter an old and new value for the percentage increase or decrease, or apply a % to a number. Formula, examples and a worked answer for each case.",
       canonical: "/percentage-change-calculator",
     },
     keywords: [
