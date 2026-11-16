@@ -22,7 +22,7 @@ export function SiteChrome({
   return (
     <>
       <SiteHeader />
-      {banner}
+      {pathname !== "/" && banner}
       <main className="flex-1">{children}</main>
       <SiteFooter />
       <CookieBanner />
