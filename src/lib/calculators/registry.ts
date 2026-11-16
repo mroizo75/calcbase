@@ -743,23 +743,23 @@ The distinction between profit, margin, and markup — three closely related but
       "Profit is the difference between what you sell for and what it costs. Margin expresses that profit as a percentage of revenue; markup expresses it as a percentage of cost. Both describe the same profit from different perspectives.",
     examples: [
       {
-        title: "Profit from a $100 sale",
+        title: "Selling price from a 30% margin",
         description: "A product that costs $60 to produce is sold for $100.",
         inputs: { Cost: "$60", Revenue: "$100" },
         result: "Profit = $40. Margin = 40%. Markup = 66.67%.",
       },
       {
         title: "Setting price from a 30% margin target",
-        description: "A product costs £50 and you need a 30% margin.",
-        inputs: { Cost: "£50", "Target margin": "30%" },
-        result: "Selling price = £71.43. Profit = £21.43.",
+        description: "A product costs $50 and you need a 30% margin.",
+        inputs: { Cost: "$50", "Target margin": "30%" },
+        result: "Selling price = $71.43. Profit = $21.43.",
       },
     ],
     faq: [
       {
         question: "How do I calculate profit?",
         answer:
-          "Subtract the total cost from the total revenue. If you sell a product for £100 and it costs £60 to produce and deliver, your gross profit is £40. Net profit subtracts all other business expenses (overheads, taxes, interest) on top of that — this calculator focuses on gross profit.",
+          "Subtract the total cost from the total revenue. If you sell a product for $100 and it costs $60 to produce and deliver, your gross profit is $40. Net profit subtracts all other business expenses (overheads, taxes, interest) on top of that — this calculator focuses on gross profit.",
       },
       {
         question: "What is the difference between gross and net profit?",
@@ -769,12 +769,12 @@ The distinction between profit, margin, and markup — three closely related but
       {
         question: "How do I find selling price from a target margin?",
         answer:
-          "Divide the cost by (1 − margin as a decimal). For a 30% margin on a £50 cost: £50 ÷ 0.70 = £71.43 selling price. This formula is essential for pricing products where you have a required margin target — it ensures you set the price correctly rather than applying a markup and hoping the margin works out.",
+          "Divide the cost by (1 − margin as a decimal). For a 30% margin on a $50 cost: $50 ÷ 0.70 = $71.43 selling price. This formula is essential for pricing products where you have a required margin target — it ensures you set the price correctly rather than applying a markup and hoping the margin works out.",
       },
       {
         question: "Is profit the same as margin?",
         answer:
-          "No. Profit is an absolute amount in currency (e.g. £40). Margin is profit expressed as a percentage of revenue (e.g. 40%). A high margin on a small sale can mean less total profit than a low margin on a large sale. Both matter — margin tells you how efficiently each sale generates profit; total profit tells you the actual financial result.",
+          "No. Profit is an absolute amount in currency (e.g. $40). Margin is profit expressed as a percentage of revenue (e.g. 40%). A high margin on a small sale can mean less total profit than a low margin on a large sale. Both matter — margin tells you how efficiently each sale generates profit; total profit tells you the actual financial result.",
       },
       {
         question: "What is a good gross profit margin?",
@@ -807,7 +807,7 @@ The distinction between profit, margin, and markup — three closely related but
     longDescription:
       `Commission is the percentage of a sale paid to the person or organisation who facilitated or closed that transaction. It is the primary compensation structure for sales professionals, real estate agents, mortgage brokers, financial advisers, and affiliate marketers. Understanding how commission is calculated — and what each party receives after commission is deducted — is essential for anyone working in or managing a commission-based environment.
 
-Enter the total sales amount and the commission rate. The calculator shows the commission earned and the net amount — what remains after commission is deducted. For example, a real estate agent earning 6% on a £350,000 sale earns £21,000, and the seller receives £329,000 net of commission. The same arithmetic applies to wholesale transactions, franchise royalties, payment processor fees, and any situation where a percentage is deducted from a transaction value.
+Enter the total sales amount and the commission rate. The calculator shows the commission earned and the net amount — what remains after commission is deducted. For example, a real estate agent earning 6% on a $350,000 sale earns $21,000, and the seller receives $329,000 net of commission. The same arithmetic applies to wholesale transactions, franchise royalties, payment processor fees, and any situation where a percentage is deducted from a transaction value.
 
 Commission structures vary considerably across industries and roles. Flat-rate commission (as calculated here) is the simplest structure. Tiered commissions pay an increasing rate once a volume target is reached, rewarding high performers disproportionately. Split commissions divide the fee between multiple parties, such as a listing agent and a buyer's agent in real estate. Gross profit commissions pay a percentage of margin rather than revenue, aligning the salesperson's incentive more closely with business profitability.`,
     category: "business",
@@ -825,9 +825,9 @@ Commission structures vary considerably across industries and roles. Flat-rate c
       },
       {
         title: "Sales rep monthly commission",
-        description: "A sales rep earning 8% on £25,000 in monthly sales.",
-        inputs: { "Sales amount": "£25,000", "Commission rate": "8%" },
-        result: "Commission earned = £2,000. Net to company = £23,000.",
+        description: "A sales rep earning 8% on $25,000 in monthly sales.",
+        inputs: { "Sales amount": "$25,000", "Commission rate": "8%" },
+        result: "Commission earned = $2,000. Net to company = $23,000.",
       },
     ],
     faq: [
@@ -839,7 +839,7 @@ Commission structures vary considerably across industries and roles. Flat-rate c
       {
         question: "How do tiered commissions work?",
         answer:
-          "Tiered commission structures increase the rate as sales volume grows. For example: 5% on the first £50,000 in sales, then 8% on sales above that threshold. Calculate each tier separately and add the results: for £75,000 in sales, the commission is (£50,000 × 5%) + (£25,000 × 8%) = £2,500 + £2,000 = £4,500. This calculator uses a flat rate — for tiered structures, calculate each tier separately.",
+          "Tiered commission structures increase the rate as sales volume grows. For example: 5% on the first $50,000 in sales, then 8% on sales above that threshold. Calculate each tier separately and add the results: for $75,000 in sales, the commission is ($50,000 × 5%) + ($25,000 × 8%) = $2,500 + $2,000 = $4,500. This calculator uses a flat rate — for tiered structures, calculate each tier separately.",
       },
       {
         question: "Is commission calculated on revenue or profit?",
@@ -854,7 +854,7 @@ Commission structures vary considerably across industries and roles. Flat-rate c
       {
         question: "How do tiered commissions affect my total calculation?",
         answer:
-          "For tiered structures, you must calculate each tier separately. If the rate is 5% on the first £50,000 and 8% on sales above £50,000, a £75,000 sale earns: (£50,000 × 0.05) + (£25,000 × 0.08) = £2,500 + £2,000 = £4,500. This is different from applying 8% to the entire £75,000, which would give £6,000. Use this calculator for each tier and sum the results.",
+          "For tiered structures, you must calculate each tier separately. If the rate is 5% on the first $50,000 and 8% on sales above $50,000, a $75,000 sale earns: ($50,000 × 0.05) + ($25,000 × 0.08) = $2,500 + $2,000 = $4,500. This is different from applying 8% to the entire $75,000, which would give $6,000. Use this calculator for each tier and sum the results.",
       },
       {
         question: "How is commission income taxed?",
@@ -886,9 +886,9 @@ Commission structures vary considerably across industries and roles. Flat-rate c
     title: "Percentage Change Calculator",
     shortDescription: "Calculate the percentage increase or decrease between two numbers, or find the new value after applying a percentage change.",
     longDescription:
-      `Percentage change — the relative increase or decrease between two values — is one of the most important metrics in business analysis, finance, and reporting. It tells you not just how much something changed in absolute terms, but how large that change was relative to where it started. A £5 price increase means something very different when the original price was £10 versus £100. Percentage change captures this proportional relationship and makes comparisons meaningful.
+      `Percentage change — the relative increase or decrease between two values — is one of the most important metrics in business analysis, finance, and reporting. It tells you not just how much something changed in absolute terms, but how large that change was relative to where it started. A $5 price increase means something very different when the original price was $10 versus $100. Percentage change captures this proportional relationship and makes comparisons meaningful.
 
-This calculator works in two modes. The first finds the percentage change between two numbers — enter the original (old) value and the new value to see the exact percentage increase or decrease. The second applies a known percentage change to a starting value — enter the original value and the change percentage to calculate the resulting figure. A 25% increase from £80 gives £100; this can be immediately verified by running the reverse calculation in the first mode. Both directions show the formula used.
+This calculator works in two modes. The first finds the percentage change between two numbers — enter the original (old) value and the new value to see the exact percentage increase or decrease. The second applies a known percentage change to a starting value — enter the original value and the change percentage to calculate the resulting figure. A 25% increase from $80 gives $100; this can be immediately verified by running the reverse calculation in the first mode. Both directions show the formula used.
 
 Percentage change is used in virtually every type of business and financial analysis: year-on-year revenue growth, price movement tracking, salary review calculations, portfolio performance measurement, and comparing results across reporting periods. An important distinction to understand is the difference between percentage change and percentage points — a variable moving from 4% to 6% is a 2 percentage-point increase but a 50% relative change. Confusing these two measures is one of the most common errors in financial communication and reporting.`,
     category: "business",
@@ -906,9 +906,9 @@ Percentage change is used in virtually every type of business and financial anal
       },
       {
         title: "Salary after 8% raise",
-        description: "A £42,000 salary after an 8% pay rise.",
-        inputs: { "Original value": "£42,000", "Change": "+8%" },
-        result: "New salary = £45,360.",
+        description: "A $42,000 salary after an 8% pay rise.",
+        inputs: { "Original value": "$42,000", "Change": "+8%" },
+        result: "New salary = $45,360.",
       },
       {
         title: "Stock dropped from $250 to $200",
@@ -941,7 +941,7 @@ Percentage change is used in virtually every type of business and financial anal
       {
         question: "How do I reverse a percentage change to find the original value?",
         answer:
-          "If you know the current value and the percentage change, divide by (1 + change ÷ 100). For example, a value is now £120 after a 20% increase: £120 ÷ 1.20 = £100 original. For a decrease, divide by (1 − rate ÷ 100): if a value is now £80 after a 20% decrease, the original was £80 ÷ 0.80 = £100.",
+          "If you know the current value and the percentage change, divide by (1 + change ÷ 100). For example, a value is now $120 after a 20% increase: $120 ÷ 1.20 = $100 original. For a decrease, divide by (1 − rate ÷ 100): if a value is now $80 after a 20% decrease, the original was $80 ÷ 0.80 = $100.",
       },
       {
         question: "How is percentage change different from ROI?",
