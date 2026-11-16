@@ -124,7 +124,16 @@ export function ProfitCalculatorUi() {
     setMode("fromRevenue");
   }
 
+  const headline = results.find((r) => r.highlight);
+
   return (
+    <>
+      {headline && (
+        <div className="mb-4 rounded-lg border bg-card p-4 lg:hidden" aria-live="polite">
+          <p className="text-sm text-muted-foreground">{headline.label}</p>
+          <p className="text-2xl font-semibold tabular-nums">{headline.formatted}</p>
+        </div>
+      )}
     <div className="grid gap-6 lg:grid-cols-2">
       <Card>
         <CardContent className="space-y-5 pt-6">
@@ -134,6 +143,7 @@ export function ProfitCalculatorUi() {
               <button
                 type="button"
                 onClick={() => setMode("fromRevenue")}
+                aria-pressed={mode === "fromRevenue"}
                 className={`h-12 rounded-lg border text-sm font-medium transition-colors ${
                   mode === "fromRevenue"
                     ? "border-primary bg-primary text-primary-foreground"
@@ -145,6 +155,7 @@ export function ProfitCalculatorUi() {
               <button
                 type="button"
                 onClick={() => setMode("fromMargin")}
+                aria-pressed={mode === "fromMargin"}
                 className={`h-12 rounded-lg border text-sm font-medium transition-colors ${
                   mode === "fromMargin"
                     ? "border-primary bg-primary text-primary-foreground"
@@ -156,6 +167,7 @@ export function ProfitCalculatorUi() {
               <button
                 type="button"
                 onClick={() => setMode("fromMarkup")}
+                aria-pressed={mode === "fromMarkup"}
                 className={`h-12 rounded-lg border text-sm font-medium transition-colors ${
                   mode === "fromMarkup"
                     ? "border-primary bg-primary text-primary-foreground"
@@ -166,8 +178,6 @@ export function ProfitCalculatorUi() {
               </button>
             </div>
           </fieldset>
-
-          <CurrencyToggle />
 
           <div>
             <Label htmlFor="profit-cost">Cost ({symbol})</Label>
@@ -238,6 +248,9 @@ export function ProfitCalculatorUi() {
       </Card>
 
       <div className="flex flex-col gap-4">
+        <div className="flex justify-end">
+          <CurrencyToggle />
+        </div>
         <ResultCard results={results} formulaUsed={formulaUsed} shareUrl={shareUrl} title="Profit Calculation" />
         <PriceBuilderNudge
           href={priceBuilderHref(
@@ -258,7 +271,8 @@ export function ProfitCalculatorUi() {
             <p className="text-sm leading-relaxed text-muted-foreground">
               Profit is the amount remaining after subtracting costs from revenue. Margin expresses
               that profit as a percentage of revenue, while markup expresses it as a percentage of
-              cost. A 30% margin means you keep 30 cents of every dollar in revenue. Use &ldquo;From
+              cost. A 30% margin means you keep 30 {symbol === "£" ? "pence" : "cents"} of every{" "}
+              {symbol === "£" ? "pound" : "dollar"} in revenue. Use &ldquo;From
               Margin&rdquo; to find the selling price needed for a target margin, or &ldquo;From
               Markup&rdquo; to price based on a cost-plus strategy.
             </p>
@@ -266,5 +280,6 @@ export function ProfitCalculatorUi() {
         </Card>
       </div>
     </div>
+    </>
   );
 }
