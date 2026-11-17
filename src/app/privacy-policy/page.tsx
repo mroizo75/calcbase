@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     description: "CalcBase privacy policy. Learn how we handle your data and protect your privacy.",
     canonical: "/privacy-policy",
   }),
-  robots: { index: false, follow: true },
+  robots: { index: true, follow: true },
 };
 
 export default function PrivacyPolicyPage() {
