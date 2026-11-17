@@ -870,7 +870,7 @@ Commission structures vary considerably across industries and roles. Flat-rate c
     seo: {
       title: "Sales Commission Calculator: $ in Sales at % Commission | CalcBase",
       description:
-        "Free commission calculator. Enter any sale amount and rate, e.g. $31,000 at 3% = $930 commission. Shows commission earned and net amount. Real estate, sales reps, affiliates.",
+        "Free commission calculator. Enter any sale amount and rate, e.g. $31,000 at 3% = $930 commission. Shows commission and net amount for reps and agents.",
       canonical: "/commission-calculator",
     },
     keywords: [
@@ -957,7 +957,7 @@ Percentage change is used in virtually every type of business and financial anal
     seo: {
       title: "% Change Calculator: Percentage Increase & Decrease | CalcBase",
       description:
-        "Free % change calculator. Enter an old and new value for the percentage increase or decrease, or apply a % to a number. Formula, examples and a worked answer for each case.",
+        "Free % change calculator. Enter old and new values for the percentage increase or decrease, or apply a % to a number. Formula and worked examples included.",
       canonical: "/percentage-change-calculator",
     },
     keywords: [

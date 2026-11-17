@@ -25,6 +25,7 @@ export function VatCalculatorUi() {
     searchParams.get("mode") === "remove" ? "remove" : "add",
   );
   const [showComparison, setShowComparison] = useState(false);
+  const [countryLabel, setCountryLabel] = useState("");
 
   const numAmount = parseNumericInput(amount);
   const numRate = parseNumericInput(rate);
@@ -171,9 +172,10 @@ export function VatCalculatorUi() {
                 className="mt-1 w-full rounded-md border bg-background px-3 py-2 text-sm"
                 onChange={(e) => {
                   const preset = VAT_PRESETS.find((p) => p.label === e.target.value);
+                  setCountryLabel(e.target.value);
                   if (preset) handlePreset(preset.rate);
                 }}
-                value={VAT_PRESETS.find((p) => p.rate === parseFloat(rate))?.label ?? ""}
+                value={VAT_PRESETS.some((p) => p.label === countryLabel && p.rate === parseFloat(rate)) ? countryLabel : ""}
               >
                 <option value="">Select a country rate…</option>
                 {VAT_PRESETS.map((p) => (
