@@ -7,7 +7,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ResultCard } from "@/components/calculator/result-card";
 import { marginToMarkup, markupToMargin } from "@/lib/utils/math";
-import { parseNumericInput } from "@/lib/utils/format-number";
+import { formatNumber, parseNumericInput } from "@/lib/utils/format-number";
+import { useCurrency } from "@/lib/currency/use-currency";
+import { CurrencyToggle } from "@/components/calculator/currency-toggle";
 import { buildShareUrl } from "@/lib/utils/urls";
 import { addHistoryEntry } from "@/lib/history/config";
 import type { CalculatorResult } from "@/lib/calculators/types";
@@ -23,6 +25,7 @@ export function MarginMarkupConverterUi() {
     searchParams.get("mode") === "markupToMargin" ? "markupToMargin" : "marginToMarkup",
   );
 
+  const { symbol } = useCurrency();
   const numValue = parseNumericInput(value);
   const isValid = numValue > 0 && (mode === "markupToMargin" || numValue < 100);
 
@@ -71,6 +74,9 @@ export function MarginMarkupConverterUi() {
 
   return (
     <div className="space-y-6">
+      <div className="flex justify-end">
+        <CurrencyToggle />
+      </div>
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
           <CardContent className="space-y-5 pt-6">
@@ -138,8 +144,8 @@ export function MarginMarkupConverterUi() {
               <p className="text-sm leading-relaxed text-muted-foreground">
                 Margin and markup both describe profit, but from different angles. Margin divides profit
                 by revenue (selling price). Markup divides profit by cost. Because revenue is always
-                larger than cost, margin is always the smaller number. A 50% markup on a $100 cost gives
-                a $150 price and only a 33.3% margin.
+                larger than cost, margin is always the smaller number. A 50% markup on a 100 cost gives
+                a 150 price and only a 33.3% margin.
               </p>
             </CardContent>
           </Card>
@@ -159,7 +165,7 @@ export function MarginMarkupConverterUi() {
                   <th className="pb-2 pr-6 font-medium text-muted-foreground">Margin</th>
                   <th className="pb-2 pr-6 font-medium text-muted-foreground">Markup</th>
                   <th className="pb-2 pr-6 font-medium text-muted-foreground">Multiplier (on cost)</th>
-                  <th className="pb-2 font-medium text-muted-foreground">Example ($100 cost)</th>
+                  <th className="pb-2 font-medium text-muted-foreground">Example ({symbol}100 cost)</th>
                 </tr>
               </thead>
               <tbody>
@@ -174,7 +180,7 @@ export function MarginMarkupConverterUi() {
                       <td className="py-2 pr-6 tabular-nums font-medium">{m}%</td>
                       <td className="py-2 pr-6 tabular-nums">{mu}%</td>
                       <td className="py-2 pr-6 tabular-nums text-muted-foreground">×{(1 + mu / 100).toFixed(2)}</td>
-                      <td className="py-2 tabular-nums text-muted-foreground">${price}</td>
+                      <td className="py-2 tabular-nums text-muted-foreground">{symbol}{formatNumber(Number(price))}</td>
                     </tr>
                   );
                 })}

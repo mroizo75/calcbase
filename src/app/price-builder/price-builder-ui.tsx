@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import { useCurrency } from "@/lib/currency/use-currency";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -159,6 +160,7 @@ function subscribeToSearch(onChange: () => void): () => void {
 }
 
 export function PriceBuilderUi() {
+  const { symbol } = useCurrency();
   const query = useSyncExternalStore(subscribeToSearch, () => window.location.search, () => "");
   const fromUrl = useMemo(
     () => (query === "" ? null : readScenarios(new URLSearchParams(query))),
@@ -194,16 +196,16 @@ export function PriceBuilderUi() {
     if (!result.ok) return [];
     const prefix = scenarios.length > 1 ? `${scenario.name}: ` : "";
     return [
-      { label: `${prefix}Customer pays`, value: result.customerPays, formatted: `£${formatNumber(result.customerPays)}`, highlight: true },
-      { label: `${prefix}Price ex VAT`, value: result.listNet, formatted: `£${formatNumber(result.listNet)}` },
-      { label: `${prefix}Profit`, value: result.profit, formatted: `£${formatNumber(result.profit)}` },
+      { label: `${prefix}Customer pays`, value: result.customerPays, formatted: `${symbol}${formatNumber(result.customerPays)}`, highlight: true },
+      { label: `${prefix}Price ex VAT`, value: result.listNet, formatted: `${symbol}${formatNumber(result.listNet)}` },
+      { label: `${prefix}Profit`, value: result.profit, formatted: `${symbol}${formatNumber(result.profit)}` },
       { label: `${prefix}Margin`, value: result.marginPercent, formatted: `${result.marginPercent}%` },
     ];
   });
 
   const first = evaluated[0];
   const historySummary = first?.result.ok
-    ? `${first.scenario.name} → £${formatNumber(first.result.customerPays)} at ${first.result.marginPercent}% margin`
+    ? `${first.scenario.name} → ${symbol}${formatNumber(first.result.customerPays)} at ${first.result.marginPercent}% margin`
     : "";
 
   useEffect(() => {
@@ -393,10 +395,10 @@ export function PriceBuilderUi() {
 
                 {result.ok ? (
                   <div className="space-y-2 border-t pt-4">
-                    <p className="text-2xl font-semibold tabular-nums">£{formatNumber(result.customerPays)}</p>
+                    <p className="text-2xl font-semibold tabular-nums">{symbol}{formatNumber(result.customerPays)}</p>
                     <p className="text-sm text-muted-foreground">
                       {parseNumericInput(scenario.discount) > 0
-                        ? `Customer pays this after a ${scenario.discount}% discount. The listed price excluding VAT is £${formatNumber(result.listNet)}.`
+                        ? `Customer pays this after a ${scenario.discount}% discount. The listed price excluding VAT is ${symbol}${formatNumber(result.listNet)}.`
                         : "Customer pays this."}{" "}
                       Margin {result.marginPercent}%
                       {result.markupPercent === null ? "" : `, markup ${result.markupPercent}%`}.

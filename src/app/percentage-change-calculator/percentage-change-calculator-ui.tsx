@@ -197,6 +197,18 @@ export function PercentageChangeCalculatorUi() {
             shareUrl={shareUrl}
             title="Percentage Change"
           />
+          {mode === "find-change" && from === 0 && fromInput.trim() !== "" && (
+            <Card className="border-amber-300 bg-amber-50 dark:bg-amber-950/30">
+              <CardContent className="pt-5">
+                <h3 className="mb-2 text-sm font-semibold">Percentage change is undefined when the original value is 0</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  A percentage change is calculated relative to the original value, and dividing by 0 has no answer.
+                  Enter an original value above 0 to see the change. The absolute change from 0 to the new value is still{" "}
+                  {formatNumber(to)}.
+                </p>
+              </CardContent>
+            </Card>
+          )}
           {isValid && insightText && (
             <Card className="bg-muted/30">
               <CardContent className="pt-5">

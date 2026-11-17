@@ -105,7 +105,7 @@ export function MarginCalculatorUi() {
           <CardContent className="pt-5">
             <h3 className="mb-2 text-sm font-semibold">Understanding profit margin</h3>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              Profit margin tells you what percentage of each dollar in revenue you keep as profit.
+              Profit margin tells you what percentage of revenue you keep as profit.
               A {marginPercent}% margin on {formatNumber(numRevenue)} in revenue means you retain{" "}
               {formatNumber(profit)} after covering the {formatNumber(numCost)} cost. Margin is always
               calculated relative to revenue — not cost. This is the key difference between margin
