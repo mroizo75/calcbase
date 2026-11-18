@@ -12,9 +12,14 @@ import { formatMoney } from "@/lib/currency/currency";
 import { useCurrency } from "@/lib/currency/use-currency";
 import { calculateMarketplaceSale, type FeeBase } from "@/lib/utils/marketplace-net";
 import { getPlatformFee, platformFees } from "@/data/platform-fees";
+import { storeCurrency } from "@/lib/currency/currency";
 import type { CalculatorResult } from "@/lib/calculators/types";
 
 const CUSTOM = "custom";
+
+function symbolToCurrency(symbol: string): "USD" | "GBP" {
+  return symbol === "£" ? "GBP" : "USD";
+}
 const DEFAULT_PRESET = "etsy-uk";
 
 const FEE_FIELDS = ["platformPercent", "platformFixed", "paymentPercent", "paymentFixed"] as const;
@@ -69,6 +74,10 @@ export function MarketplaceProfitCalculatorUi() {
     setPreset(id);
     const values = presetValues(id);
     if (!values) return;
+    const presetCurrency = getPlatformFee(id)?.currency;
+    if (presetCurrency && presetCurrency !== symbolToCurrency(symbol)) {
+      storeCurrency(presetCurrency);
+    }
     setFields((prev) => ({
       ...prev,
       platformPercent: values.platformPercent,

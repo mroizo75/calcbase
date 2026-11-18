@@ -4,14 +4,14 @@ export interface PlatformFeePreset {
   country: string;
   percentFee: number;
   fixedFee: number;
-  currency: "GBP";
+  currency: "GBP" | "USD";
   feeAppliesTo: "gross" | "net";
   paymentPercentFee: number;
   paymentFixedFee: number;
   paymentFeeAppliesTo: "gross" | "net";
   sourceUrl: string;
   paymentSourceUrl?: string;
-  lastVerified: "2026-10-21";
+  lastVerified: string;
   notes: string;
 }
 
@@ -102,6 +102,56 @@ export const platformFees: PlatformFeePreset[] = [
     lastVerified: "2026-10-21",
     notes:
       "1.5% + 20p is the standard UK card rate. Premium UK cards are 2.8% + 20p, EEA cards are 2.5% + 20p, and other international cards are 3.15% + 20p. There is no separate platform percentage.",
+  },
+  {
+    id: "etsy-us",
+    label: "Etsy US",
+    country: "United States",
+    percentFee: 6.5,
+    fixedFee: 0,
+    currency: "USD",
+    feeAppliesTo: "gross",
+    paymentPercentFee: 3,
+    paymentFixedFee: 0.25,
+    paymentFeeAppliesTo: "gross",
+    sourceUrl: "https://www.etsy.com/legal/fees/",
+    paymentSourceUrl:
+      "https://help.etsy.com/hc/en-us/articles/115015628847-What-are-Payment-Processing-Fees-for-Selling-on-Etsy",
+    lastVerified: "2026-11-18",
+    notes:
+      "US figures checked 18 November 2026. The 6.5% transaction fee applies to the whole order, including item price, shipping and any sales tax. Payment processing for a US bank account is 3% + $0.25 per order, on the same total. Fixed fees in this preset are USD. Not included: the $0.20 listing fee, Offsite Ads, Etsy's regulatory fees for other countries, or currency conversion.",
+  },
+  {
+    id: "ebay-us-clothes",
+    label: "eBay US — Clothing, Shoes & Accessories 13.6%",
+    country: "United States",
+    percentFee: 13.6,
+    fixedFee: 0.4,
+    currency: "USD",
+    feeAppliesTo: "gross",
+    paymentPercentFee: 0,
+    paymentFixedFee: 0,
+    paymentFeeAppliesTo: "gross",
+    sourceUrl: "https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822",
+    lastVerified: "2026-11-18",
+    notes:
+      "US figures checked 18 November 2026. Basic final value fee for most categories is 13.6% of the total sale (item, postage, handling and sales tax), plus a per-order fee of $0.40 on orders over $10 ($0.30 on orders $10 or less). This preset uses the most common category rate, so check your category on eBay's page. Above $7,500 per item the rate is 2.35%, which this preset does not cover. The insertion fee above the 250 free listings per month is not included. Fixed fees are in USD.",
+  },
+  {
+    id: "amazon-us-home-kitchen",
+    label: "Amazon US — Home and Kitchen 15%",
+    country: "United States",
+    percentFee: 15,
+    fixedFee: 0,
+    currency: "USD",
+    feeAppliesTo: "gross",
+    paymentPercentFee: 0,
+    paymentFixedFee: 0,
+    paymentFeeAppliesTo: "gross",
+    sourceUrl: "https://sell.amazon.com/pricing",
+    lastVerified: "2026-11-18",
+    notes:
+      "US figures checked 18 November 2026. Referral fee is 15% of the total sale price for Home and Kitchen, with a minimum of $0.30 per item when that is higher. This preset does not add the minimum, which only matters on items under $2. Categories range from 5% to 45%, so change the rate for your category. Not included: the Individual plan ($0.99 per item sold) or the Professional plan ($39.99 a month), which go under fixed costs, and FBA fulfilment fees. Fixed fees are in USD.",
   },
 ];
 

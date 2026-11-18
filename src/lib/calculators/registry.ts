@@ -1056,7 +1056,7 @@ Use it before you set a price, not after. The Price Builder solves for the price
       {
         question: "Can I use this for US marketplaces?",
         answer:
-          "Yes, but US fee presets are not in the list yet. Enter the fees from the platform's US fee page under Custom fees, and use the sales tax rate you collect in place of VAT, if you collect it. The calculation is the same for any platform that takes a percentage and a fixed fee per order.",
+          "Yes. Etsy US, eBay US and Amazon US presets are included, in USD, with the fee pages linked next to them. Shopify and Stripe US rates are not preset yet, so enter those under Custom fees. Use the sales tax rate you collect in place of VAT, if you collect it. The calculation is the same for any platform that takes a percentage and a fixed fee per order.",
       },
     ],
     seo: {
