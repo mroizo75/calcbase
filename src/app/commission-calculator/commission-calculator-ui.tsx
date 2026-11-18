@@ -11,12 +11,17 @@ import { calculateCommission } from "@/lib/utils/math";
 import { formatNumber, parseNumericInput } from "@/lib/utils/format-number";
 import { buildShareUrl } from "@/lib/utils/urls";
 import { addHistoryEntry } from "@/lib/history/config";
+import { CurrencyToggle } from "@/components/calculator/currency-toggle";
+import { formatMoney } from "@/lib/currency/currency";
+import { useCurrency } from "@/lib/currency/use-currency";
 import type { CalculatorResult } from "@/lib/calculators/types";
 
 const RATE_PRESETS = [1, 2, 3, 5, 6, 8, 10, 15, 20];
 
 export function CommissionCalculatorUi() {
   const searchParams = useSearchParams();
+  const { symbol } = useCurrency();
+  const money = (v: number) => formatMoney(v, symbol, formatNumber(v));
   const [salesAmount, setSalesAmount] = useState(searchParams.get("salesAmount") ?? "50000");
   const [commissionRate, setCommissionRate] = useState(searchParams.get("rate") ?? "5");
 
@@ -30,15 +35,15 @@ export function CommissionCalculatorUi() {
 
   const results: CalculatorResult[] = isValid
     ? [
-        { label: "Sales Amount", value: numSalesAmount, formatted: formatNumber(numSalesAmount) },
+        { label: "Sales Amount", value: numSalesAmount, formatted: money(numSalesAmount) },
         { label: "Commission Rate", value: numCommissionRate, formatted: `${numCommissionRate}%` },
-        { label: "Commission Earned", value: commission, formatted: formatNumber(commission), highlight: true },
-        { label: "Net After Commission", value: netAfterCommission, formatted: formatNumber(netAfterCommission) },
+        { label: "Commission Earned", value: commission, formatted: money(commission), highlight: true },
+        { label: "Net After Commission", value: netAfterCommission, formatted: money(netAfterCommission) },
       ]
     : [];
 
   const formulaUsed = isValid
-    ? `${formatNumber(numSalesAmount)} × ${numCommissionRate}% = ${formatNumber(commission)}`
+    ? `${money(numSalesAmount)} × ${numCommissionRate}% = ${money(commission)}`
     : "";
 
   const shareUrl = isValid
@@ -70,7 +75,7 @@ export function CommissionCalculatorUi() {
       <Card>
         <CardContent className="space-y-5 pt-6">
           <div>
-            <Label htmlFor="commission-sales">Sales Amount</Label>
+            <Label htmlFor="commission-sales">Sales Amount ({symbol})</Label>
             <Input
               id="commission-sales"
               type="text"
@@ -122,18 +127,21 @@ export function CommissionCalculatorUi() {
       </Card>
 
       <div className="flex flex-col gap-4">
+        <div className="flex justify-end">
+          <CurrencyToggle />
+        </div>
         <ResultCard results={results} formulaUsed={formulaUsed} shareUrl={shareUrl} title="Commission Calculation" />
         <Card>
           <CardContent className="pt-5">
             <h2 className="mb-2 text-sm font-semibold">Commission examples</h2>
             <ul className="space-y-1.5 text-sm text-muted-foreground">
-              <li>$31,000 in sales at 3% = $930 commission</li>
-              <li>$12,000 in sales at 10% = $1,200 commission</li>
-              <li>$50,000 in sales at 5% = $2,500 commission</li>
+              <li>{symbol}31,000 in sales at 3% = {symbol}930 commission</li>
+              <li>{symbol}12,000 in sales at 10% = {symbol}1,200 commission</li>
+              <li>{symbol}50,000 in sales at 5% = {symbol}2,500 commission</li>
             </ul>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               To find the rate you were paid: divide the commission by the sales amount, then multiply by 100.
-              Example: $930 ÷ $31,000 × 100 = 3%.
+              Example: {symbol}930 ÷ {symbol}31,000 × 100 = 3%.
             </p>
             <p className="mt-3 text-sm text-muted-foreground">
               Related:{" "}
@@ -156,8 +164,8 @@ export function CommissionCalculatorUi() {
             <h3 className="mb-2 text-sm font-semibold">How commissions work</h3>
             <p className="text-sm leading-relaxed text-muted-foreground">
               A commission is a percentage of the sale amount paid to a salesperson, agent, or
-              intermediary. At {commissionRate}%, a {formatNumber(numSalesAmount)} sale generates{" "}
-              {formatNumber(commission)} in commission, leaving {formatNumber(netAfterCommission)} net.
+              intermediary. At {commissionRate}%, a {money(numSalesAmount)} sale generates{" "}
+              {money(commission)} in commission, leaving {money(netAfterCommission)} net.
               Commission rates vary widely — real estate agents typically earn 5–6%, SaaS sales reps
               8–12%, and affiliate marketers 5–30%. Always clarify whether commission is calculated on
               revenue or gross profit.
