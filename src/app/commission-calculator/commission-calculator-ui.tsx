@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
+import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ResultCard } from "@/components/calculator/result-card";
@@ -122,6 +123,34 @@ export function CommissionCalculatorUi() {
 
       <div className="flex flex-col gap-4">
         <ResultCard results={results} formulaUsed={formulaUsed} shareUrl={shareUrl} title="Commission Calculation" />
+        <Card>
+          <CardContent className="pt-5">
+            <h2 className="mb-2 text-sm font-semibold">Commission examples</h2>
+            <ul className="space-y-1.5 text-sm text-muted-foreground">
+              <li>$31,000 in sales at 3% = $930 commission</li>
+              <li>$12,000 in sales at 10% = $1,200 commission</li>
+              <li>$50,000 in sales at 5% = $2,500 commission</li>
+            </ul>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              To find the rate you were paid: divide the commission by the sales amount, then multiply by 100.
+              Example: $930 ÷ $31,000 × 100 = 3%.
+            </p>
+            <p className="mt-3 text-sm text-muted-foreground">
+              Related:{" "}
+              <Link href="/profit-calculator" className="underline underline-offset-4 hover:text-foreground">
+                Profit Calculator
+              </Link>
+              {" · "}
+              <Link href="/price-builder" className="underline underline-offset-4 hover:text-foreground">
+                Price Builder
+              </Link>
+              {" · "}
+              <Link href="/guides/how-to-price-a-product" className="underline underline-offset-4 hover:text-foreground">
+                How to Price a Product
+              </Link>
+            </p>
+          </CardContent>
+        </Card>
         <Card className="bg-muted/30">
           <CardContent className="pt-5">
             <h3 className="mb-2 text-sm font-semibold">How commissions work</h3>
