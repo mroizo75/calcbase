@@ -156,6 +156,10 @@ export function CommissionCalculatorUi() {
               <Link href="/guides/how-to-price-a-product" className="underline underline-offset-4 hover:text-foreground">
                 How to Price a Product
               </Link>
+              {" · "}
+              <Link href="/marketplace-profit-calculator" className="underline underline-offset-4 hover:text-foreground">
+                Marketplace Profit Calculator
+              </Link>
             </p>
           </CardContent>
         </Card>

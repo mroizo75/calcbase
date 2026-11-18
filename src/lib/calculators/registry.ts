@@ -32,7 +32,7 @@ Ask what you should charge, and it returns the price excluding VAT, the VAT, and
 
 The platform presets are filled from the fee pages linked next to them, and you can edit every figure. A fee changes when the platform says it changes. The breakdown shows the path from the customer's payment to your profit, so you can see which line ate the margin.`,
     category: "pricing",
-    relatedSlugs: ["margin-calculator", "markup-calculator", "vat-calculator", "discount-calculator", "profit-calculator"],
+    relatedSlugs: ["margin-calculator", "markup-calculator", "vat-calculator", "discount-calculator", "profit-calculator", "marketplace-profit-calculator"],
     defaultInputs: { cost: 8, margin: 35, vat: 20 },
     formula:
       "Net price after discount = (unit costs + fixed fees) ÷ (1 − target margin − percentage fees on the net price)\nA fee charged on the VAT-inclusive price is multiplied by (1 + the VAT rate) first, so it is measured on the net price.\nCustomer pays = net price × (1 + VAT rate) when you are VAT-registered. If you are not, the customer pays the net price and no VAT is added.",
@@ -965,6 +965,111 @@ Percentage change is used in virtually every type of business and financial anal
       "percentage decrease calculator", "how to calculate percentage change", "percent increase formula",
       "percentage change formula", "calculate percent increase", "percent difference calculator",
       "percentage growth calculator", "price change percentage", "percent change formula",
+    ],
+  },
+  {
+    slug: "marketplace-profit-calculator",
+    title: "Marketplace Profit Calculator",
+    shortDescription: "Work out what you keep per sale on Etsy, Amazon, eBay or Shopify after VAT, platform and payment fees, and how many sales break even.",
+    longDescription:
+      `The price on the listing is not what you keep. Before a sale turns into profit, the platform takes a percentage, a card processor takes another, VAT goes to the tax office, and postage and packaging come off the top. Then you still have monthly costs such as ads and software to cover. This calculator puts every one of those lines in order, so you see what one sale leaves you and how many sales you need each month before you make money.
+
+Pick a platform and the fee presets fill in from the UK fee pages, checked on 21 October 2026. Each preset says what it includes. Change any figure to match your own plan, or your own category rate. Enter 0% VAT if you are not VAT-registered. The result shows the customer's total, the VAT you pass on, the platform and payment fees, your costs, profit per sale, margin per sale, and break-even sales per month.
+
+Use it before you set a price, not after. The Price Builder solves for the price that hits a target margin. This tool tells you what you actually keep at the price you already have.`,
+    category: "pricing",
+    relatedSlugs: ["price-builder", "profit-calculator", "commission-calculator", "margin-calculator", "vat-calculator"],
+    defaultInputs: { itemPrice: 20, vatRate: 20, productCost: 8, sellerShipping: 3.5, monthlySales: 100, monthlyFixedCosts: 150 },
+    formula:
+      "Customer pays = (item price + buyer postage) × (1 + VAT rate)\nPlatform fee = platform % × base + platform fixed fee\nPayment fee = payment % × base + payment fixed fee\nProfit per sale = net revenue − platform fee − payment fee − your costs\nBreak-even sales per month = monthly fixed costs ÷ profit per sale",
+    formulaExplanation:
+      "Net revenue is the item price and postage charged to the buyer, excluding VAT. VAT is collected for the tax office, so it is not your money and is not counted in profit. Each fee has a base: some platforms charge on the buyer's total including VAT, others on the price excluding VAT. The calculator uses the base you select. Break-even is rounded up to whole sales. If profit per sale is zero or negative, no number of sales covers fixed costs at this price.",
+    examples: [
+      {
+        title: "Etsy UK, handmade mug",
+        description:
+          "A VAT-registered seller lists a mug at £20 excluding VAT. It costs £8 to make and £3.50 to post. Etsy's UK transaction and regulatory fees are 6.98% of the buyer's total, and the payment fee is 4% + £0.20 of the buyer's total. Fees verified 21 October 2026.",
+        inputs: {
+          "Item price, excl. VAT": "£20.00",
+          "VAT": "20%",
+          "Product cost": "£8.00",
+          "Postage you pay": "£3.50",
+          "Platform fee": "6.98% of buyer total",
+          "Payment fee": "4% + £0.20 of buyer total",
+        },
+        result:
+          "Customer pays £24.00. VAT £4.00. Platform fee £1.68. Payment fee £1.16. Costs £11.50. Profit per sale £5.66. Margin 28.3%.",
+      },
+      {
+        title: "eBay UK, clothing, postage paid by buyer",
+        description:
+          "A seller lists a jacket at £30 excluding VAT, with postage charged to the buyer. The jacket costs £12 and the seller pays £3 to post it. eBay's UK final value fee for Clothes, Shoes & Accessories is 11.9% of the total, plus £0.40 per order. eBay has no separate payment fee. Fees verified 21 October 2026.",
+        inputs: {
+          "Item price, excl. VAT": "£30.00",
+          "Postage charged to buyer": "£0.00",
+          "VAT": "20%",
+          "Product cost": "£12.00",
+          "Postage you pay": "£3.00",
+          "Platform fee": "11.9% of buyer total + £0.40",
+        },
+        result:
+          "Customer pays £36.00. VAT £6.00. Platform fee £4.68. Payment fee £0.00. Costs £15.00. Profit per sale £10.32. Margin 34.4%.",
+      },
+      {
+        title: "Shopify Payments UK, Basic plan, 100 sales a month",
+        description:
+          "A seller sells a product at £50 excluding VAT. It costs £20 and £5 postage. Shopify Payments on the Basic plan charges 2% + £0.25 on the buyer's total. There is no separate platform percentage. The seller pays £1,000 a month for ads and the Shopify plan. Fees verified 21 October 2026, Basic plan online card rate only.",
+        inputs: {
+          "Item price, excl. VAT": "£50.00",
+          "VAT": "20%",
+          "Product cost": "£20.00",
+          "Postage you pay": "£5.00",
+          "Payment fee": "2% + £0.25 of buyer total",
+          "Fixed costs per month": "£1,000.00",
+          "Sales per month": "200",
+        },
+        result:
+          "Customer pays £60.00. VAT £10.00. Payment fee £1.45. Costs £25.00. Profit per sale £23.55. Margin 47.1%. Break-even 43 sales a month. Profit at 200 sales £3,710.00.",
+      },
+    ],
+    faq: [
+      {
+        question: "Why is my profit so much lower than the listed price minus cost?",
+        answer:
+          "Three things come out before you keep anything: VAT, which you pass to the tax office; the platform's percentage, often charged on the total the buyer paid including VAT; and the payment fee. Postage you pay, packaging and product cost come off after that. The breakdown in the result shows the order, so you can see which line takes the most.",
+      },
+      {
+        question: "Do I include VAT in the item price?",
+        answer:
+          "Enter the price excluding VAT, then enter your VAT rate. The calculator adds VAT to get the customer's total. If you are not VAT-registered, enter 0% VAT and the price you enter is the price the customer pays. Your costs are then the full amounts you paid, because you cannot reclaim VAT on them.",
+      },
+      {
+        question: "Which fees does a preset include?",
+        answer:
+          "The percentage and per-order fees from the platform's UK fee page, checked on 21 October 2026. Monthly subscriptions, listing fees, advertising and currency conversion are not in the presets. Add any of them under Fixed costs per month, or edit the fee fields. Category rates on Amazon and eBay vary, so change the rate if your category is different.",
+      },
+      {
+        question: "What is break-even sales per month?",
+        answer:
+          "It is the number of sales you need each month for profit per sale to cover your fixed costs. Fixed costs are things you pay whether or not you sell, such as ads, software and subscriptions. If profit per sale is zero or negative at your price, the tool says break-even is not possible and you need to change the price, the costs or the fees.",
+      },
+      {
+        question: "Can I use this for US marketplaces?",
+        answer:
+          "Yes, but US fee presets are not in the list yet. Enter the fees from the platform's US fee page under Custom fees, and use the sales tax rate you collect in place of VAT, if you collect it. The calculation is the same for any platform that takes a percentage and a fixed fee per order.",
+      },
+    ],
+    seo: {
+      title: "Marketplace Profit Calculator – Profit per Sale After Fees",
+      description:
+        "See what you keep per sale after VAT, Etsy, Amazon, eBay and card fees, plus break-even sales per month. Free, with current UK platform fee presets.",
+      canonical: "/marketplace-profit-calculator",
+    },
+    keywords: [
+      "marketplace profit calculator", "etsy profit calculator", "amazon fees calculator",
+      "ebay fees calculator", "profit per sale calculator", "etsy seller profit calculator",
+      "shopify fees calculator", "marketplace fees calculator", "break even sales calculator",
+      "net profit after fees calculator",
     ],
   },
 ];
