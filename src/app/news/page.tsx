@@ -47,13 +47,61 @@ export default async function NewsPage() {
       </p>
 
       {articles.length === 0 ? (
-        <p className="text-muted-foreground">
-          Practical reading lives in the{" "}
-          <Link href="/guides" className="underline underline-offset-4 hover:text-foreground">
-            guides
-          </Link>
-          . News is only for a topic that no guide or calculator already covers.
-        </p>
+        <div className="space-y-6">
+          <p className="text-muted-foreground">
+            Practical reading lives in the{" "}
+            <Link href="/guides" className="underline underline-offset-4 hover:text-foreground">
+              guides
+            </Link>
+            . News is only for a topic that no guide or calculator already covers.
+          </p>
+          <Card>
+            <CardContent className="pt-5">
+              <h2 className="mb-2 font-semibold">Start with the tools</h2>
+              <ul className="space-y-1.5 text-sm text-muted-foreground">
+                <li>
+                  <Link href="/price-builder" className="underline underline-offset-4 hover:text-foreground">Price Builder</Link>
+                  {" "}— the price that still hits your margin after VAT and fees.
+                </li>
+                <li>
+                  <Link href="/marketplace-profit-calculator" className="underline underline-offset-4 hover:text-foreground">Marketplace Profit Calculator</Link>
+                  {" "}— profit per sale on Etsy, eBay and Amazon.
+                </li>
+                <li>
+                  <Link href="/commission-calculator" className="underline underline-offset-4 hover:text-foreground">Commission Calculator</Link>
+                  {" "}— commission from a sale and a rate.
+                </li>
+                <li>
+                  <Link href="/reverse-commission-calculator" className="underline underline-offset-4 hover:text-foreground">Reverse Commission Calculator</Link>
+                  {" "}— the sales you need for a commission target.
+                </li>
+                <li>
+                  <Link href="/percentage-change-calculator" className="underline underline-offset-4 hover:text-foreground">Percentage Change Calculator</Link>
+                  {" "}— increase or decrease between two values.
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+          <Card className="bg-muted/30">
+            <CardContent className="pt-5">
+              <h2 className="mb-2 font-semibold">Read the guides</h2>
+              <ul className="space-y-1.5 text-sm text-muted-foreground">
+                <li>
+                  <Link href="/guides/how-to-calculate-discount" className="underline underline-offset-4 hover:text-foreground">How to Calculate Discount</Link>
+                  {" "}— formulas, stacking and reverse calculations.
+                </li>
+                <li>
+                  <Link href="/guides/margin-vs-markup" className="underline underline-offset-4 hover:text-foreground">Margin vs Markup</Link>
+                  {" "}— why the two numbers differ.
+                </li>
+                <li>
+                  <Link href="/guides/how-to-calculate-sales-commission" className="underline underline-offset-4 hover:text-foreground">How to Calculate Sales Commission</Link>
+                  {" "}— tiered rates and gross versus net sales.
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+        </div>
       ) : (
         <div className="grid gap-4">
           {articles.map((article) => (

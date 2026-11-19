@@ -72,6 +72,89 @@ export default function AboutPage() {
           </li>
         </ul>
 
+        <h2 className="text-xl font-semibold">How the Calculators Are Built</h2>
+        <p>
+          Each CalcBase calculator follows the same pattern. You enter the figures, the result
+          updates as you type, and the formula is shown next to the answer. Where a rate or fee
+          depends on the country, the tool says which market it uses, so a UK VAT rate is never
+          quietly applied to a US price. Fee presets for marketplaces such as Etsy, eBay and Amazon
+          are taken from the platforms&apos; own fee pages, and each preset names what it includes and
+          what it leaves out.
+        </p>
+        <p>
+          The arithmetic lives in one shared library, and it is covered by automated tests. Every
+          tool uses the same rounding and the same formulas for margin, markup, VAT and commission,
+          so the results agree from one page to the next.
+        </p>
+
+        <h2 className="text-xl font-semibold">Where to Start</h2>
+        <p>
+          If you are pricing a product, start with the{" "}
+          <Link href="/price-builder" className="underline underline-offset-4 hover:text-primary">
+            Price Builder
+          </Link>
+          , which works backwards from the margin you want. If you sell on a marketplace, the{" "}
+          <Link href="/marketplace-profit-calculator" className="underline underline-offset-4 hover:text-primary">
+            Marketplace Profit Calculator
+          </Link>{" "}
+          shows what you keep per sale after VAT and platform fees. For sales pay, the{" "}
+          <Link href="/commission-calculator" className="underline underline-offset-4 hover:text-primary">
+            Commission Calculator
+          </Link>{" "}
+          works forwards from a sale, and the{" "}
+          <Link href="/reverse-commission-calculator" className="underline underline-offset-4 hover:text-primary">
+            Reverse Commission Calculator
+          </Link>{" "}
+          works backwards from the commission you want.
+        </p>
+        <p>
+          For the concepts behind the numbers, the{" "}
+          <Link href="/guides" className="underline underline-offset-4 hover:text-primary">
+            guides
+          </Link>{" "}
+          explain formulas step by step, including{" "}
+          <Link href="/guides/margin-vs-markup" className="underline underline-offset-4 hover:text-primary">
+            margin versus markup
+          </Link>
+          ,{" "}
+          <Link href="/guides/how-to-calculate-discount" className="underline underline-offset-4 hover:text-primary">
+            how to calculate a discount
+          </Link>
+          , and{" "}
+          <Link href="/guides/how-to-calculate-sales-commission" className="underline underline-offset-4 hover:text-primary">
+            how to calculate sales commission
+          </Link>
+          .
+        </p>
+
+        <h2 className="text-xl font-semibold">Common Questions We Answer</h2>
+        <p>
+          Most of the questions we see come down to a few patterns. A seller wants to know what
+          price to set so that a 35% margin survives Etsy&apos;s fees and VAT. A freelancer wants to
+          know what the net amount is on a gross invoice of £240 at 20% VAT, which is £200. A
+          consultant wants to know how many sales a £930 commission target needs at 3%, which is
+          £31,000. A shop owner wants to know whether a 25% discount followed by a 10% discount
+          is the same as 35% off, which it is not. Each of these has its own calculator or guide,
+          and each one shows the working so the answer can be checked by hand.
+        </p>
+        <p>
+          We also get questions about the difference between two numbers that look alike. Margin
+          and markup both describe profit, but margin is measured against the selling price and
+          markup against the cost. A 40% markup is a 28.6% margin. Percentage change and percentage
+          points are different too: moving from 10% to 12% is a 2 point rise and a 20% increase.
+          The guides explain these differences with the same worked numbers used in the tools.
+        </p>
+
+        <h2 className="text-xl font-semibold">Who Uses CalcBase</h2>
+        <p>
+          The tools are used by Etsy and Amazon sellers checking whether a product still earns money
+          after fees, freelancers deciding whether to add VAT to an invoice, sales reps and agents
+          checking a commission statement, and small business owners setting prices and discounts.
+          Most visitors arrive with one specific question, such as &quot;what is 20% VAT on £500&quot; or
+          &quot;how many sales do I need to hit a commission target&quot;, so every page is built to answer
+          that question first and explain the method second.
+        </p>
+
         <h2 className="text-xl font-semibold">Our Principles</h2>
         <ul className="list-disc space-y-1 pl-5">
           <li><strong>Accuracy:</strong> Every formula is tested and validated. We show our work.</li>

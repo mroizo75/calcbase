@@ -788,9 +788,9 @@ The distinction between profit, margin, and markup — three closely related but
       },
     ],
     seo: {
-      title: "Profit Calculator Online: Profit, Margin & Markup | CalcBase",
+      title: "Profit Calculator: Profit, Margin & Markup Free | CalcBase",
       description:
-        "Free profit calculator. Enter cost and revenue to get profit, margin and markup at once, or set a target margin to find the selling price. Formula and examples included.",
+        "Free profit calculator: enter cost and price to see profit, margin and markup together. Or set a target margin and get the selling price. Formula and worked examples.",
       canonical: "/profit-calculator",
     },
     keywords: [
@@ -868,9 +868,9 @@ Commission structures vary considerably across industries and roles. Flat-rate c
       },
     ],
     seo: {
-      title: "Sales Commission Calculator: $ in Sales at % Commission | CalcBase",
+      title: "Commission Calculator: $31,000 at 3% = $930 | CalcBase",
       description:
-        "Free commission calculator. Enter any sale amount and rate, e.g. $31,000 at 3% = $930 commission. Shows commission and net amount for reps and agents.",
+        "Free commission calculator: enter a sale and a rate, e.g. $31,000 at 3% = $930 commission. Shows the commission and the net amount for reps and agents.",
       canonical: "/commission-calculator",
     },
     keywords: [
@@ -955,9 +955,9 @@ Percentage change is used in virtually every type of business and financial anal
       },
     ],
     seo: {
-      title: "% Change Calculator: Percentage Increase & Decrease | CalcBase",
+      title: "Percentage Change Calculator: Increase or Decrease | CalcBase",
       description:
-        "Free % change calculator. Enter old and new values for the percentage increase or decrease, or apply a % to a number. Formula and worked examples included.",
+        "Free percentage change calculator: enter the old and new value for the increase or decrease in %, or apply a % to a number. Formula and worked examples.",
       canonical: "/percentage-change-calculator",
     },
     keywords: [
@@ -1088,6 +1088,74 @@ Use it before you set a price, not after. The Price Builder solves for the price
       "ebay fees calculator", "profit per sale calculator", "etsy seller profit calculator",
       "shopify fees calculator", "marketplace fees calculator", "break even sales calculator",
       "net profit after fees calculator",
+    ],
+  },
+  {
+    slug: "reverse-commission-calculator",
+    title: "Reverse Commission Calculator",
+    shortDescription: "Enter the commission you want and a rate. Get the sales amount you need to reach it.",
+    longDescription:
+      `Sales targets are often set from a commission goal, not from a sales number. If you want to earn $930 at 3%, the question is how much you have to sell. This calculator answers that question directly: divide the commission you want by the rate, and you get the sales amount that pays it.
+
+It is the reverse of the Commission Calculator. Use it to plan a quarter, check whether a commission plan is realistic, or see how much volume an agent needs for a target payout. Each result is checked by running the commission back forward, so you can see that the sales figure really produces the amount you asked for.
+
+Remember that commission plans differ on whether they pay on gross sales or net sales after returns and discounts. Use the figure your plan actually pays on.`,
+    category: "business",
+    relatedSlugs: ["commission-calculator", "profit-calculator", "price-builder"],
+    defaultInputs: { commission: 930, rate: 3 },
+    formula: "Sales Needed = Target Commission ÷ (Commission Rate ÷ 100)",
+    formulaExplanation:
+      "Commission is a percentage of sales, so the sales needed is the target commission divided by the rate written as a decimal. At 3%, the rate is 0.03, and $930 ÷ 0.03 = $31,000. Multiplying $31,000 by 3% gives $930 again, which is the check.",
+    examples: [
+      {
+        title: "Sales rep target: $930 at 3%",
+        description: "A sales rep wants $930 in commission on a 3% plan this month.",
+        inputs: { "Target commission": "$930", "Commission rate": "3%" },
+        result: "Sales needed = $31,000. Check: $31,000 × 3% = $930.",
+      },
+      {
+        title: "Agent target: $1,200 at 10%",
+        description: "An agent wants $1,200 in commission on a 10% plan.",
+        inputs: { "Target commission": "$1,200", "Commission rate": "10%" },
+        result: "Sales needed = $12,000. Check: $12,000 × 10% = $1,200.",
+      },
+    ],
+    faq: [
+      {
+        question: "How do I work out how much I need to sell for a commission?",
+        answer:
+          "Divide the commission you want by the commission rate as a decimal. For 3%, divide by 0.03. $930 ÷ 0.03 = $31,000 in sales.",
+      },
+      {
+        question: "Is this the same as the commission calculator?",
+        answer:
+          "It is the reverse. The Commission Calculator starts from a sale and gives the commission. This one starts from the commission you want and gives the sale you need.",
+      },
+      {
+        question: "Does this work for tiered commission plans?",
+        answer:
+          "Not directly. This tool uses one flat rate. On a tiered plan the rate changes by band, so work out each band separately. The how-to guide explains the tiered method.",
+      },
+      {
+        question: "Should I use gross or net sales?",
+        answer:
+          "Use the amount your plan pays commission on. If the plan pays on net sales, the figure from this calculator is net sales. Refunds and discounts can make gross and net differ a lot.",
+      },
+      {
+        question: "What if my rate is 0%?",
+        answer:
+          "No sales amount produces commission at 0%, so the calculator shows no result. Enter a rate above zero.",
+      },
+    ],
+    seo: {
+      title: "Reverse Commission Calculator: Sales Needed for a Target | CalcBase",
+      description:
+        "Free reverse commission calculator: enter the commission you want and the rate, and get the sales you need. For example, $930 at 3% needs $31,000 in sales.",
+      canonical: "/reverse-commission-calculator",
+    },
+    keywords: [
+      "reverse commission calculator", "commission sales needed", "how much do I need to sell for commission",
+      "sales needed for commission", "commission target calculator", "commission to sales calculator",
     ],
   },
 ];

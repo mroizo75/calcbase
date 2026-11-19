@@ -40,9 +40,9 @@ export const guides: GuideConfig[] = [
     updatedDate: "2026-04-17",
     relatedCalculators: ["discount-calculator", "margin-calculator"],
     seo: {
-      title: "How to Calculate Percentage Discount – Formulas & Examples | CalcBase",
+      title: "How to Calculate Discount: Formula & Examples | CalcBase",
       description:
-        "Step-by-step guide: calculate percentage off, find sale price, stack multiple discounts, and reverse-calculate original price. Includes the discount formula and worked examples.",
+        "How to calculate a percentage discount: find the sale price, stack two discounts, and work back to the original price. Discount formula and worked examples in USD.",
       canonical: "/guides/how-to-calculate-discount",
     },
   },

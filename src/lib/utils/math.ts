@@ -68,6 +68,13 @@ export function calculateCommission(salesAmount: number, commissionRate: number)
   return { commission, netAfterCommission };
 }
 
+/** Reverse of calculateCommission: the sales amount that produces a target commission. */
+export function calculateSalesNeeded(targetCommission: number, commissionRate: number): { requiredSales: number } {
+  if (commissionRate <= 0) return { requiredSales: 0 };
+  const requiredSales = round(targetCommission / (commissionRate / 100));
+  return { requiredSales };
+}
+
 export function calculatePercentageOf(percent: number, total: number): number {
   return round(total * (percent / 100));
 }
