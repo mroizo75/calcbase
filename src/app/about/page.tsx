@@ -164,6 +164,40 @@ export default function AboutPage() {
           <li><strong>No clutter:</strong> Clean, focused tools without dark patterns or misleading design.</li>
         </ul>
 
+        <h2 className="text-xl font-semibold">Using CalcBase for US and UK Pricing</h2>
+        <p>
+          Most calculators on CalcBase work with plain numbers, so the same arithmetic applies whether
+          you price in dollars, pounds, euros or another currency. The tools do not convert
+          currencies, so enter every figure in the same currency. Where a rule depends on the
+          country, such as UK VAT at 20%, the page names that rule so it is not applied to another
+          country by accident.
+        </p>
+        <p>
+          US sellers on Etsy, eBay and Amazon can start with the{" "}
+          <Link href="/marketplace-profit-calculator" className="underline underline-offset-4 hover:text-primary">
+            Marketplace Profit Calculator
+          </Link>
+          , which has US presets in dollars. Platform fees change, so check the platform&apos;s current
+          fee page before you publish a price. Each preset states what it includes and what it leaves
+          out, and the FAQ on that page lists the costs that sit outside the percentage.
+        </p>
+        <p>
+          UK sellers who are VAT-registered should use the{" "}
+          <Link href="/price-builder" className="underline underline-offset-4 hover:text-primary">
+            Price Builder
+          </Link>{" "}
+          with VAT switched on. Margin is measured on the price excluding VAT, because the VAT is
+          collected for the government and is not your income. Freelancers who are not VAT-registered
+          can switch VAT off, and the tool then shows that VAT on their costs cannot be reclaimed.
+        </p>
+
+        <h2 className="text-xl font-semibold">How the Numbers Are Checked</h2>
+        <p>
+          The arithmetic for the calculators sits in one shared library with automated tests, so a
+          change to one formula is checked everywhere it is used. Fee presets for marketplaces show the
+          date they were checked, so you can see how old the figures are before you rely on them.
+        </p>
+
         <h2 className="text-xl font-semibold">Disclaimer</h2>
         <p>
           CalcBase provides calculations for informational and educational purposes only. While we
