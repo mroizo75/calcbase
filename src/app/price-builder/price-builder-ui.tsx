@@ -229,7 +229,7 @@ export function PriceBuilderUi() {
         formulaUsed="Net price = (costs + fixed fees) ÷ (1 − margin − fees on the net price)"
       />
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className={evaluated.length > 1 ? "grid gap-4 md:grid-cols-2" : "grid gap-4"}>
         {evaluated.map(({ scenario, result }) => {
           const preset = getPlatformFee(scenario.presetId);
           const warnings = priceWarnings(toInput(scenario), result, scenario.mode);
