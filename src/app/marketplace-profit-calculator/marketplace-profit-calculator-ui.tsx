@@ -264,7 +264,7 @@ export function MarketplaceProfitCalculatorUi() {
             <p className="text-sm leading-relaxed text-muted-foreground">
               The presets cover the percentage and per-order fees on each platform&apos;s UK fee page, as checked on
               21 October 2026. They do not include monthly subscriptions, listing fees or advertising, unless you add
-              them under fixed costs. US fees are not preset yet. Enter them under Custom fees.
+              them under fixed costs. US presets were checked on 18 November 2026. Shopify and Stripe US rates are not preset yet. Enter them under Custom fees.
             </p>
             <p className="mt-3 text-sm text-muted-foreground">
               Related:{" "}

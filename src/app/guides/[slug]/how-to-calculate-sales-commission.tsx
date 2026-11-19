@@ -1,0 +1,140 @@
+import Link from "next/link";
+
+export function HowToCalculateSalesCommissionContent() {
+  return (
+    <>
+      <h2 className="text-xl font-semibold">What Sales Commission Means</h2>
+      <p>
+        Sales commission is a share of each sale paid to the person who made it happen. Sales reps,
+        affiliates, agents and marketplace partners are often paid this way. The calculation is simple,
+        but mistakes are common: the wrong base, the wrong rate, or a tiered plan calculated as if it
+        were a single rate. This guide shows the formula, worked examples in USD, and how to work
+        backwards from a commission amount to the rate.
+      </p>
+
+      <h2 className="text-xl font-semibold">The Commission Formula</h2>
+      <div className="rounded-lg border bg-muted/50 p-4">
+        <code className="text-sm">Commission = Sales × Commission rate</code>
+      </div>
+      <p>
+        Example: you sold <strong>$31,000</strong> worth of product and earn a <strong>3%</strong>{" "}
+        commission. Commission = $31,000 × 0.03 = <strong>$930</strong>.
+      </p>
+      <p>
+        Use the{" "}
+        <Link href="/commission-calculator" className="font-medium underline underline-offset-4 hover:text-primary">
+          Commission Calculator
+        </Link>{" "}
+        to run the same calculation with any sales figure and rate.
+      </p>
+
+      <h2 className="text-xl font-semibold">Finding the Rate from a Commission Amount</h2>
+      <p>
+        If you already know what you were paid and what you sold, work backwards:
+      </p>
+      <div className="rounded-lg border bg-muted/50 p-4">
+        <code className="text-sm">Commission rate = Commission ÷ Sales × 100</code>
+      </div>
+      <p>
+        Example: $930 ÷ $31,000 × 100 = 3%. This is useful for checking a statement from an agent or
+        platform, or for confirming that a contract rate has been applied correctly.
+      </p>
+
+      <h2 className="text-xl font-semibold">Worked Examples</h2>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b">
+              <th className="py-2 text-left font-medium">Sales</th>
+              <th className="py-2 text-left font-medium">Rate</th>
+              <th className="py-2 text-left font-medium">Commission</th>
+            </tr>
+          </thead>
+          <tbody className="text-muted-foreground">
+            <tr className="border-b"><td className="py-2">$31,000</td><td>3%</td><td>$930</td></tr>
+            <tr className="border-b"><td className="py-2">$12,000</td><td>10%</td><td>$1,200</td></tr>
+            <tr><td className="py-2">$50,000</td><td>5%</td><td>$2,500</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 className="text-xl font-semibold">Tiered Commission: Apply Each Rate to Its Own Band</h2>
+      <p>
+        Many plans pay a higher rate above a threshold. The rule that catches people out is that each
+        rate applies only to the part of sales inside its band. It does not apply to the whole amount.
+      </p>
+      <p>
+        Example plan: <strong>5%</strong> on the first $10,000, and <strong>8%</strong> on sales above
+        $10,000. Sales are $25,000.
+      </p>
+      <ul className="list-disc space-y-1 pl-5">
+        <li>First band: $10,000 × 5% = $500</li>
+        <li>Second band: $15,000 × 8% = $1,200</li>
+        <li>Total commission: $1,700, an effective rate of 6.8%</li>
+      </ul>
+      <p>
+        Applying 8% to the full $25,000 gives $2,000. That is $300 more than the plan pays, and it is
+        the most common error in tiered calculations.
+      </p>
+
+      <h2 className="text-xl font-semibold">Gross or Net Sales?</h2>
+      <p>
+        Check whether the contract pays on gross sales or on net sales after refunds and returns. Net
+        is common in B2B agreements, where refunds are taken off before commission is paid.
+      </p>
+      <ul className="list-disc space-y-1 pl-5">
+        <li>Gross: $31,000 × 3% = $930</li>
+        <li>Net after $1,000 of refunds: $30,000 × 3% = $900</li>
+      </ul>
+      <p>
+        If you sell on a marketplace, the platform fee may also be taken before your commission is
+        calculated. Work out what you keep per sale with the{" "}
+        <Link href="/marketplace-profit-calculator" className="font-medium underline underline-offset-4 hover:text-primary">
+          Marketplace Profit Calculator
+        </Link>{" "}
+        first, so the commission is not based on money you never receive.
+      </p>
+
+      <h2 className="text-xl font-semibold">Common Mistakes</h2>
+      <ol className="list-decimal space-y-2 pl-5">
+        <li>
+          <strong>Mixing up percentage and amount.</strong> A 3% commission on $31,000 is $930, not
+          $31. Check that the result is a small share of the sales figure.
+        </li>
+        <li>
+          <strong>Applying a tier rate to the whole amount.</strong> Each band is calculated separately,
+          as shown above.
+        </li>
+        <li>
+          <strong>Using the wrong sales base.</strong> Gross and net can differ by a lot when returns are
+          high.
+        </li>
+        <li>
+          <strong>Forgetting that the commission is a cost.</strong> If you pay commission on a sale, it
+          reduces your profit. Include it when you set prices, using the{" "}
+          <Link href="/profit-calculator" className="font-medium underline underline-offset-4 hover:text-primary">
+            Profit Calculator
+          </Link>.
+        </li>
+      </ol>
+
+      <h2 className="text-xl font-semibold">Commission and Pricing</h2>
+      <p>
+        If you pay a 10% commission on a product that costs $40 to make and sells for $80, the
+        commission is $8 per sale, which is part of your cost. Build it into the price before you
+        decide on a margin. The{" "}
+        <Link href="/price-builder" className="font-medium underline underline-offset-4 hover:text-primary">
+          Price Builder
+        </Link>{" "}
+        helps you find the price that hits your target margin after costs like this.
+      </p>
+      <p>
+        For more on how commission and other costs affect your price, see{" "}
+        <Link href="/guides/how-to-price-a-product" className="font-medium underline underline-offset-4 hover:text-primary">
+          How to Price a Product
+        </Link>
+        .
+      </p>
+    </>
+  );
+}

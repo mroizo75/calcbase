@@ -974,7 +974,7 @@ Percentage change is used in virtually every type of business and financial anal
     longDescription:
       `The price on the listing is not what you keep. Before a sale turns into profit, the platform takes a percentage, a card processor takes another, VAT goes to the tax office, and postage and packaging come off the top. Then you still have monthly costs such as ads and software to cover. This calculator puts every one of those lines in order, so you see what one sale leaves you and how many sales you need each month before you make money.
 
-Pick a platform and the fee presets fill in from the UK fee pages, checked on 21 October 2026. Each preset says what it includes. Change any figure to match your own plan, or your own category rate. Enter 0% VAT if you are not VAT-registered. The result shows the customer's total, the VAT you pass on, the platform and payment fees, your costs, profit per sale, margin per sale, and break-even sales per month.
+Pick a platform and the fee presets fill in from the official fee pages. UK presets (in GBP) were checked on 21 October 2026, and US presets (in USD) on 18 November 2026. Each preset says what it includes. Change any figure to match your own plan, or your own category rate. Enter 0% VAT if you are not VAT-registered. The result shows the customer's total, the VAT you pass on, the platform and payment fees, your costs, profit per sale, margin per sale, and break-even sales per month.
 
 Use it before you set a price, not after. The Price Builder solves for the price that hits a target margin. This tool tells you what you actually keep at the price you already have.`,
     category: "pricing",
@@ -1031,6 +1031,24 @@ Use it before you set a price, not after. The Price Builder solves for the price
         result:
           "Customer pays £60.00. VAT £10.00. Payment fee £1.45. Costs £25.00. Profit per sale £23.55. Margin 47.1%. Break-even 43 sales a month. Profit at 200 sales £3,710.00.",
       },
+      {
+        title: "Etsy US, $30 item, US bank account",
+        description:
+          "A seller lists a print at $30 with no sales tax to add and free postage, so the seller pays postage and the buyer pays only the item price. The print costs $8 and the seller pays $3.50 to post it. Etsy US charges 6.5% of the whole order, and payment processing for a US bank account is 3% + $0.25 on the same total. Fees checked 18 November 2026. The $0.20 listing fee is not included.",
+        inputs: {
+          "Item price": "$30.00",
+          "Postage charged to buyer": "$0.00",
+          "Sales tax": "0%",
+          "Product cost": "$8.00",
+          "Postage you pay": "$3.50",
+          "Platform fee": "6.5% of buyer total",
+          "Payment fee": "3% + $0.25 of buyer total",
+          "Fixed costs per month": "$150.00",
+          "Sales per month": "100",
+        },
+        result:
+          "Customer pays $30.00. Platform fee $1.95. Payment fee $1.15. Costs $11.50. Profit per sale $15.40. Margin 51.3%. Break-even 10 sales a month. Profit at 100 sales $1,390.00.",
+      },
     ],
     faq: [
       {
@@ -1046,7 +1064,7 @@ Use it before you set a price, not after. The Price Builder solves for the price
       {
         question: "Which fees does a preset include?",
         answer:
-          "The percentage and per-order fees from the platform's UK fee page, checked on 21 October 2026. Monthly subscriptions, listing fees, advertising and currency conversion are not in the presets. Add any of them under Fixed costs per month, or edit the fee fields. Category rates on Amazon and eBay vary, so change the rate if your category is different.",
+          "The percentage and per-order fees from the platform's official fee page: UK presets checked on 21 October 2026, US presets checked on 18 November 2026. Monthly subscriptions, listing fees, advertising and currency conversion are not in the presets. Add any of them under Fixed costs per month, or edit the fee fields. Category rates on Amazon and eBay vary, so change the rate if your category is different.",
       },
       {
         question: "What is break-even sales per month?",
@@ -1062,7 +1080,7 @@ Use it before you set a price, not after. The Price Builder solves for the price
     seo: {
       title: "Marketplace Profit Calculator – Profit per Sale After Fees",
       description:
-        "See what you keep per sale after VAT, Etsy, Amazon, eBay and card fees, plus break-even sales per month. Free, with current UK platform fee presets.",
+        "See what you keep per sale after VAT, Etsy, Amazon, eBay and card fees, plus break-even sales per month. Free, with UK and US platform fee presets.",
       canonical: "/marketplace-profit-calculator",
     },
     keywords: [

@@ -13,6 +13,7 @@ import { HowToPriceAProductContent } from "./how-to-price-a-product";
 import { HowToCalculateRoiContent } from "./how-to-calculate-roi";
 import { PricingStrategyExplainedContent } from "./pricing-strategy-explained";
 import { DiscountImpactOnMarginContent } from "./discount-impact-on-margin";
+import { HowToCalculateSalesCommissionContent } from "./how-to-calculate-sales-commission";
 
 export function generateStaticParams() {
   return guides.map((g) => ({ slug: g.slug }));
@@ -42,6 +43,7 @@ const contentMap: Record<string, React.ComponentType> = {
   "how-to-calculate-roi": HowToCalculateRoiContent,
   "pricing-strategy-explained": PricingStrategyExplainedContent,
   "discount-impact-on-margin": DiscountImpactOnMarginContent,
+  "how-to-calculate-sales-commission": HowToCalculateSalesCommissionContent,
 };
 
 export default async function GuidePage({ params }: { params: Params }) {

@@ -151,6 +151,21 @@ export const guides: GuideConfig[] = [
       canonical: "/guides/discount-impact-on-margin",
     },
   },
+  {
+    slug: "how-to-calculate-sales-commission",
+    title: "How to Calculate Sales Commission: Formula, Examples and Tiered Rates",
+    description:
+      "Learn how sales commission works: the formula, how to find the rate from an amount, tiered plans that apply rate by band, and gross versus net sales, with worked examples in USD.",
+    publishedDate: "2026-11-19",
+    updatedDate: "2026-11-19",
+    relatedCalculators: ["commission-calculator", "profit-calculator", "marketplace-profit-calculator", "price-builder"],
+    seo: {
+      title: "How to Calculate Sales Commission – Formula & Examples | CalcBase",
+      description:
+        "Calculate sales commission step by step: the formula, finding the rate from a payout, tiered commission bands, and gross versus net sales. Worked examples in USD.",
+      canonical: "/guides/how-to-calculate-sales-commission",
+    },
+  },
 ];
 
 export function getGuide(slug: string): GuideConfig | undefined {
