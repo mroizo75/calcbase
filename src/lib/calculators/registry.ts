@@ -868,9 +868,9 @@ Commission structures vary considerably across industries and roles. Flat-rate c
       },
     ],
     seo: {
-      title: "Commission Calculator: $31,000 at 3% = $930 | CalcBase",
+      title: "$31,000 in Sales at 3% Commission = $930 | CalcBase",
       description:
-        "Free commission calculator: enter a sale and a rate, e.g. $31,000 at 3% = $930 commission. Shows the commission and the net amount for reps and agents.",
+        "Free commission calculator: enter sales and a commission rate, e.g. $31,000 in sales with 3% commission = $930. Shows the commission and the net amount for reps and agents. Formula and examples.",
       canonical: "/commission-calculator",
     },
     keywords: [
@@ -955,7 +955,7 @@ Percentage change is used in virtually every type of business and financial anal
       },
     ],
     seo: {
-      title: "Percentage Change Calculator: Increase or Decrease | CalcBase",
+      title: "% Change Calculator – Percentage Increase or Decrease | CalcBase",
       description:
         "Free percentage change calculator: enter the old and new value for the increase or decrease in %, or apply a % to a number. Formula and worked examples.",
       canonical: "/percentage-change-calculator",
