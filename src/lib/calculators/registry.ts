@@ -782,6 +782,11 @@ The distinction between profit, margin, and markup — three closely related but
           "Gross profit margin benchmarks vary by industry. Software and SaaS businesses typically achieve 70–90% gross margins. Retail ranges from 20–50%. Restaurants see 60–70% on food cost alone but much lower all-in. Professional services and consulting often run 50–70%. Compare your margin to industry-specific benchmarks, not a universal standard.",
       },
       {
+        question: "What is a profit calculator and how do I use it?",
+        answer:
+          "A profit calculator takes your selling price and your cost and returns the profit per sale, the margin, and the markup. Enter the sales price and the cost of the item. Profit = price − cost. Margin = profit ÷ price × 100. Markup = profit ÷ cost × 100. For a $100 sale at a $60 cost, profit is $40, margin is 40%, and markup is 66.7%. Use the margin field to go the other way and find the price you need to hit a target.",
+      },
+      {
         question: "How do I improve my profit margin?",
         answer:
           "There are two levers: increase revenue while holding costs steady, or reduce costs while maintaining revenue. In practice this means: raising prices (even small increases have outsized impact on margin), reducing variable costs through supplier negotiation or process improvement, increasing average order value through upselling, and discontinuing low-margin products. Use this calculator to model the impact of each change before implementing it.",
@@ -866,11 +871,16 @@ Commission structures vary considerably across industries and roles. Flat-rate c
         answer:
           "Multiply the sale amount by the rate as a decimal. $31,000 × 0.03 = $930 commission. The net amount after commission is $31,000 − $930 = $30,070. The same method works for any amount: $50,000 at 2% is $1,000, and $450,000 at 1.5% is $6,750.",
       },
+      {
+        question: "What is the commission on $17,396 at 1.67%, or $61,129 at 2.8%?",
+        answer:
+          "Multiply the sales amount by the commission rate as a decimal, then subtract the commission to get the net. $17,396 at 1.67% = $290.51 commission, $17,105.49 net. $61,129 at 2.8% = $1,711.61 commission, $59,417.39 net. $98,773 at 1.42% = $1,402.58 commission, $97,370.42 net. Type any sales amount and rate into the calculator above to check the numbers.",
+      },
     ],
     seo: {
       title: "$31,000 in Sales at 3% Commission = $930 | CalcBase",
       description:
-        "Free commission calculator: enter sales and a commission rate, e.g. $31,000 in sales with 3% commission = $930. Shows the commission and the net amount for reps and agents. Formula and examples.",
+        "Commission calculator: enter sales and a rate, e.g. $31,000 in sales with 3% commission = $930. Shows the commission and net amount. Formula and examples.",
       canonical: "/commission-calculator",
     },
     keywords: [
@@ -947,6 +957,11 @@ Percentage change is used in virtually every type of business and financial anal
         question: "How is percentage change different from ROI?",
         answer:
           "ROI (Return on Investment) uses the same percentage change formula but applied specifically to financial returns: (Gain − Investment) ÷ Investment × 100. Percentage change is the general-purpose version of the same calculation applied to any two values. When the 'old value' is your initial investment and the 'new value' is the total return, percentage change equals ROI.",
+      },
+      {
+        question: "How do I use a % change calc to find the change between two numbers?",
+        answer:
+          "Enter the old value in the first field and the new value in the second. The calculator subtracts the old value from the new, divides by the old value, and multiplies by 100. For example, from $80 to $100: ($100 − $80) ÷ $80 × 100 = 25% increase. Switch to the second mode to apply a % change to a starting value instead.",
       },
       {
         question: "How do I find a percentage of a number?",
