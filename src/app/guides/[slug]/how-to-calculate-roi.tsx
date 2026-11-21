@@ -8,7 +8,7 @@ export function HowToCalculateRoiContent() {
         Return on Investment (ROI) is one of the most widely used financial metrics. It measures the
         efficiency of an investment by comparing the gain (or loss) to its cost. ROI is expressed as
         a percentage, making it easy to compare investments of different sizes and types — from a
-        £5,000 marketing campaign to a £500,000 real estate purchase.
+        $5,000 marketing campaign to a $500,000 real estate purchase.
       </p>
 
       <h2 className="text-xl font-semibold">The ROI Formula</h2>
@@ -22,16 +22,16 @@ export function HowToCalculateRoiContent() {
 
       <h2 className="text-xl font-semibold">Step-by-Step Example: Marketing Campaign</h2>
       <p>
-        Suppose you spend £8,000 on a paid advertising campaign. The campaign generates £22,000 in
-        attributable revenue and the cost of goods sold on those sales is £10,000.
+        Suppose you spend $8,000 on a paid advertising campaign. The campaign generates $22,000 in
+        attributable revenue and the cost of goods sold on those sales is $10,000.
       </p>
       <ol className="list-decimal space-y-1 pl-5">
-        <li>Calculate net profit: £22,000 revenue − £10,000 COGS − £8,000 ad spend = £4,000</li>
-        <li>Divide net profit by investment: £4,000 ÷ £8,000 = 0.50</li>
+        <li>Calculate net profit: $22,000 revenue − $10,000 COGS − $8,000 ad spend = $4,000</li>
+        <li>Divide net profit by investment: $4,000 ÷ $8,000 = 0.50</li>
         <li>Multiply by 100: 0.50 × 100 = <strong>50% ROI</strong></li>
       </ol>
       <p>
-        For every pound invested in advertising, you earned £1.50 back (your original £1 plus £0.50
+        For every dollar invested in advertising, you earned $1.50 back (your original $1 plus $0.50
         profit). The same steps work for any investment: subtract what you spent from what you got
         back, then divide by what you spent.
       </p>
@@ -50,25 +50,25 @@ export function HowToCalculateRoiContent() {
       <p>
         For a property investment, the calculation includes purchase price, renovation costs,
         ongoing maintenance, and taxes as the investment cost. The return includes rental income
-        and/or the sale price minus the purchase price. A house bought for £200,000 with £30,000 in
-        renovations and sold for £280,000 yields: (£280,000 − £230,000) ÷ £230,000 × 100 =
+        and/or the sale price minus the purchase price. A house bought for $200,000 with $30,000 in
+        renovations and sold for $280,000 yields: ($280,000 − $230,000) ÷ $230,000 × 100 =
         21.7% ROI. This does not account for holding time — a 21.7% return over five years is very
         different from the same return over one year.
       </p>
 
       <h3 className="font-medium">Equipment &amp; Capital Expenditure</h3>
       <p>
-        A manufacturer buying a £50,000 machine that saves £15,000 per year in labor costs has an
+        A manufacturer buying a $50,000 machine that saves $15,000 per year in labor costs has an
         annual ROI of 30%. The payback period — how long until the machine pays for itself — is
-        £50,000 ÷ £15,000 = 3.33 years. ROI is useful for comparing alternative equipment
-        purchases: the machine with the highest ROI delivers the best return per pound invested.
+        $50,000 ÷ $15,000 = 3.33 years. ROI is useful for comparing alternative equipment
+        purchases: the machine with the highest ROI delivers the best return per dollar invested.
       </p>
 
       <h3 className="font-medium">Stock Market</h3>
       <p>
         For stocks, ROI includes both capital gains (price increase) and dividends received. If you
-        buy shares for £10,000, receive £400 in dividends, and sell for £11,500: net profit =
-        £11,500 + £400 − £10,000 = £1,900. ROI = £1,900 ÷ £10,000 × 100 = 19%.
+        buy shares for $10,000, receive $400 in dividends, and sell for $11,500: net profit =
+        $11,500 + $400 − $10,000 = $1,900. ROI = $1,900 ÷ $10,000 × 100 = 19%.
       </p>
 
       <h2 className="text-xl font-semibold">Limitations of ROI</h2>
@@ -87,8 +87,8 @@ export function HowToCalculateRoiContent() {
           achieving the return.
         </li>
         <li>
-          <strong>Opportunity cost is excluded.</strong> Every pound invested in one project is a
-          pound not invested elsewhere. An ROI of 15% looks good until you realize the alternative
+          <strong>Opportunity cost is excluded.</strong> Every dollar invested in one project is a
+          dollar not invested elsewhere. An ROI of 15% looks good until you realize the alternative
           investment offered 25%.
         </li>
         <li>
