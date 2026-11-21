@@ -1,9 +1,17 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { ArrowRight, Calculator, Zap, Shield, Globe, Share2, FileText, History } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { SearchBox } from "@/components/layout/search-box";
 import { AdBanner } from "@/components/ads/ad-banner";
 import { calculators } from "@/lib/calculators/registry";
+
+// Oversikt er et utkast og skal ikke indekseres før Kenneth har godkjent.
+export const metadata: Metadata = {
+  title: "CalcBase Overview",
+  description: "Overview of CalcBase calculators.",
+  robots: { index: false, follow: false },
+};
 
 const categoryLabels: Record<string, string> = {
   vat: "VAT & Tax",
