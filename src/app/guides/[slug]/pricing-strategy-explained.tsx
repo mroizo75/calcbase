@@ -26,8 +26,8 @@ export function PricingStrategyExplainedContent() {
         <code className="text-sm">Selling Price = Total Cost per Unit × (1 + Markup %)</code>
       </div>
       <p>
-        Example: A bakery makes a cake for £8 in ingredients and labor. With a 75% markup, the
-        selling price is £8 × 1.75 = £14. Profit per cake: £6. Use the{" "}
+        Example: A bakery makes a cake for $8 in ingredients and labor. With a 75% markup, the
+        selling price is $8 × 1.75 = $14. Profit per cake: $6. Use the{" "}
         <Link href="/markup-calculator" className="font-medium underline underline-offset-4 hover:text-primary">
           Markup Calculator
         </Link>{" "}
@@ -48,8 +48,8 @@ export function PricingStrategyExplainedContent() {
         common in software, consulting, and luxury goods.
       </p>
       <p>
-        A CRM tool that helps a sales team close £100,000 more per year can reasonably charge
-        £12,000 annually, even if the marginal cost of serving that customer is £200. The customer
+        A CRM tool that helps a sales team close $100,000 more per year can reasonably charge
+        $12,000 annually, even if the marginal cost of serving that customer is $200. The customer
         pays for the outcome, not the input.
       </p>
       <p>
@@ -76,8 +76,8 @@ export function PricingStrategyExplainedContent() {
         strategy works in markets where products are similar and customers actively comparison-shop.
       </p>
       <p>
-        Example: Three competitors sell a similar wireless mouse at £29.99, £32.99, and £34.99.
-        Pricing yours at £31.99 positions you competitively. However, you must verify that £31.99
+        Example: Three competitors sell a similar wireless mouse at $29.99, $32.99, and $34.99.
+        Pricing yours at $31.99 positions you competitively. However, you must verify that $31.99
         covers your costs — matching a competitor&apos;s price means nothing if their cost structure
         is lower than yours.
       </p>
@@ -98,8 +98,8 @@ export function PricingStrategyExplainedContent() {
       </p>
       <p>
         This strategy is common with subscription services, streaming platforms, and new entrants in
-        competitive markets. A new project management tool might launch at £5/month when competitors
-        charge £15–25/month, aiming to acquire users rapidly.
+        competitive markets. A new project management tool might launch at $5/month when competitors
+        charge $15–25/month, aiming to acquire users rapidly.
       </p>
       <ul className="list-disc space-y-1 pl-5">
         <li><strong>Pro:</strong> Fast market entry and customer acquisition.</li>
@@ -137,6 +137,31 @@ export function PricingStrategyExplainedContent() {
         <strong>Weakness:</strong> Limits addressable market. Requires consistent quality and brand
         investment.
       </p>
+
+      <h2 className="text-xl font-semibold">Comparing the Five Strategies</h2>
+      <p>
+        The table summarises when each strategy fits best and what it costs you. Use it as a quick
+        filter before running the numbers.
+      </p>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b">
+              <th className="py-2 text-left font-medium">Strategy</th>
+              <th className="py-2 text-left font-medium">Price is set by</th>
+              <th className="py-2 text-left font-medium">Best for</th>
+              <th className="py-2 text-left font-medium">Main risk</th>
+            </tr>
+          </thead>
+          <tbody className="text-muted-foreground">
+            <tr className="border-b"><td className="py-2">Cost-plus</td><td>Your costs plus a markup</td><td>Stable-cost manufacturing and retail</td><td>Ignores what customers will pay</td></tr>
+            <tr className="border-b"><td className="py-2">Value-based</td><td>Customer outcome and willingness to pay</td><td>SaaS, consulting, differentiated products</td><td>Needs strong customer research</td></tr>
+            <tr className="border-b"><td className="py-2">Competitive</td><td>Competitor prices</td><td>Commoditised, price-compared markets</td><td>Price wars</td></tr>
+            <tr className="border-b"><td className="py-2">Penetration</td><td>A deliberately low entry price</td><td>Winning market share quickly</td><td>Losses and hard price rises later</td></tr>
+            <tr><td className="py-2">Premium</td><td>Brand and perceived exclusivity</td><td>Luxury and strong-brand products</td><td>Small market, and quality must back it up</td></tr>
+          </tbody>
+        </table>
+      </div>
 
       <h2 className="text-xl font-semibold">How to Choose the Right Strategy</h2>
       <p>

@@ -60,6 +60,33 @@ export const guides: GuideConfig[] = [
         "Learn the break-even formula step by step. Understand fixed costs, variable costs, contribution margin, and how to find break-even units and revenue. Worked examples for real businesses.",
       canonical: "/guides/break-even-formula",
     },
+    faq: [
+      {
+        question: "What is the break-even point?",
+        answer:
+          "The break-even point is the sales volume at which total revenue equals total costs, so profit is zero. Divide fixed costs by the contribution margin per unit (selling price minus variable cost per unit) to get the number of units needed.",
+      },
+      {
+        question: "What is contribution margin?",
+        answer:
+          "Contribution margin is the selling price minus the variable cost per unit. It is the amount each sale contributes towards covering fixed costs. Once fixed costs are covered, the contribution margin becomes profit.",
+      },
+      {
+        question: "What is the difference between fixed and variable costs?",
+        answer:
+          "Fixed costs such as rent, salaries and software subscriptions stay the same whatever you sell. Variable costs such as materials, packaging, shipping and payment fees rise and fall with each unit sold.",
+      },
+      {
+        question: "Can I calculate break-even in dollars and in units?",
+        answer:
+          "Yes. Break-even units = fixed costs ÷ contribution margin per unit. Break-even revenue = break-even units × selling price per unit. For example, $3,000 of fixed costs and a $16 contribution margin give 188 units, or $4,512 of revenue at a $24 price.",
+      },
+      {
+        question: "What happens if the variable cost is higher than the price?",
+        answer:
+          "The contribution margin is zero or negative, so each sale adds nothing or adds to the loss. No volume will reach break-even. The price, the variable cost or the business model has to change first.",
+      },
+    ],
   },
   {
     slug: "vat-rates-by-country",
@@ -75,6 +102,33 @@ export const guides: GuideConfig[] = [
         "Complete list of VAT and GST rates by country for 2026. UK 20%, Germany 19%, France 20%, Australia 10%, and more. Compare rates and calculate VAT instantly.",
       canonical: "/guides/vat-rates-by-country",
     },
+    faq: [
+      {
+        question: "What is the standard VAT rate in the UK?",
+        answer:
+          "The standard UK VAT rate is 20%. A reduced rate of 5% applies to some goods, such as domestic fuel and power, and a zero rate applies to items such as most food, children's clothing and books.",
+      },
+      {
+        question: "What is the difference between VAT and GST?",
+        answer:
+          "They work the same way in practice: tax is charged at each stage and businesses reclaim the tax on their purchases. The names differ by country. GST is used in Australia, New Zealand, Singapore, India and Canada, while VAT is used across Europe, the UK and much of the rest of the world.",
+      },
+      {
+        question: "How do I work out VAT from a price that already includes it?",
+        answer:
+          "Divide the gross price by (1 + rate). For example, $240 including 20% VAT is $240 ÷ 1.20 = $200 net, and the VAT portion is $40. Subtracting 20% of $240 gives the wrong answer of $48.",
+      },
+      {
+        question: "What is the standard GST rate in Canada?",
+        answer:
+          "The federal GST rate is 5%. Several provinces also charge provincial sales tax, and some combine it with GST into a harmonised rate (HST) of 13–15%. The rate depends on the province where the buyer is located.",
+      },
+      {
+        question: "Why do VAT rates differ between countries?",
+        answer:
+          "Each government sets its own rates and decides which goods get reduced or zero rates. EU members must keep a standard rate of at least 15%, but the rate is otherwise a national choice, so the same product can carry different tax in different countries.",
+      },
+    ],
   },
   {
     slug: "vat-vs-sales-tax",
@@ -167,6 +221,28 @@ export const guides: GuideConfig[] = [
         "Compare pricing strategies: cost-plus, value-based, competitive, penetration, and premium pricing. Learn which strategy fits your business with formulas and examples.",
       canonical: "/guides/pricing-strategy-explained",
     },
+    faq: [
+      {
+        question: "What is the best pricing strategy?",
+        answer:
+          "There is no single best strategy. Cost-plus suits stable-cost products, value-based pricing suits software and consulting, competitive pricing suits commoditised markets, penetration pricing suits winning share quickly, and premium pricing suits strong brands. Most businesses combine several.",
+      },
+      {
+        question: "What is the difference between cost-plus and value-based pricing?",
+        answer:
+          "Cost-plus pricing starts from what the product costs you to make and adds a markup. Value-based pricing starts from what the customer gains and what they are willing to pay, so the price can be far above cost.",
+      },
+      {
+        question: "When should I use penetration pricing?",
+        answer:
+          "Use it when you need to win customers quickly in a competitive market and can fund early losses. Before you commit, run a break-even analysis to see how much volume you need and how long you can sustain the low price.",
+      },
+      {
+        question: "Does a higher price always mean more profit?",
+        answer:
+          "No. A higher price usually means fewer units sold. Profit depends on price, volume and cost together. Premium pricing works only where customers accept the higher price, so test changes before you apply them across the range.",
+      },
+    ],
   },
   {
     slug: "discount-impact-on-margin",

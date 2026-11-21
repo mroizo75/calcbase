@@ -65,6 +65,50 @@ export function VatRatesByCountryContent() {
         </table>
       </div>
 
+      <h2 className="text-xl font-semibold">Worked Examples by Country</h2>
+      <p>
+        The same arithmetic works everywhere: to add tax, multiply the net price by (1 + rate). To
+        remove tax from a gross price, divide by (1 + rate). Here is how that looks in five markets,
+        using the standard rate for a $500 net price.
+      </p>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b">
+              <th className="py-2 text-left font-medium">Country</th>
+              <th className="py-2 text-left font-medium">Standard rate</th>
+              <th className="py-2 text-left font-medium">Tax on $500</th>
+              <th className="py-2 text-left font-medium">Gross price</th>
+            </tr>
+          </thead>
+          <tbody className="text-muted-foreground">
+            <tr className="border-b"><td className="py-2">United Kingdom</td><td>20%</td><td>$100</td><td>$600</td></tr>
+            <tr className="border-b"><td className="py-2">Germany (EU)</td><td>19%</td><td>$95</td><td>$595</td></tr>
+            <tr className="border-b"><td className="py-2">Australia</td><td>10% GST</td><td>$50</td><td>$550</td></tr>
+            <tr className="border-b"><td className="py-2">Canada (federal GST only)</td><td>5%</td><td>$25</td><td>$525</td></tr>
+            <tr><td className="py-2">India</td><td>18% GST</td><td>$90</td><td>$590</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Canada is the exception that catches many sellers out. Provinces that use the harmonised
+        system charge HST of 13–15% instead of 5%, so a single rate cannot be applied across the
+        whole country. Check the buyer&apos;s province before you quote a price.
+      </p>
+      <p>
+        Note on the figures: the UK and EU examples apply the standard rate only. Reduced rates such as
+        the UK&apos;s 5% on domestic fuel, or Germany&apos;s 7% on books, change the result for those goods.
+        Use the{" "}
+        <Link href="/vat-calculator" className="font-medium underline underline-offset-4 hover:text-primary">
+          VAT Calculator
+        </Link>{" "}
+        to run your own numbers, or the{" "}
+        <Link href="/remove-vat" className="font-medium underline underline-offset-4 hover:text-primary">
+          Remove VAT Calculator
+        </Link>{" "}
+        to extract tax from a gross price.
+      </p>
+
       <h2 className="text-xl font-semibold">Standard vs Reduced Rates</h2>
       <p>
         Most countries that levy VAT apply a standard rate to the majority of goods and services,
@@ -116,9 +160,9 @@ export function VatRatesByCountryContent() {
       <h2 className="text-xl font-semibold">How to Use These Rates</h2>
       <p>
         If you know the net (pre-tax) price of a product or service, multiply by the applicable VAT
-        rate to find the tax amount. For a £500 item in the UK at 20%: £500 × 0.20 = £100 VAT, so
-        the gross price is £600. To extract the VAT from a gross price, divide by (1 + rate). For
-        the same £600: £600 ÷ 1.20 = £500 net.
+        rate to find the tax amount. For a $500 item in the UK at 20%: $500 × 0.20 = $100 VAT, so
+        the gross price is $600. To extract the VAT from a gross price, divide by (1 + rate). For
+        the same $600: $600 ÷ 1.20 = $500 net.
       </p>
       <p>
         Use the{" "}

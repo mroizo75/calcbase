@@ -71,6 +71,74 @@ export function BreakEvenFormulaContent() {
         where profit begins. If they sell 250 candles, profit = (250 − 188) × $16 = $992.
       </p>
 
+      <h2 className="text-xl font-semibold">Second Example: A SaaS Product</h2>
+      <p>
+        Break-even is not only for physical goods. A software company with a monthly subscription
+        has the same structure:
+      </p>
+      <ul className="list-disc space-y-1 pl-5">
+        <li>Fixed costs: $12,000/month (engineering tools, office, support staff)</li>
+        <li>Variable cost per customer: $4/month (hosting, payment processing)</li>
+        <li>Subscription price: $29/month</li>
+      </ul>
+      <div className="rounded-lg border bg-muted/50 p-4">
+        <p className="text-sm">Contribution margin = $29 − $4 = $25 per customer per month</p>
+        <p className="text-sm">Break-even customers = $12,000 ÷ $25 = <strong>480 customers</strong></p>
+        <p className="text-sm">Break-even revenue = 480 × $29 = <strong>$13,920 per month</strong></p>
+      </div>
+      <p>
+        At 600 customers, monthly profit is (600 − 480) × $25 = $3,000. The useful question for a
+        SaaS business is therefore not only where break-even sits, but how many customers you need to
+        add each month to reach it.
+      </p>
+
+      <h2 className="text-xl font-semibold">Sensitivity: How Price and Fixed Costs Move Break-even</h2>
+      <p>
+        Small changes in price or overheads can shift break-even dramatically. The tables below use a
+        variable cost of $8 per unit unless stated otherwise.
+      </p>
+      <h3 className="font-medium">Selling price (fixed costs $3,000/month)</h3>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b">
+              <th className="py-2 text-left font-medium">Selling price</th>
+              <th className="py-2 text-left font-medium">Contribution per unit</th>
+              <th className="py-2 text-left font-medium">Break-even units</th>
+            </tr>
+          </thead>
+          <tbody className="text-muted-foreground">
+            <tr className="border-b"><td className="py-2">$20</td><td>$12</td><td>250</td></tr>
+            <tr className="border-b"><td className="py-2">$24</td><td>$16</td><td>188</td></tr>
+            <tr className="border-b"><td className="py-2">$30</td><td>$22</td><td>137</td></tr>
+            <tr><td className="py-2">$36</td><td>$28</td><td>108</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 className="font-medium">Fixed costs (selling price $24)</h3>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b">
+              <th className="py-2 text-left font-medium">Fixed costs per month</th>
+              <th className="py-2 text-left font-medium">Break-even units</th>
+              <th className="py-2 text-left font-medium">Break-even revenue</th>
+            </tr>
+          </thead>
+          <tbody className="text-muted-foreground">
+            <tr className="border-b"><td className="py-2">$2,000</td><td>125</td><td>$3,000</td></tr>
+            <tr className="border-b"><td className="py-2">$3,000</td><td>188</td><td>$4,512</td></tr>
+            <tr className="border-b"><td className="py-2">$4,000</td><td>250</td><td>$6,000</td></tr>
+            <tr><td className="py-2">$5,000</td><td>313</td><td>$7,512</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Unit counts are rounded up, because you cannot sell a fraction of a unit and still break even.
+        Raising the price from $24 to $30 cuts break-even volume by more than a quarter, while a $1,000
+        rise in fixed costs adds 62 units to the target.
+      </p>
+
       <h2 className="text-xl font-semibold">When Break-even Is Impossible</h2>
       <p>
         If the variable cost per unit equals or exceeds the selling price, the contribution
