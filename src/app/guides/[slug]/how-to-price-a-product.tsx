@@ -50,8 +50,8 @@ export function HowToPriceAProductContent() {
         <code className="text-sm">Selling Price = Cost × (1 + Markup %)</code>
       </div>
       <p>
-        Example: Your product costs £20 to make. You apply a 50% markup. Selling price = £20 ×
-        1.50 = £30. Your profit per unit is £10. Use the{" "}
+        Example: Your product costs $20 to make. You apply a 50% markup. Selling price = $20 ×
+        1.50 = $30. Your profit per unit is $10. Use the{" "}
         <Link href="/markup-calculator" className="font-medium underline underline-offset-4 hover:text-primary">
           Markup Calculator
         </Link>{" "}
@@ -72,8 +72,8 @@ export function HowToPriceAProductContent() {
         <code className="text-sm">Selling Price = Cost ÷ (1 − Target Margin %)</code>
       </div>
       <p>
-        Example: Your product costs £20 and you want a 40% margin. Selling price = £20 ÷ (1 −
-        0.40) = £20 ÷ 0.60 = £33.33. Your profit is £13.33. The{" "}
+        Example: Your product costs $20 and you want a 40% margin. Selling price = $20 ÷ (1 −
+        0.40) = $20 ÷ 0.60 = $33.33. Your profit is $13.33. The{" "}
         <Link href="/margin-calculator" className="font-medium underline underline-offset-4 hover:text-primary">
           Margin Calculator
         </Link>{" "}
@@ -82,8 +82,8 @@ export function HowToPriceAProductContent() {
       <p>
         Margin-based pricing is popular because margin is how profitability is reported in financial
         statements. A common mistake is confusing margin and markup — they produce different prices
-        from the same cost. A 50% markup on £20 gives £30 (33.3% margin), while a 50% margin on
-        £20 gives £40. See our{" "}
+        from the same cost. A 50% markup on $20 gives $30 (33.3% margin), while a 50% margin on
+        $20 gives $40. See our{" "}
         <Link href="/guides/margin-vs-markup" className="font-medium underline underline-offset-4 hover:text-primary">
           Margin vs Markup
         </Link>{" "}
@@ -101,8 +101,8 @@ export function HowToPriceAProductContent() {
       <h3 className="font-medium">Value-Based Pricing</h3>
       <p>
         Set price based on the perceived value to the customer rather than your cost. A software
-        tool that saves a business £10,000 per year can reasonably charge £2,000 even if it costs
-        £200 to deliver. Value-based pricing requires understanding your customer deeply — what
+        tool that saves a business $10,000 per year can reasonably charge $2,000 even if it costs
+        $200 to deliver. Value-based pricing requires understanding your customer deeply — what
         problem you solve, what alternatives exist, and what the customer would lose without your
         product. It produces the highest margins but demands the most research.
       </p>
@@ -117,29 +117,29 @@ export function HowToPriceAProductContent() {
             <tr className="border-b">
               <th className="py-2 text-left font-medium">Formula</th>
               <th className="py-2 text-left font-medium">Equation</th>
-              <th className="py-2 text-left font-medium">Example (Cost = £20)</th>
+              <th className="py-2 text-left font-medium">Example (Cost = $20)</th>
             </tr>
           </thead>
           <tbody className="text-muted-foreground">
             <tr className="border-b">
               <td className="py-2 font-medium text-foreground">Price from markup</td>
               <td className="py-2">Cost × (1 + Markup%)</td>
-              <td className="py-2">£20 × 1.50 = £30 (50% markup)</td>
+              <td className="py-2">$20 × 1.50 = $30 (50% markup)</td>
             </tr>
             <tr className="border-b">
               <td className="py-2 font-medium text-foreground">Price from margin</td>
               <td className="py-2">Cost ÷ (1 − Margin%)</td>
-              <td className="py-2">£20 ÷ 0.60 = £33.33 (40% margin)</td>
+              <td className="py-2">$20 ÷ 0.60 = $33.33 (40% margin)</td>
             </tr>
             <tr className="border-b">
               <td className="py-2 font-medium text-foreground">Margin from price</td>
               <td className="py-2">(Price − Cost) ÷ Price × 100</td>
-              <td className="py-2">(£30 − £20) ÷ £30 = 33.3%</td>
+              <td className="py-2">($30 − $20) ÷ $30 = 33.3%</td>
             </tr>
             <tr>
               <td className="py-2 font-medium text-foreground">Markup from price</td>
               <td className="py-2">(Price − Cost) ÷ Cost × 100</td>
-              <td className="py-2">(£30 − £20) ÷ £20 = 50%</td>
+              <td className="py-2">($30 − $20) ÷ $20 = 50%</td>
             </tr>
           </tbody>
         </table>
