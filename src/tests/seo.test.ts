@@ -93,6 +93,23 @@ describe("structured data", () => {
     const types = (graph["@graph"] as Array<{ "@type": string }>).map((s) => s["@type"]);
     expect(types).toContain("Article");
     expect(types).toContain("BreadcrumbList");
+    expect(types).not.toContain("FAQPage");
+  });
+
+  it("guide page graph includes FAQPage only when faq is provided", () => {
+    const guide = guides[0];
+    const graph = buildGuidePageGraph({
+      title: guide.title,
+      description: guide.description,
+      canonical: guide.seo.canonical,
+      datePublished: guide.publishedDate,
+      dateModified: guide.updatedDate,
+      faq: [{ question: "What is it?", answer: "A test answer." }],
+    });
+    const faqSchema = (graph["@graph"] as Array<{ "@type": string; mainEntity?: unknown[] }>)
+      .find((s) => s["@type"] === "FAQPage");
+    expect(faqSchema).toBeDefined();
+    expect(faqSchema!.mainEntity).toHaveLength(1);
   });
 
   it("FAQ schema includes all questions for each calculator", () => {

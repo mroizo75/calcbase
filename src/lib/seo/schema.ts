@@ -163,8 +163,9 @@ export function buildGuidePageGraph(opts: {
   canonical: string;
   datePublished: string;
   dateModified: string;
+  faq?: FaqEntry[];
 }) {
-  return buildGraphJsonLd([
+  const schemas: Record<string, unknown>[] = [
     buildArticleSchema({
       headline: opts.title,
       description: opts.description,
@@ -177,5 +178,10 @@ export function buildGuidePageGraph(opts: {
       { name: "Guides", url: "/guides" },
       { name: opts.title, url: opts.canonical },
     ]),
-  ]);
+  ];
+
+  const faq = opts.faq ? buildFaqSchema(opts.faq) : null;
+  if (faq) schemas.push(faq);
+
+  return buildGraphJsonLd(schemas);
 }

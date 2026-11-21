@@ -1,0 +1,222 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Breadcrumb } from "@/components/layout/breadcrumb";
+import { buildPageMetadata } from "@/lib/seo/metadata";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "About CalcBase – Practical Business Calculators",
+  description:
+    "CalcBase provides free, accurate online calculators for VAT, profit margins, markup, discounts, and break-even analysis. Built for business owners, freelancers, and finance professionals.",
+  canonical: "/about",
+});
+
+export default function AboutPage() {
+  return (
+    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6">
+      <Breadcrumb items={[{ label: "About" }]} />
+
+      <h1 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
+        About CalcBase
+      </h1>
+
+      <div className="space-y-6 text-base leading-relaxed">
+        <p>
+          CalcBase is a free online platform for practical business calculations. We build tools
+          that business owners, freelancers, accountants, and finance professionals use every day —
+          from adding VAT to an invoice to figuring out break-even points for a new product.
+        </p>
+
+        <h2 className="text-xl font-semibold">Why We Built This</h2>
+        <p>
+          Most calculator websites are cluttered with ads, use confusing interfaces, or give you
+          a number without explaining how it was calculated. We believe a calculator tool should
+          be fast, transparent, and genuinely helpful.
+        </p>
+        <p>
+          Every calculator on CalcBase shows the formula used, explains the result in plain
+          language, and includes worked examples so you can verify the math yourself. We also
+          provide supporting guides that explain the concepts behind the calculations — not
+          generic filler, but practical knowledge you can apply immediately.
+        </p>
+
+        <h2 className="text-xl font-semibold">What We Cover</h2>
+        <ul className="list-disc space-y-1 pl-5">
+          <li>
+            <strong>VAT & Tax:</strong>{" "}
+            <Link href="/vat-calculator" className="underline underline-offset-4 hover:text-primary">
+              Add or remove VAT
+            </Link>
+            {" "}with support for UK, EU, GST, and custom rates.
+          </li>
+          <li>
+            <strong>Pricing:</strong>{" "}
+            <Link href="/margin-calculator" className="underline underline-offset-4 hover:text-primary">
+              Profit margin
+            </Link>
+            ,{" "}
+            <Link href="/markup-calculator" className="underline underline-offset-4 hover:text-primary">
+              markup
+            </Link>
+            , and{" "}
+            <Link href="/discount-calculator" className="underline underline-offset-4 hover:text-primary">
+              discount
+            </Link>
+            {" "}calculations for informed pricing decisions.
+          </li>
+          <li>
+            <strong>Business Planning:</strong>{" "}
+            <Link href="/break-even-calculator" className="underline underline-offset-4 hover:text-primary">
+              Break-even analysis
+            </Link>
+            {" "}to understand when your business becomes profitable.
+          </li>
+        </ul>
+
+        <h2 className="text-xl font-semibold">How the Calculators Are Built</h2>
+        <p>
+          Each CalcBase calculator follows the same pattern. You enter the figures, the result
+          updates as you type, and the formula is shown next to the answer. Where a rate or fee
+          depends on the country, the tool says which market it uses, so a UK VAT rate is never
+          quietly applied to a US price. Fee presets for marketplaces such as Etsy, eBay and Amazon
+          are taken from the platforms&apos; own fee pages, and each preset names what it includes and
+          what it leaves out.
+        </p>
+        <p>
+          The arithmetic lives in one shared library, and it is covered by automated tests. Every
+          tool uses the same rounding and the same formulas for margin, markup, VAT and commission,
+          so the results agree from one page to the next.
+        </p>
+
+        <h2 className="text-xl font-semibold">Where to Start</h2>
+        <p>
+          If you are pricing a product, start with the{" "}
+          <Link href="/price-builder" className="underline underline-offset-4 hover:text-primary">
+            Price Builder
+          </Link>
+          , which works backwards from the margin you want. If you sell on a marketplace, the{" "}
+          <Link href="/marketplace-profit-calculator" className="underline underline-offset-4 hover:text-primary">
+            Marketplace Profit Calculator
+          </Link>{" "}
+          shows what you keep per sale after VAT and platform fees. For sales pay, the{" "}
+          <Link href="/commission-calculator" className="underline underline-offset-4 hover:text-primary">
+            Commission Calculator
+          </Link>{" "}
+          works forwards from a sale, and the{" "}
+          <Link href="/reverse-commission-calculator" className="underline underline-offset-4 hover:text-primary">
+            Reverse Commission Calculator
+          </Link>{" "}
+          works backwards from the commission you want.
+        </p>
+        <p>
+          For the concepts behind the numbers, the{" "}
+          <Link href="/guides" className="underline underline-offset-4 hover:text-primary">
+            guides
+          </Link>{" "}
+          explain formulas step by step, including{" "}
+          <Link href="/guides/margin-vs-markup" className="underline underline-offset-4 hover:text-primary">
+            margin versus markup
+          </Link>
+          ,{" "}
+          <Link href="/guides/how-to-calculate-discount" className="underline underline-offset-4 hover:text-primary">
+            how to calculate a discount
+          </Link>
+          , and{" "}
+          <Link href="/guides/how-to-calculate-sales-commission" className="underline underline-offset-4 hover:text-primary">
+            how to calculate sales commission
+          </Link>
+          .
+        </p>
+
+        <h2 className="text-xl font-semibold">Common Questions We Answer</h2>
+        <p>
+          Most of the questions we see come down to a few patterns. A seller wants to know what
+          price to set so that a 35% margin survives Etsy&apos;s fees and VAT. A freelancer wants to
+          know what the net amount is on a gross invoice of £240 at 20% VAT, which is £200. A
+          consultant wants to know how many sales a £930 commission target needs at 3%, which is
+          £31,000. A shop owner wants to know whether a 25% discount followed by a 10% discount
+          is the same as 35% off, which it is not. Each of these has its own calculator or guide,
+          and each one shows the working so the answer can be checked by hand.
+        </p>
+        <p>
+          We also get questions about the difference between two numbers that look alike. Margin
+          and markup both describe profit, but margin is measured against the selling price and
+          markup against the cost. A 40% markup is a 28.6% margin. Percentage change and percentage
+          points are different too: moving from 10% to 12% is a 2 point rise and a 20% increase.
+          The guides explain these differences with the same worked numbers used in the tools.
+        </p>
+
+        <h2 className="text-xl font-semibold">Who Uses CalcBase</h2>
+        <p>
+          The tools are used by Etsy and Amazon sellers checking whether a product still earns money
+          after fees, freelancers deciding whether to add VAT to an invoice, sales reps and agents
+          checking a commission statement, and small business owners setting prices and discounts.
+          Most visitors arrive with one specific question, such as &quot;what is 20% VAT on £500&quot; or
+          &quot;how many sales do I need to hit a commission target&quot;, so every page is built to answer
+          that question first and explain the method second.
+        </p>
+
+        <h2 className="text-xl font-semibold">Our Principles</h2>
+        <ul className="list-disc space-y-1 pl-5">
+          <li><strong>Accuracy:</strong> Every formula is tested and validated. We show our work.</li>
+          <li><strong>Transparency:</strong> No hidden logic. The formula and calculation steps are always visible.</li>
+          <li><strong>Speed:</strong> Results update instantly as you type. No page reloads.</li>
+          <li><strong>Privacy:</strong> We do not require accounts, track personal data, or sell information.</li>
+          <li><strong>No clutter:</strong> Clean, focused tools without dark patterns or misleading design.</li>
+        </ul>
+
+        <h2 className="text-xl font-semibold">Using CalcBase for US and UK Pricing</h2>
+        <p>
+          Most calculators on CalcBase work with plain numbers, so the same arithmetic applies whether
+          you price in dollars, pounds, euros or another currency. The tools do not convert
+          currencies, so enter every figure in the same currency. Where a rule depends on the
+          country, such as UK VAT at 20%, the page names that rule so it is not applied to another
+          country by accident.
+        </p>
+        <p>
+          US sellers on Etsy, eBay and Amazon can start with the{" "}
+          <Link href="/marketplace-profit-calculator" className="underline underline-offset-4 hover:text-primary">
+            Marketplace Profit Calculator
+          </Link>
+          , which has US presets in dollars. Platform fees change, so check the platform&apos;s current
+          fee page before you publish a price. Each preset states what it includes and what it leaves
+          out, and the FAQ on that page lists the costs that sit outside the percentage.
+        </p>
+        <p>
+          UK sellers who are VAT-registered should use the{" "}
+          <Link href="/price-builder" className="underline underline-offset-4 hover:text-primary">
+            Price Builder
+          </Link>{" "}
+          with VAT switched on. Margin is measured on the price excluding VAT, because the VAT is
+          collected for the government and is not your income. Freelancers who are not VAT-registered
+          can switch VAT off, and the tool then shows that VAT on their costs cannot be reclaimed.
+        </p>
+
+        <h2 className="text-xl font-semibold">How the Numbers Are Checked</h2>
+        <p>
+          The arithmetic for every calculator sits in one shared library with automated tests, so a
+          change to one formula is checked everywhere it is used. The worked examples on each page
+          were calculated by hand and match what the tool returns. When a platform changes its fees,
+          we update the preset and the date on the page, and the old figures are not left in place
+          without a note.
+        </p>
+
+        <h2 className="text-xl font-semibold">Disclaimer</h2>
+        <p>
+          CalcBase provides calculations for informational and educational purposes only. While we
+          strive for accuracy, the results should not be used as a substitute for professional
+          financial, tax, accounting, or legal advice. Always consult a qualified professional
+          before making decisions that affect your finances or business.
+        </p>
+
+        <h2 className="text-xl font-semibold">Contact</h2>
+        <p>
+          Have a question, found a bug, or want to suggest a new calculator?{" "}
+          <Link href="/contact" className="underline underline-offset-4 hover:text-primary">
+            Get in touch
+          </Link>
+          .
+        </p>
+      </div>
+    </div>
+  );
+}

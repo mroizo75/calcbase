@@ -25,6 +25,7 @@ export function GuideShell({ config, children }: GuideShellProps) {
     canonical: config.seo.canonical,
     datePublished: config.publishedDate,
     dateModified: config.updatedDate,
+    faq: config.faq,
   });
 
   return (
@@ -64,6 +65,20 @@ export function GuideShell({ config, children }: GuideShellProps) {
       <div className="prose-content space-y-6 text-base leading-relaxed">
         {children}
       </div>
+
+      {config.faq && config.faq.length > 0 && (
+        <section className="mt-12">
+          <h2 className="mb-4 text-xl font-semibold">Frequently Asked Questions</h2>
+          <div className="space-y-4">
+            {config.faq.map((entry) => (
+              <div key={entry.question}>
+                <h3 className="font-medium">{entry.question}</h3>
+                <p className="mt-1 text-muted-foreground">{entry.answer}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       <AdBanner slot="guide-mid-content" />
 
