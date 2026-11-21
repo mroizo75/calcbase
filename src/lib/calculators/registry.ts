@@ -921,6 +921,24 @@ Percentage change is used in virtually every type of business and financial anal
         result: "New salary = $45,360.",
       },
       {
+        title: "Year-over-year (YoY) revenue growth",
+        description: "Annual revenue was $1,250,000 last year and $1,437,500 this year. What is the year-over-year growth?",
+        inputs: { "Last year (old)": "$1,250,000", "This year (new)": "$1,437,500" },
+        result: "Percentage change = ($1,437,500 − $1,250,000) ÷ $1,250,000 × 100 = +15% YoY. The dollar change is +$187,500.",
+      },
+      {
+        title: "Dollar change vs percentage gain on a stock",
+        description: "You bought a share at $40 and sold it at $52. The dollar gain and the percentage gain are different measures.",
+        inputs: { "Buy price (old)": "$40", "Sell price (new)": "$52" },
+        result: "Dollar change = +$12. Percentage gain = +30%. Both describe the same trade, but only the percentage is comparable across different prices.",
+      },
+      {
+        title: "Price cut from $60 to $45",
+        description: "A product's price is reduced from $60 to $45. What percentage did the price fall?",
+        inputs: { "Old price": "$60", "New price": "$45" },
+        result: "Percentage change = ($45 − $60) ÷ $60 × 100 = −25%. A 25% price cut is the same as a 25% discount on the old price.",
+      },
+      {
         title: "Stock dropped from $250 to $200",
         description: "A stock price declined — what is the percentage loss?",
         inputs: { "Old price": "$250", "New price": "$200" },
@@ -967,6 +985,26 @@ Percentage change is used in virtually every type of business and financial anal
         question: "How do I find a percentage of a number?",
         answer:
           "Multiply the number by the percent and divide by 100. For example, 15% of 80 is 80 × 15 ÷ 100 = 12. A discount uses the same idea on a price — use the discount calculator when you are taking a percent off what you charge.",
+      },
+      {
+        question: "What is the difference between dollar change and percentage change?",
+        answer:
+          "Dollar change is the absolute difference: $100 minus $80 is $20. Percentage change puts that difference relative to the starting value: $20 ÷ $80 × 100 = 25%. Dollar change tells you how much moved; percentage change tells you how much it moved compared with where it began. Use dollar change when the units matter (a $20 cost), and percentage change when you want to compare items with different starting values.",
+      },
+      {
+        question: "What does YoY mean, and how do I calculate year-over-year change?",
+        answer:
+          "YoY stands for year-over-year. It compares a figure in one year with the same figure a year earlier. Use the same formula: (this year − last year) ÷ last year × 100. For example, revenue of $1,437,500 this year against $1,250,000 last year is +15% YoY. Compare like with like: the same metric, the same length of period, and the same currency.",
+      },
+      {
+        question: "What is a percentage gain, and is it the same as percentage change?",
+        answer:
+          "A percentage gain is a percentage change where the new value is higher than the old. It is the same calculation, so a rise from $40 to $52 is a 30% gain. The term is used mainly for investments and returns. A loss is the same calculation with a negative result, so the word 'gain' only describes the direction.",
+      },
+      {
+        question: "Why is a 50% drop followed by a 50% rise not back to the start?",
+        answer:
+          "Each percentage applies to a different base. A value of $100 that falls 50% is $50. A 50% rise on $50 is $75, not $100. To recover from a 50% loss you need a 100% gain. Losses and gains are not symmetric, which matters for prices, portfolios and any figure that falls and then recovers.",
       },
     ],
     seo: {
