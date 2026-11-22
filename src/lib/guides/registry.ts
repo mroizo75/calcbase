@@ -45,6 +45,33 @@ export const guides: GuideConfig[] = [
         "How to calculate a percentage discount: find the sale price, stack two discounts, and work back to the original price. Discount formula and worked examples in USD.",
       canonical: "/guides/how-to-calculate-discount",
     },
+    faq: [
+      {
+        question: "How do you calculate a discount percentage?",
+        answer:
+          "Subtract the sale price from the original price, divide the result by the original price and multiply by 100. For example, a $120 jacket now selling for $90 is ($120 − $90) ÷ $120 × 100 = 25% off.",
+      },
+      {
+        question: "How do you calculate the sale price after a discount?",
+        answer:
+          "Multiply the original price by (1 − discount ÷ 100). For 30% off $250, that is $250 × 0.70 = $175. You save $75.",
+      },
+      {
+        question: "Do two discounts add up?",
+        answer:
+          "No. The second discount is applied to the already reduced price. 20% off followed by an extra 10% off is $100 × 0.80 × 0.90 = $72, which is a 28% total discount, not 30%.",
+      },
+      {
+        question: "How do you find the original price from the sale price?",
+        answer:
+          "Divide the sale price by (1 − discount ÷ 100). If you paid $67.50 after a 25% discount, the original price was $67.50 ÷ 0.75 = $90.",
+      },
+      {
+        question: "How does a discount affect profit margin?",
+        answer:
+          "A discount comes straight out of your margin. A 20% discount on a product with a 30% margin removes about two-thirds of the profit per sale, so you need far more sales to earn the same total profit. Check the impact with the margin calculator before setting a discount.",
+      },
+    ],
   },
   {
     slug: "break-even-formula",

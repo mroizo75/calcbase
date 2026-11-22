@@ -26,6 +26,21 @@ export function HowToCalculateDiscountContent() {
         Alternatively: $250 × 0.70 = $175.
       </p>
 
+      <h2 className="text-xl font-semibold">Discount Percentage Formula: Find the % Off from Two Prices</h2>
+      <p>
+        If you know the original price and the sale price, work out the discount percentage by
+        dividing the amount saved by the original price:
+      </p>
+      <div className="rounded-lg border bg-muted/50 p-4">
+        <code className="text-sm">Discount % = (Original Price − Sale Price) ÷ Original Price × 100</code>
+      </div>
+      <p>
+        Example: a jacket was $120 and is now $90. The saving is $120 − $90 = $30, and
+        $30 ÷ $120 = 0.25, so the discount is <strong>25%</strong>. Always divide by the
+        <em> original</em> price, not the sale price. Dividing $30 by $90 would give 33%, which is the
+        increase needed to get back from the sale price to the original, not the discount.
+      </p>
+
       <h2 className="text-xl font-semibold">Stacking Discounts (Successive Discounts)</h2>
       <p>
         When two discounts are applied in sequence — say 20% off, then an additional 10% off —
