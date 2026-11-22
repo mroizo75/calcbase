@@ -15,6 +15,33 @@ export const guides: GuideConfig[] = [
         "Understand VAT (Value Added Tax) in plain English. How VAT works, who pays it, current UK VAT rates (20%, 5%, 0%), EU rates, GST, and how to calculate VAT. Complete guide with examples.",
       canonical: "/guides/vat-explained",
     },
+    faq: [
+      {
+        question: "What does VAT stand for?",
+        answer:
+          "VAT stands for Value Added Tax. It is a consumption tax charged at each stage of the supply chain on the value a business adds, and the end consumer bears the final cost.",
+      },
+      {
+        question: "Who pays VAT, the buyer or the seller?",
+        answer:
+          "The buyer pays it in the price. The seller collects VAT on sales, subtracts the VAT it paid on business purchases, and sends the difference to the tax authority. VAT-registered businesses are collectors, not the final payers.",
+      },
+      {
+        question: "How do you add 20% VAT to a price?",
+        answer:
+          "Multiply the net price by 1.20. For example, a £1,000 net price becomes £1,200 including £200 VAT. To go the other way, divide the gross price by 1.20.",
+      },
+      {
+        question: "Is VAT the same as sales tax?",
+        answer:
+          "No. US sales tax is charged once, at the final retail sale. VAT is charged at every stage, with businesses reclaiming the VAT on their purchases. The result for the consumer looks similar, but the paperwork and the tax base differ.",
+      },
+      {
+        question: "When must a UK business register for VAT?",
+        answer:
+          "A UK business must register when its taxable turnover goes over the VAT registration threshold in a rolling 12-month period (£90,000 as of 2024). Below that, registration is voluntary. Check gov.uk for the current figure.",
+      },
+    ],
   },
   {
     slug: "margin-vs-markup",

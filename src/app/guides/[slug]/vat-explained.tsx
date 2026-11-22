@@ -93,6 +93,18 @@ export function VatExplainedContent() {
         additional rules such as the One Stop Shop (OSS) scheme may apply.
       </p>
 
+      <p>
+        For a full country-by-country table, see{" "}
+        <Link href="/guides/vat-rates-by-country" className="font-medium underline underline-offset-4 hover:text-primary">
+          VAT Rates by Country
+        </Link>
+        . If you sell to US customers, the guide on{" "}
+        <Link href="/guides/vat-vs-sales-tax" className="font-medium underline underline-offset-4 hover:text-primary">
+          VAT vs Sales Tax
+        </Link>{" "}
+        explains how the two systems differ in practice.
+      </p>
+
       <h2 className="text-xl font-semibold">Key Takeaways</h2>
       <ul className="list-disc space-y-1 pl-5">
         <li>VAT is charged at every stage of the supply chain, not just at retail.</li>
