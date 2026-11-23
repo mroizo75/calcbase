@@ -339,6 +339,33 @@ export const guides: GuideConfig[] = [
         "See how discounts reduce profit margin and how much extra volume you need to break even. Includes the discount-margin formula, worked examples, and a full reference table.",
       canonical: "/guides/discount-impact-on-margin",
     },
+    faq: [
+      {
+        question: "How much does a discount reduce profit margin?",
+        answer:
+          "Your cost stays the same, so the whole discount comes out of profit. A product that sells for $100 with a $60 cost has a 40% margin. At 20% off it sells for $80, profit falls from $40 to $20 and the margin drops to 25%, so profit per sale is cut in half.",
+      },
+      {
+        question: "How much more do I need to sell to make up for a discount?",
+        answer:
+          "Required volume increase = discount % ÷ (margin % − discount %). With a 40% margin and 20% off, that is 20 ÷ (40 − 20) = 100%, so you must double your unit sales to earn the same total profit.",
+      },
+      {
+        question: "What happens if the discount is bigger than my margin?",
+        answer:
+          "You lose money on every sale. A 40% discount on a product with a 30% margin means each unit sells for less than it cost you, so selling more units only increases the loss.",
+      },
+      {
+        question: "How do I calculate the new margin after a discount?",
+        answer:
+          "Subtract your cost from the discounted price, then divide by the discounted price. For a $120 jacket with a $78 cost and 15% off, the price is $102, profit is $24 and the new margin is $24 ÷ $102 = 23.5%, down from 35%.",
+      },
+      {
+        question: "When is it worth offering a discount?",
+        answer:
+          "A discount can pay off when you are clearing dead stock, acquiring customers whose lifetime value exceeds the margin lost on the first sale, or securing a large guaranteed order that lowers your unit costs. Outside those cases, check the volume increase you need first.",
+      },
+    ],
   },
   {
     slug: "how-to-calculate-sales-commission",
