@@ -381,6 +381,33 @@ export const guides: GuideConfig[] = [
         "Calculate sales commission step by step: the formula, finding the rate from a payout, tiered commission bands, and gross versus net sales. Worked examples in USD.",
       canonical: "/guides/how-to-calculate-sales-commission",
     },
+    faq: [
+      {
+        question: "How do you calculate sales commission?",
+        answer:
+          "Multiply total sales by the commission rate. For $31,000 in sales at a 3% commission, the commission is $31,000 × 0.03 = $930.",
+      },
+      {
+        question: "How do you find the commission rate from the amount paid?",
+        answer:
+          "Divide the commission by the sales and multiply by 100. If you were paid $930 on $31,000 of sales, the rate is $930 ÷ $31,000 × 100 = 3%.",
+      },
+      {
+        question: "How does tiered commission work?",
+        answer:
+          "Each rate applies only to the sales inside its band. With 5% on the first $10,000 and 8% above that, $25,000 in sales pays $500 + $1,200 = $1,700, an effective rate of 6.8%. Applying 8% to the whole $25,000 would wrongly give $2,000.",
+      },
+      {
+        question: "Is commission paid on gross or net sales?",
+        answer:
+          "It depends on the contract. Gross sales include refunds, while net sales remove them first. At 3%, $31,000 gross pays $930, but $30,000 net of $1,000 in refunds pays $900.",
+      },
+      {
+        question: "Is sales commission a cost to the business?",
+        answer:
+          "Yes. A 10% commission on an $80 sale is $8, which comes straight out of your profit. Include it in your cost before you set a price or a target margin.",
+      },
+    ],
   },
 ];
 
