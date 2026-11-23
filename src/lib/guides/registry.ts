@@ -57,6 +57,33 @@ export const guides: GuideConfig[] = [
         "Learn the difference between profit margin and markup with clear formulas, worked examples, and a margin-to-markup conversion table. Avoid the pricing mistake that costs businesses money.",
       canonical: "/guides/margin-vs-markup",
     },
+    faq: [
+      {
+        question: "What is the difference between margin and markup?",
+        answer:
+          "Margin is profit as a percentage of the selling price. Markup is profit as a percentage of cost. A product that costs $60 and sells for $100 has a $40 profit, which is a 40% margin and a 66.7% markup.",
+      },
+      {
+        question: "How do you convert markup to margin?",
+        answer:
+          "Divide the markup by (1 + markup). A 50% markup is 0.50 ÷ 1.50 = 33.3% margin. A 100% markup is 1.00 ÷ 2.00 = 50% margin.",
+      },
+      {
+        question: "How do you convert margin to markup?",
+        answer:
+          "Divide the margin by (1 − margin). A 40% margin is 0.40 ÷ 0.60 = 66.7% markup. A 25% margin is 0.25 ÷ 0.75 = 33.3% markup.",
+      },
+      {
+        question: "Is markup always higher than margin?",
+        answer:
+          "Yes, for any profitable sale. Both use the same profit figure, but markup divides it by cost, which is lower than the selling price. The gap grows as the percentages rise: a 20% margin is a 25% markup, while a 60% margin is a 150% markup.",
+      },
+      {
+        question: "What markup do I need for a 50% margin?",
+        answer:
+          "A 100% markup. If an item costs $100, price it at $200. The profit of $100 is 50% of the $200 selling price. A 50% markup would only give $150, which is a 33.3% margin.",
+      },
+    ],
   },
   {
     slug: "how-to-calculate-discount",
