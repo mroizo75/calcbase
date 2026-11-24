@@ -225,6 +225,33 @@ export const guides: GuideConfig[] = [
         "Understand the difference between VAT and sales tax. How each works, who pays, collection methods, and which countries use which. Clear comparison with examples.",
       canonical: "/guides/vat-vs-sales-tax",
     },
+    faq: [
+      {
+        question: "What is the main difference between VAT and sales tax?",
+        answer:
+          "VAT is charged at every stage of the supply chain, and each business reclaims the VAT it paid on its purchases. Sales tax is charged once, at the final sale to the consumer. Both are paid by the end customer, but VAT is collected in stages.",
+      },
+      {
+        question: "Does the US have VAT?",
+        answer:
+          "No. The United States has no national VAT. There is no federal sales tax either: 45 states levy their own sales taxes, and many allow counties and cities to add their own rates on top.",
+      },
+      {
+        question: "Why are prices in the UK and EU shown with tax included, but not in the US?",
+        answer:
+          "It is a difference in convention. In VAT countries, the shelf price normally includes VAT, so a £120 price tag means you pay £120. In the US, the displayed price is before tax, so a $100 item can cost $108.75 at the register once state and local sales tax is added.",
+      },
+      {
+        question: "Can businesses reclaim sales tax like they reclaim VAT?",
+        answer:
+          "Generally no. VAT-registered businesses credit the input VAT they pay against the VAT they collect. Sales tax is meant to fall only on the final consumer, but businesses cannot reclaim tax paid on items like office equipment, which can leave hidden tax cost in B2B prices (tax cascading).",
+      },
+      {
+        question: "Does Canada use VAT or sales tax?",
+        answer:
+          "A hybrid. Canada has a federal GST of 5%. Some provinces add a separate provincial sales tax (PST), while others combine both into a single Harmonized Sales Tax (HST).",
+      },
+    ],
   },
   {
     slug: "how-to-price-a-product",
@@ -240,6 +267,33 @@ export const guides: GuideConfig[] = [
         "Learn how to price a product using cost-plus, margin-based, and competitive pricing strategies. Includes formulas, worked examples, and common pricing mistakes to avoid.",
       canonical: "/guides/how-to-price-a-product",
     },
+    faq: [
+      {
+        question: "How do you calculate the selling price from cost and markup?",
+        answer:
+          "Multiply the cost by (1 + markup). A product that costs $20 with a 50% markup sells for $20 × 1.50 = $30, which is a $10 profit per unit.",
+      },
+      {
+        question: "How do you price a product for a target profit margin?",
+        answer:
+          "Divide the cost by (1 − target margin). For a $20 cost and a 40% margin, the price is $20 ÷ 0.60 = $33.33, which gives a profit of $13.33 per unit.",
+      },
+      {
+        question: "Why does a 50% markup not give a 50% margin?",
+        answer:
+          "Markup is calculated on cost and margin on the selling price. A 50% markup on $20 gives a $30 price, which is a 33.3% margin. To get a true 50% margin on a $20 cost, the price must be $40.",
+      },
+      {
+        question: "Which pricing method should I use?",
+        answer:
+          "Cost-plus is the simplest and guarantees each sale covers its cost, but ignores what customers will pay. Margin-based pricing ties the price to a profit target. Competitive pricing suits commoditised markets, and value-based pricing earns the highest margins but needs the most customer research. Many sellers start with a margin-based price and then cross-check it against competitors.",
+      },
+      {
+        question: "How do I check that my price is high enough?",
+        answer:
+          "Calculate the break-even point at the proposed price. If you would need to sell more units than the market can realistically absorb, the price is too low or the cost structure needs work. Also leave room in the margin for discounts and promotions.",
+      },
+    ],
   },
   {
     slug: "how-to-calculate-roi",
