@@ -3,14 +3,16 @@ import { Card, CardContent } from "@/components/ui/card";
 
 interface ExampleBlockProps {
   examples: WorkedExample[];
+  /** Optional heading override (Spanish pages). Default: "Worked Examples". */
+  heading?: string;
 }
 
-export function ExampleBlock({ examples }: ExampleBlockProps) {
+export function ExampleBlock({ examples, heading = "Worked Examples" }: ExampleBlockProps) {
   if (examples.length === 0) return null;
 
   return (
     <section className="mb-10">
-      <h2 className="mb-4 text-xl font-semibold">Worked Examples</h2>
+      <h2 className="mb-4 text-xl font-semibold">{heading}</h2>
       <div className="grid gap-4 sm:grid-cols-2">
         {examples.map((ex) => (
           <Card key={ex.title}>

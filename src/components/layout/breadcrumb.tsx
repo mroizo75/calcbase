@@ -8,15 +8,24 @@ export interface BreadcrumbItem {
 
 interface BreadcrumbProps {
   items: BreadcrumbItem[];
+  /** Optional overrides for the Spanish pages. Defaults keep the English behaviour. */
+  homeLabel?: string;
+  homeHref?: string;
+  ariaLabel?: string;
 }
 
-export function Breadcrumb({ items }: BreadcrumbProps) {
+export function Breadcrumb({
+  items,
+  homeLabel = "Home",
+  homeHref = "/",
+  ariaLabel = "Breadcrumb",
+}: BreadcrumbProps) {
   return (
-    <nav aria-label="Breadcrumb" className="mb-4 text-sm text-muted-foreground">
+    <nav aria-label={ariaLabel} className="mb-4 text-sm text-muted-foreground">
       <ol className="flex flex-wrap items-center gap-1">
         <li>
-          <Link href="/" className="transition-colors hover:text-foreground">
-            Home
+          <Link href={homeHref} className="transition-colors hover:text-foreground">
+            {homeLabel}
           </Link>
         </li>
         {items.map((item, i) => (

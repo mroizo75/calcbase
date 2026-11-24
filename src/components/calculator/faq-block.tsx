@@ -2,14 +2,16 @@ import type { FaqEntry } from "@/lib/calculators/types";
 
 interface FaqBlockProps {
   entries: FaqEntry[];
+  /** Optional heading override (Spanish pages). Default: "Frequently Asked Questions". */
+  heading?: string;
 }
 
-export function FaqBlock({ entries }: FaqBlockProps) {
+export function FaqBlock({ entries, heading = "Frequently Asked Questions" }: FaqBlockProps) {
   if (entries.length === 0) return null;
 
   return (
     <section className="mb-10">
-      <h2 className="mb-4 text-xl font-semibold">Frequently Asked Questions</h2>
+      <h2 className="mb-4 text-xl font-semibold">{heading}</h2>
       <div className="space-y-3">
         {entries.map((entry) => (
           <details
