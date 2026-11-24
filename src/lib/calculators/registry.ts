@@ -793,9 +793,9 @@ The distinction between profit, margin, and markup — three closely related but
       },
     ],
     seo: {
-      title: "Profit Calculator: Profit, Margin & Markup Free | CalcBase",
+      title: "Profit Calculator: Profit, Margin & Markup (Free Online)",
       description:
-        "Free profit calculator: enter cost and price to see profit, margin and markup together. Or set a target margin and get the selling price. Formula and worked examples.",
+        "Work out profit, margin and markup from your cost and selling price. Free, no signup. Includes a target-margin price calculator, formulas and worked examples.",
       canonical: "/profit-calculator",
     },
     keywords: [
